@@ -1,6 +1,5 @@
 import argparse
-from flask import Flask, render_template, request
-import json
+from flask import Flask, render_template, request, jsonify
 
 from data.decisions import import_decision_data
 from data.es import index_decision, find_decisions
@@ -19,7 +18,7 @@ def home():
 def search_decisions():
   criteria = request.args.get("q")
   if criteria:
-    return json.dumps(find_decisions(criteria.strip()))
+    return jsonify(results=find_decisions(criteria.strip()))
   return "?q=SEARCH_TERM"
 
 
