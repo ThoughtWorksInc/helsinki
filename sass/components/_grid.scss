@@ -1,0 +1,71 @@
+$grid_gutter: 10px;
+
+// Grid system
+//
+// Create rows with `.columns` to clear the floated columns and outdent the
+// padding on `.column`s with negative margin for alignment.
+
+.columns {
+  margin-right: -$grid_gutter;
+  margin-left: -$grid_gutter;
+  @include clearfix;
+  .column {
+    @include width-to($medium_device) {
+      float: none;
+      width: 100%;
+    }
+  }
+}
+
+// Base class for every column (requires a column width from below)
+.column {
+  padding-right: $grid_gutter;
+  padding-left: $grid_gutter;
+  @include width-from($medium_device) {
+    float: left;
+  }
+}
+
+// Column widths
+.one-third {
+  width: 33.333333%;
+}
+
+.two-thirds {
+  width: 66.666667%;
+}
+
+.one-fourth {
+  width: 25%;
+}
+
+.one-half {
+  width: 50%;
+}
+
+.three-fourths {
+  width: 75%;
+}
+
+.one-fifth {
+  width: 20%;
+}
+
+.four-fifths {
+  width: 80%;
+}
+
+// Single column hack
+.single-column {
+  padding-right: $grid_gutter;
+  padding-left: $grid_gutter;
+}
+
+// Equal width columns via table sorcery.
+.table-column {
+  display: table-cell;
+  width: 1%;
+  padding-right: $grid_gutter;
+  padding-left: $grid_gutter;
+  vertical-align: top;
+}

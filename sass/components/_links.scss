@@ -1,0 +1,11 @@
+a {
+  $link_color: $default_text_color;
+  color: $link_color;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    color: rgba($link_color,0.7);
+  }
+}
+

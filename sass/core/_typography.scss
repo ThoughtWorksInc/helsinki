@@ -1,0 +1,36 @@
+.page-heading {
+  line-height: 1.2;
+  letter-spacing: -0.05rem;
+  @include font-size(30);
+  @include width-from($medium_device) {
+    @include font-size(40);
+  }
+}
+.date-heading {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  @include font-size(22);
+  &__title {
+    font-weight: $heavy_weight;
+    padding-right: 0.5em;
+  }
+  &__date {
+    font-size: 70%;
+    font-weight: $medium_weight;
+    color: rgba($default_text_color,0.7);
+  }
+}
+h2 {
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+p {
+  margin-top: 0;
+  @include font-size(18);
+  line-height: 1.5;
+}

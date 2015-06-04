@@ -1,0 +1,53 @@
+body {
+  padding-top: 3rem;
+  @include font-smoothing(on);
+  color: $default_text_color;
+  font-family: $para_font_family;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  background: $background_color;
+  @include width-from($medium_device) {
+
+  }
+  *, & {
+    box-sizing: border-box;
+  }
+}
+.body--white {
+  background: $white;
+  color: $default_text_color_dark;
+}
+
+.layout-header {
+  max-width: $large_device;
+  padding: 0 1rem;
+  margin: 0 auto 0.5rem;
+  @include font-size(30);
+  @include width-from($medium_device) {
+    @include font-size(40);
+    margin-bottom: 1.5rem;
+  }
+  &__logo {
+    display: inline-block;
+    height: 45px;
+    width: 100%;
+    i {
+      padding: 0 0.25rem;
+    }
+    :first-child,
+    :last-child {
+      font-size: 80%;
+    }
+  }
+}
+
+
+
+.middle-container {
+  max-width: $large_device;
+  padding: 0 1rem;
+  margin: 0 auto;
+  &--vertical-spacer {
+    margin-bottom: 3rem;
+  }
+}

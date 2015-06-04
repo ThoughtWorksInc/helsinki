@@ -1,0 +1,50 @@
+$white: #fff;
+$black: #000;
+
+
+$light_blue: #2597FF;
+$pink: #FF25A9;
+$green: #38b56a;
+
+$orange: #FFA000;
+
+
+$text_grey: #333;
+
+$default_text_color: $white;
+$default_text_color_dark: rgba($black,0.8);
+$background_color: $green;
+
+$link_colour: $default_text_color;
+$link_hover_colour: $link_colour;
+$link_visited_colour: $link_colour;
+$link_active_colour: $link_colour;
+
+//
+
+$small_device: 320px;
+$medium_device: 640px;
+$large_device: 768px;
+$extra_large_device: 960px;
+$monster_large_device: 1220px;
+
+//
+
+$grid_gutter: 15px;
+
+$side_content_width: 330px;
+
+
+//
+
+$max_site_width: 960px;
+$main_nav_height: 50px;
+
+//
+
+$para_font_family: 'Open Sans', sans-serif;
+
+$heavy_weight: 700;
+$medium_weight: 400;
+$light_weight: 300;
+

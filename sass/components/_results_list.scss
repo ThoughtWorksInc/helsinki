@@ -1,0 +1,43 @@
+.results-list {
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+  list-style: none;
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__item {
+    margin-bottom: 1.25rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &__link {
+      text-decoration: none;
+      display: block;
+      @include width-from($large_device) {
+        display: inline-block;
+      }
+      &:hover {
+        text-decoration: none;
+        > h2 {
+          text-decoration: underline;
+        }
+      }
+    }
+    &__title {
+      @include font-size(18);
+      font-weight: $medium_weight;
+      line-height: 1.2;
+      margin-top: 0;
+      margin-bottom: 0.25rem;
+    }
+    &__description {
+      @include font-size(16);
+      font-weight: $light_weight;
+      line-height: 1.2;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
