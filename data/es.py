@@ -1,5 +1,6 @@
 from elasticsearch import Elasticsearch
 
+
 es = Elasticsearch()
 
 
@@ -14,4 +15,13 @@ def index_decision(decision):
   except:
     print "Error when indexing: %s" % decision
     pass
+
+
+def find_decisions(criteria):
+  results = es.search(
+      index="decisions",
+      body={"query": {"query_string": {"query": criteria, "default_field": "subject"}}}
+      )
+  hits = results.get("hits")
+  return [hit.get("_source") for hit in hits.get("hits")]
 
