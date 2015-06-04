@@ -1,0 +1,17 @@
+mixin resultListItem(title, url)
+  li.results-list__item
+    a.results-list__item__link(href=url)
+      //-i.fa.fa-asterisk
+      h2.results-list__item__title #{title}
+      p.results-list__item__description
+        block
+
+mixin interestedIn(searchText, formClass, focusOnLoad)
+  form.interested-in(action="/results", method="post", autocomplete="off", class=formClass)
+    p.interested-in-search
+      label.interested-in-search__label(for="interested-in")
+        | I’m interested in
+      input.interested-in-search__input(type="text", id="interested-in", name="interested_in", autofocus=focusOnLoad, value=searchText)
+      //i.fa.fa-search.interested-in-search__icon
+    .interested-in-search__actions
+      button(type="submit", value="find")

@@ -1,0 +1,34 @@
+- var bodyClass = ""
+- var htmlClass = ""
+block vars
+
+doctype
+html.no-js(lang="en", class="#{htmlClass}")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title
+      block title
+    meta(name="viewport", content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no")
+    meta(name="format-detection", content="telephone=no")
+    link(rel="icon", type="image/png", href="favicon.png")
+    block headerMeta
+
+    link(href="/static/css/application.css", media="screen", rel="stylesheet", type="text/css")
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:700,300,400', rel='stylesheet', type='text/css')
+    link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+
+    script(src="/static/javascript/vendor/modernizr.min.js")
+
+    block headerScripts
+
+  body(class="#{bodyClass}")
+    .wrapper
+      header.layout-header
+        a.layout-header__logo(href="/")
+          i.fa.fa-tree
+          i.fa.fa-tree
+          i.fa.fa-tree
+
+    block content
+    block footerScripts

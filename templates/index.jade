@@ -1,0 +1,20 @@
+extends layout/layout
+
+//block vars
+//  - bodyClass = ""
+
+block title
+  | Interested in...
+
+block content
+
+  .middle-container.middle-container--vertical-spacer
+    - var focusOnLoad = true
+
+    form.interested-in.interested-in-search--middle(action="/search", method="get", autocomplete="off")
+      p.interested-in-search
+        label.interested-in-search__label(for="interested-in")
+          | I’m interested in
+        input.interested-in-search__input(type="text", id="interested-in", name="q", autofocus=true, value=searchTerm)
+      .interested-in-search__actions
+        button(type="submit", value="find")

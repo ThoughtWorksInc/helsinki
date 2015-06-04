@@ -1,0 +1,29 @@
+extends layout/layout
+
+block title
+  | Results for #{searchString}
+
+block content
+
+  .middle-container.middle-container--vertical-spacer
+    form.interested-in(action="/search", method="get", autocomplete="off")
+      p.interested-in-search
+        label.interested-in-search__label(for="interested-in")
+          | I’m interested in
+        input.interested-in-search__input(type="text", id="interested-in", name="q", value=searchTerm)
+      .interested-in-search__actions
+        button(type="submit", value="find")
+
+  .middle-container.middle-container--vertical-spacer
+
+    time.date-heading(datetime="03/06/2015 20:00")
+      span.date-heading__title Yesterday
+      //-span.date-heading__date Yesterday
+
+
+    ul.results-list
+      for result in results
+        li.results-list__item
+          a.results-list__item__link(href=result.permalink)
+            h2.results-list__item__title #{result.subject}
+            p.results-list__item__description #{result.issue_subject}
