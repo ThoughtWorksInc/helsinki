@@ -2,7 +2,7 @@ import argparse
 from flask import Flask, render_template, request, jsonify
 
 from data.decisions import import_decision_data
-from data.es import index_decision, find_decisions
+from data.es import index_decision, find_decisions, configure
 
 
 app = Flask(__name__)
@@ -30,6 +30,7 @@ if __name__ == "__main__":
 
   if args.reindex:
     print "Indexing API data..."
+    configure()
     decisions = import_decision_data()
   
     for d in decisions.get("objects"):
