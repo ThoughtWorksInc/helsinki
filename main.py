@@ -1,7 +1,7 @@
 import argparse
 from flask import Flask, render_template, request, jsonify
 
-from data.decisions import import_decision_data
+from data.decisions import import_decision_data, agenda_item_to_municipal_action
 from data.es import index_decision, find_decisions, configure
 
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     decisions = import_decision_data()
   
     for d in decisions.get("objects"):
-      index_decision(d)
+      index_decision(agenda_item_to_municipal_action(d))
 
   app.debug = bool(args.debug)
   app.run()

@@ -1,5 +1,6 @@
 from elasticsearch import Elasticsearch
 
+from data import decisions
 
 es = Elasticsearch()
 
@@ -11,16 +12,7 @@ def configure():
         index="decisions",
         body={
           "settings": {"number_of_shards": 1, "number_of_replicas": 0},
-          "mappings": {
-            "decision_data": {
-              "properties": {
-                "subject": {
-                  "type": "string",
-                  "analyzer": "finnish"
-                  }
-                }
-              }
-            }
+          "mappings": decisions.DECISION_MAPPING
           },
         ignore=400
         )
