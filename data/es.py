@@ -37,7 +37,9 @@ def index_decision(decision):
 def find_decisions(criteria):
   results = es.search(
       index="decisions",
-      body={"query": {"query_string": {"query": criteria, "default_field": "subject"}}}
+      body={"query": {"multi_match": {"query": criteria,
+                                      "type": "most_fields",
+                                      "fields": decisions.SEARCH_FIELDS}}}
       )
   hits = results.get("hits")
   return [hit.get("_source") for hit in hits.get("hits")]

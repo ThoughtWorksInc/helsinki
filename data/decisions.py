@@ -7,13 +7,15 @@ class APIError(Exception):
   pass
 
 
-DECISION_MAPPING = {'decision_data': {'properties': {'issue_subject': {'analyser': 'finnish', 'type': 'string'},
+SEARCH_FIELDS = ['subject', 'issue_subject', 'content.text']
+DECISION_MAPPING = {'decision_data': {'properties': {'issue_subject': {'analyzer': 'finnish', 'type': 'string'},
                                                      'last_modified_time': {'type': 'datetime'},
-                                                     'subject': {'analyzer': 'finnish',
-                                                     'type': 'string'}}}}
+                                                     'subject': {'analyzer': 'finnish', 'type': 'string'},
+                                                     'content': {'properties': {'text': {'type': 'string', 'analyzer': 'finnish'}}}}}}
 
 def agenda_item_to_municipal_action(agenda_item):
   issue = agenda_item.get("issue")
+  content = agenda_item.get("content")
   return {
         "subject": agenda_item.get("subject"),
         "issue_subject": issue.get("subject"),
@@ -21,7 +23,8 @@ def agenda_item_to_municipal_action(agenda_item):
         "type": agenda_item.get("classification_description"),
         "issue_slug": issue.get("slug"),
         "permalink": agenda_item.get("permalink"),
-        "ajho_uri": agenda_item.get("resource_uri")
+        "ajho_uri": agenda_item.get("resource_uri"),
+        "content": content
       }
 
 
