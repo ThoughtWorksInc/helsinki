@@ -20,7 +20,6 @@ def search_decisions():
     if criteria:
         criteria_stripped = criteria.strip()
         results = find_decisions(criteria_stripped)
-        pprint(results)
         return render_template('results.jade',
                                 results=results,
                                 searchTerm=criteria_stripped)
@@ -48,3 +47,4 @@ if __name__ == "__main__":
 
     app.debug = bool(args.debug)
     app.run()
+
