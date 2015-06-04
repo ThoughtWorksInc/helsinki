@@ -1,20 +1,17 @@
-// inspired by https://gist.github.com/dmitruksergey/8441752
-
 var gulp = require('gulp'),
-    gutil = require('gulp-util'),
+    util = require('gulp-util'),
     sass = require('gulp-sass'),
     gulpif = require('gulp-if'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCSS = require('gulp-minify-css'),
-    clean = require('gulp-clean')
+    clean = require('gulp-clean');
 
 var isDev  = true;
 var isProd = false;
-if(gutil.env._[0] === 'production') {
+if(util.env.production === 'true') {
   isDev  = false;
   isProd = true;
 }
-
 
 var output_path = 'static';
 var dev_path = {
@@ -45,4 +42,6 @@ gulp.task('watch', function () {
   gulp.watch('sass/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['clean-css','sass','watch']);
+gulp.task('build', ['sass']);
+
+gulp.task('default', ['sass','watch']);
