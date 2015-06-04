@@ -13,6 +13,13 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 def home():
     return render_template('index.jade')
 
+@app.route("/email")
+def email_template():
+    return render_template('email/subscription_list.html',
+                            subscription_title='Bicycles',
+                            unsubscribe_link='###todo:unsubscribe',
+                            email_url='###todo:email_url_with_query')
+
 
 @app.route("/search", methods=["GET"])
 def search_decisions():
