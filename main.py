@@ -1,10 +1,12 @@
 import argparse
 import sys
 from flask import Flask, render_template, request, jsonify
+import re
 
 from data.decisions import import_decision_data, agenda_item_to_municipal_action
 from data.es import index_decision, find_decisions, configure
 from emailing.mailgun import send_mail
+from storage.mongo import save_subscription
 
 
 app = Flask(__name__)
@@ -14,6 +16,7 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 @app.route("/")
 def home():
     return render_template('index.jade')
+
 
 @app.route("/email")
 def email_template():
@@ -38,6 +41,24 @@ def search_decisions():
 @app.route("/decision")
 def decision():
     return render_template('decision.jade')
+
+
+def valid_subscription(form):
+    valid = False
+    if 'email' in form and 'topic' in form:
+        address_ok = re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", form.get('email'))
+        print address_ok, '<------'
+        if address_ok and form.get('topic'):
+            valid = True
+    return valid
+
+
+@app.route("/subscribers", methods=["POST"])
+def subscribe():
+    if not valid_subscription(request.form):
+        return 'bad request', 400
+    save_subscription(request.form.get('email'), request.form.get('topic'))
+    return 'ok', 201
 
 
 if __name__ == "__main__":

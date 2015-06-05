@@ -2,3 +2,4 @@ flask
 pyjade
 elasticsearch
 requirements
+pymongo
