@@ -15,10 +15,11 @@ block content
         button(type="submit", value="find")
 
 
-    form.subscribe-to-topic
+    form.subscribe-to-topic(action="/subscribers", method="POST")
       p.subscribe-to-topic__intro-text Would you like to receive updates on #{searchTerm}?
       .subscribe-to-topic__input_wrapper
-        input.subscribe-to-topic__input(type="email", id="e-address", required)
+        input(type="hidden", value=searchTerm, name="topic")
+        input.subscribe-to-topic__input(type="email", id="e-address", name="email", required)
         label.subscribe-to-topic__label(for="e-address") Email address
       button.subscribe-to-topic__button(type="submit")
         i.fa.fa-envelope-o.button__icon

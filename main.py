@@ -5,7 +5,7 @@ import re
 
 from data.decisions import import_decision_data, agenda_item_to_municipal_action
 from data.es import index_decision, find_decisions, configure
-from emailing.mailgun import send_mail
+from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, get_subscriptions
 
 
@@ -18,15 +18,9 @@ def home():
     return render_template('index.jade')
 
 
-@app.route("/email")
+@app.route("/example/email")
 def email_template():
-    return render_template('email/subscription.jade',
-                            subscription_title='Bicycles',
-                            unsubscribe_link='###todo:unsubscribe',
-                            email_url='###todo:email_url_with_query',
-                            results = [ {"title":"Cycling lanes, Soho", "description":"Additional cycle lanes added to all one way streets in Soho.","url":"###1"},
-                                        {"title":"Even more cycling lanes, Soho", "description":"Additional cycle lanes added to all one way streets in Soho.","url":"###2"},
-                                        {"title":"Cycling lanes, London", "description":"Additional cycle lanes added to all one way streets in Soho.","url":"###3"}])
+    return _build_html_email({'results': find_decisions('Helsinki'), 'topic': 'Helsinki'})
 
 
 @app.route("/search", methods=["GET"])
