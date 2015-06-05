@@ -1,6 +1,5 @@
 import argparse
 from flask import Flask, render_template, request, jsonify
-from pprint import pprint
 
 from data.decisions import import_decision_data, agenda_item_to_municipal_action
 from data.es import index_decision, find_decisions, configure
