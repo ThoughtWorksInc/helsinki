@@ -5,7 +5,7 @@ $grid_gutter: 10px;
 // Create rows with `.columns` to clear the floated columns and outdent the
 // padding on `.column`s with negative margin for alignment.
 
-.columns {
+@mixin columns {
   margin-right: -$grid_gutter;
   margin-left: -$grid_gutter;
   @include clearfix;
@@ -16,14 +16,26 @@ $grid_gutter: 10px;
     }
   }
 }
+@mixin column {
+  @include width-from($medium_device) {
+    padding-right: $grid_gutter;
+    padding-left: $grid_gutter;
+    float: left;
+  }
+}
+
+@mixin single-column {
+  padding-right: $grid_gutter;
+  padding-left: $grid_gutter;
+}
+
+.columns {
+  @include columns;
+}
 
 // Base class for every column (requires a column width from below)
 .column {
-  padding-right: $grid_gutter;
-  padding-left: $grid_gutter;
-  @include width-from($medium_device) {
-    float: left;
-  }
+  @include column;
 }
 
 // Column widths
@@ -57,8 +69,7 @@ $grid_gutter: 10px;
 
 // Single column hack
 .single-column {
-  padding-right: $grid_gutter;
-  padding-left: $grid_gutter;
+  @include single-column;
 }
 
 // Equal width columns via table sorcery.
