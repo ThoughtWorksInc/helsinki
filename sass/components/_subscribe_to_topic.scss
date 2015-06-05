@@ -20,12 +20,12 @@ $subscript_input_height: 45px;
     margin-bottom: 1rem;
   }
   &__label {
+    $label_width: $subscript_input_height+1;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
-    width: 3rem;
-    height: $subscript_input_height;
+    @include size($label_width, $subscript_input_height);
     line-height: $subscript_input_height;
     padding: 0.1rem 0.75rem;
     transition: color 250ms ease;
