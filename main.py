@@ -1,8 +1,11 @@
 import argparse
+import sys
 from flask import Flask, render_template, request, jsonify
 
 from data.decisions import import_decision_data, agenda_item_to_municipal_action
 from data.es import index_decision, find_decisions, configure
+from emailing.mailgun import send_mail
+
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -39,9 +42,15 @@ def decision():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("--mailshot", action="store_true")
     parser.add_argument("--reindex", action="store_true")
     parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
+
+    if args.mailshot:
+        print "Sending mail"
+        send_mail()
+        sys.exit(0)
 
     if args.reindex:
         print "Indexing API data..."
