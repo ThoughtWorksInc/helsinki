@@ -512,6 +512,9 @@ a {
   a:active {
     color: rgba(255, 255, 255, 0.7); }
 
+.interested-in__lede {
+  margin-bottom: 0; }
+
 .interested-in-search {
   position: relative;
   margin-top: 0;
