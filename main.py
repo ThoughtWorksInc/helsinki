@@ -6,7 +6,7 @@ import re
 from data.decisions import import_decision_data, agenda_item_to_municipal_action
 from data.es import index_decision, find_decisions, configure
 from emailing.mailgun import send_mail
-from storage.mongo import save_subscription
+from storage.mongo import save_subscription, get_subscriptions
 
 
 app = Flask(__name__)
@@ -50,7 +50,6 @@ def valid_subscription(form):
     valid = False
     if 'email' in form and 'topic' in form:
         address_ok = re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", form.get('email'))
-        print address_ok, '<------'
         if address_ok and form.get('topic'):
             valid = True
     return valid
@@ -72,8 +71,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.mailshot:
-        print "Sending mail"
-        send_mail()
+        print "Sending mail..."
+        for sub in get_subscriptions():
+            topic = sub.get('topic').strip()
+            data = {'results': find_decisions(topic),
+                    'topic': topic}
+            send_mail(sub.get('email'),
+                      'Municipal Decisions for %s' % topic,
+                      data)
         sys.exit(0)
 
     if args.reindex:

@@ -41,9 +41,9 @@ html(xmlns='http://www.w3.org/1999/xhtml', style="font-family: 'Helvetica Neue',
                                 tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
                                   td(style="font-family:#{font_family}; box-sizing: border-box; vertical-align: top; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid; margin: 0; padding: 10px 0;", valign='top')
                                     a(href="{{ result['url'] }}", target='_blank', style='display: block; font-size: 18px; font-weight: bold; color: #353535; margin: 0; padding: 0; text-decoration:none;')
-                                      | {{ result["title"] }}
+                                      | {{ result["subject"] }}
                                     div(style="font-family:#{font_family}; box-sizing: border-box; font-size: 16px; color: #7b7b7b; margin: 0; padding: 2px 0 5px 0;")
-                                      | {{ result["description"] }}
+                                      | {{ result["issue_subject"] }}
                                 | {% endfor %}
                                 // End loop of results
 
