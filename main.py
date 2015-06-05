@@ -20,10 +20,13 @@ def home():
 
 @app.route("/email")
 def email_template():
-    return render_template('email/subscription_list.html',
+    return render_template('email/subscription.jade',
                             subscription_title='Bicycles',
                             unsubscribe_link='###todo:unsubscribe',
-                            email_url='###todo:email_url_with_query')
+                            email_url='###todo:email_url_with_query',
+                            results = [ {"title":"Cycling lanes, Soho", "description":"Additional cycle lanes added to all one way streets in Soho.","url":"###1"},
+                                        {"title":"Even more cycling lanes, Soho", "description":"Additional cycle lanes added to all one way streets in Soho.","url":"###2"},
+                                        {"title":"Cycling lanes, London", "description":"Additional cycle lanes added to all one way streets in Soho.","url":"###3"}])
 
 
 @app.route("/search", methods=["GET"])
