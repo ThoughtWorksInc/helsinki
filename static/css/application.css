@@ -450,9 +450,7 @@ body {
 .middle-container {
   max-width: 768px;
   padding: 0 1rem;
-  margin: 0 auto; }
-  .middle-container--vertical-spacer {
-    margin-bottom: 3rem; }
+  margin: 0 auto 3rem auto; }
 
 .columns {
   margin-right: -10px;

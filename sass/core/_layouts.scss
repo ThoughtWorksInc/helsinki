@@ -46,8 +46,5 @@ body {
 .middle-container {
   max-width: $large_device;
   padding: 0 1rem;
-  margin: 0 auto;
-  &--vertical-spacer {
-    margin-bottom: 3rem;
-  }
+  margin: 0 auto 3rem auto;
 }
