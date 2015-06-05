@@ -1,4 +1,5 @@
-{% set font_family = "'Helvetica Neue',Helvetica,Arial,sans-serif" %}
+- var font_family = "'Helvetica Neue',Helvetica,Arial,sans-serif"
+
 doctype transitional
 html(xmlns='http://www.w3.org/1999/xhtml', style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;")
   head
@@ -8,53 +9,53 @@ html(xmlns='http://www.w3.org/1999/xhtml', style="font-family: 'Helvetica Neue',
     style(type='text/css').
       {% include "email/_subscription.css" %}
       
-  body(itemscope='', itemtype='http://schema.org/EmailMessage', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #38b56a; margin: 0;", bgcolor='#38b56a')
-    table.body-wrap(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #38b56a; margin: 0;", bgcolor='#38b56a')
-      tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-        td(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;", valign='top')
-        td.container(width='600', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;", valign='top')
-          .content(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;")
-            table.main(width='100%', cellpadding='0', cellspacing='0', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #30ab60;", bgcolor='#fff')
-              tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                td.content-wrap.aligncenter(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 20px;", align='center', valign='top')
-                  table(width='100%', cellpadding='0', cellspacing='0', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                    tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                      td.content-block.aligncenter(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
+  body(itemscope='', itemtype='http://schema.org/EmailMessage', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #38b56a; margin: 0;", bgcolor='#38b56a')
+    table.body-wrap(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #38b56a; margin: 0;", bgcolor='#38b56a')
+      tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+        td(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;", valign='top')
+        td.container(width='600', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;", valign='top')
+          .content(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;")
+            table.main(width='100%', cellpadding='0', cellspacing='0', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #30ab60;", bgcolor='#fff')
+              tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                td.content-wrap.aligncenter(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 20px;", align='center', valign='top')
+                  table(width='100%', cellpadding='0', cellspacing='0', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                    tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                      td.content-block.aligncenter(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
 
-                        table.main-content(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;")
-                          tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                            td(style="font-family: {{ font_family }}; box-sizing: border-box; vertical-align: top; border: 0; margin: 0; padding: 0 0 10px 0;", valign='top')
+                        table.main-content(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;")
+                          tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                            td(style="font-family:#{font_family}; box-sizing: border-box; vertical-align: top; border: 0; margin: 0; padding: 0 0 10px 0;", valign='top')
                               h1.alignleft(style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 32px; color: #353535; line-height: 1.2em; font-weight: 500; text-align: left; margin: 10px 0 0;", align='left')
                                 | Subscriptions for
                                 | {{subscription_title}}
-                          tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                            td(style="font-family: {{ font_family }}; box-sizing: border-box; vertical-align: top; border: 0; margin: 0; padding: 0 0 10px 0;", valign='top')
+                          tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                            td(style="font-family:#{font_family}; box-sizing: border-box; vertical-align: top; border: 0; margin: 0; padding: 0 0 10px 0;", valign='top')
                               h2.alignleft(style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 16px; color: #3fb46d; line-height: 1.2em; font-weight: bold; text-align: left; margin: 40px 0 0 0;", align='left')
                                 | LATEST UPDATES
-                          tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                            td(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;", valign='top')
-                              table.main-items(cellpadding='0', cellspacing='0', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;")
+                          tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                            td(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;", valign='top')
+                              table.main-items(cellpadding='0', cellspacing='0', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;")
 
                                 // Start loop of results
                                 | {% for result in results %}
-                                tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                                  td(style="font-family: {{ font_family }}; box-sizing: border-box; vertical-align: top; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid; margin: 0; padding: 10px 0;", valign='top')
+                                tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                                  td(style="font-family:#{font_family}; box-sizing: border-box; vertical-align: top; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid; margin: 0; padding: 10px 0;", valign='top')
                                     a(href="{{ result['url'] }}", target='_blank', style='display: block; font-size: 18px; font-weight: bold; color: #353535; margin: 0; padding: 0; text-decoration:none;')
                                       | {{ result["title"] }}
-                                    div(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 16px; color: #7b7b7b; margin: 0; padding: 2px 0 5px 0;")
+                                    div(style="font-family:#{font_family}; box-sizing: border-box; font-size: 16px; color: #7b7b7b; margin: 0; padding: 2px 0 5px 0;")
                                       | {{ result["description"] }}
                                 | {% endfor %}
                                 // End loop of results
 
-                    tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                      td.content-block.aligncenter(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
-                        a(href='{{ email_url }}', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; color: #348eda; text-decoration: underline; margin: 0;")
+                    tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                      td.content-block.aligncenter(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
+                        a(href='{{ email_url }}', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; color: #348eda; text-decoration: underline; margin: 0;")
                           | View in browser
-            .footer(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;")
-              table(width='100%', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                tr(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; margin: 0;")
-                  td.aligncenter.content-block(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #fff; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
-                    a(href='{{ unsubscribe_link }}', style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 12px; color: #fff; text-decoration: underline; margin: 0;") Unsubscribe
+            .footer(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;")
+              table(width='100%', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
+                  td.aligncenter.content-block(style="font-family:#{font_family}; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #fff; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
+                    a(href='{{ unsubscribe_link }}', style="font-family:#{font_family}; box-sizing: border-box; font-size: 12px; color: #fff; text-decoration: underline; margin: 0;") Unsubscribe
                     = " "
                     | to {{ subscription_title }} news.
-        td(style="font-family: {{ font_family }}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;", valign='top')
+        td(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;", valign='top')
