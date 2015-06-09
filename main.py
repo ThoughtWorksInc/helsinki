@@ -17,6 +17,11 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 def home():
     return render_template('index.jade')
 
+@app.route("/sign-in")
+def sign_in():
+    return render_template('sign_in.jade')
+
+
 
 @app.route("/example/email")
 def email_template():

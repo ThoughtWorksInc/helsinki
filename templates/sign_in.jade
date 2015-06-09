@@ -1,0 +1,29 @@
+extends layout/layout
+
+//block vars
+//  - bodyClass = ""
+
+block title
+  | Sign in...
+
+block header
+
+block content
+
+  .middle-container
+
+    form.sign-in-form(action="/mail-login", method="POST")
+      p.sign-in-form__intro-text
+        b Sign in
+        = " "
+        |with your email address
+      .columns
+        .column.two-thirds
+          .sign-in-form__input_wrapper
+            input.sign-in-form__input(type="email", name="email", id="e-address", required)
+            label.sign-in-form__label(for="e-address")
+              i.fa.fa-envelope-o
+              span.visuallyhidden Email address
+        .column.one-third
+          button.sign-in-form__button(type="submit")
+            | Sign in

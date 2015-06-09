@@ -5,6 +5,7 @@ $black: #000;
 $light_blue: #2597FF;
 $pink: #C42B69;
 $green: #38b56a;
+$super_light_green: lighten($green,50%);
 $dark_green: #30ab60;
 
 $orange: #FAAE58;
@@ -21,7 +22,8 @@ $link_hover_colour: $link_colour;
 $link_visited_colour: $link_colour;
 $link_active_colour: $link_colour;
 
-$border_colors: rgba($default_text_color_dark,0.15);
+$border_colors: #d8d8d8;
+$dark_border_colors: darken($border_colors,10%);
 
 //
 

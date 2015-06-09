@@ -18,31 +18,6 @@ body {
   color: $default_text_color_dark;
 }
 
-.layout-header {
-  max-width: $large_device;
-  padding: 0 1rem;
-  margin: 0 auto 0.5rem;
-  @include font-size(30);
-  @include width-from($medium_device) {
-    @include font-size(40);
-    margin-bottom: 1.5rem;
-  }
-  &__logo {
-    display: inline-block;
-    height: 45px;
-    width: 100%;
-    i {
-      padding: 0 0.25rem;
-    }
-    :first-child,
-    :last-child {
-      font-size: 80%;
-    }
-  }
-}
-
-
-
 .middle-container {
   max-width: $large_device;
   padding: 0 1rem;
