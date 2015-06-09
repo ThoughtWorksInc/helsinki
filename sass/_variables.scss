@@ -5,8 +5,10 @@ $black: #000;
 $light_blue: #2597FF;
 $pink: #C42B69;
 $green: #38b56a;
-$super_light_green: lighten($green,50%);
+$light_green: lighten($green, 10%);
+$super_light_green: lighten($green, 50%);
 $dark_green: #30ab60;
+$super_dark_green: darken($dark_green, 5%);
 
 $orange: #FAAE58;
 

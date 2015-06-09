@@ -81,6 +81,12 @@ $signin_input_height: 45px;
     text-decoration: none;
     border-radius: 3px;
     border: none;
+    transition: background 250ms ease;
+    &:focus {
+      outline: none;
+      background-color: $light_green;
+      box-shadow: 0 3px 0 0 $super_dark_green;
+    }
     &__icon {
       margin-right: 0.25rem;
     }

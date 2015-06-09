@@ -1,0 +1,23 @@
+extends layout/demo_mail_layout
+
+//block vars
+//  - bodyClass = ""
+
+- var SITE_NAME = "NAME_GOES_HERE"
+
+block title
+  | Email Login
+
+block content
+
+  .email-wrapper
+    .email-container
+      p Hello,
+
+      p You are getting this message because you've tried to sign in to #{SITE_NAME}
+
+      p In order to sign in, you will need to click on the following link (or paste it into your web browser's address bar if your email program does not allow links)
+
+      p: a(href="/signing-in") http://project.test-pilot-url.com?q=1234rghu8765rdcvbnji87654wsdf
+
+      //p For security reasons, this email will expire in 24 hours.

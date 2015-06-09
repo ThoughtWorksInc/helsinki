@@ -21,6 +21,18 @@ def home():
 def sign_in():
     return render_template('sign_in.jade')
 
+@app.route("/signing-in")
+def signing_in():
+    return render_template('signing_in.jade')
+
+@app.route("/profile")
+def profile():
+    return render_template('profile.jade')
+
+@app.route("/demo-mail-login", methods=["POST"])
+def demo_mail_login():
+    return render_template('demo_mail_login.jade')
+
 
 
 @app.route("/example/email")

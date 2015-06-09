@@ -1,0 +1,43 @@
+$loading_anim_size: 30px;
+$loading_anim_border_size: 3px;
+
+@keyframes loading_spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  @include size(300px, 200px);
+  @include middle-me;
+  text-align: center;
+  line-height: 200px;
+  &__text {
+    @include middle-me;
+    p {
+      @include font-size(14);
+    }
+    &__icon {
+      position: relative;
+      margin: 0 auto 5px auto;
+      @include size($loading_anim_size);
+      border-radius: $loading_anim_size;
+      border: $loading_anim_border_size solid $green;
+      &:after {
+        box-sizing: content-box;
+        content: '';
+        display: block;
+        z-index: 2;
+        margin-top: -3px;
+        margin-left: -6px;
+        @include circle($loading_anim_size);
+        border: none;
+        border-left: 3px solid $white;
+        animation: loading_spinner 350ms linear infinite;
+      }
+    }
+  }
+}
