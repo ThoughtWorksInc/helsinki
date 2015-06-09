@@ -17,6 +17,8 @@ $signin_input_height: 45px;
     }
   }
   &__intro-text {
+    display: block;
+    @include font-size(18);
     margin-top: 0;
     margin-bottom: 1rem;
   }

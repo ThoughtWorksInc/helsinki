@@ -4,19 +4,21 @@
   max-width: $large_device;
   padding: 0 1rem;
   margin: 0 auto 0.5rem;
+  border-bottom: 3px solid $white;
   @include font-size(30);
   @include width-from($medium_device) {
     @include font-size(40);
     margin-bottom: 1.5rem;
   }
   &__logo {
-    height: 45px;
-    i {
-      padding: 0 0.25rem;
+    height: 40px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
     }
-    :first-child,
-    :last-child {
-      font-size: 80%;
+    i {
+      padding: 5px;
+      vertical-align: bottom;
     }
   }
 }
@@ -24,10 +26,13 @@
 .button {
   text-decoration: none;
   &__icon {
-    margin-right: 4px;
+    margin-right: 5px;
   }
   &--space {
     margin-right: 12px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 .sign {
@@ -36,7 +41,7 @@
   height: 55px;
   @include font-size(18);
   @include width-from($medium_device) {
-    padding-top: 27px;
+    padding-top: 22px;
   }
   &__out {
 
