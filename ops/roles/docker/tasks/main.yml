@@ -1,0 +1,16 @@
+---
+ - name: install docker.io
+   apt: name="docker.io" state=present
+
+ - name: pull elasticsearch image
+   command: docker pull elasticsearch:1.6
+
+ - name: pull mongo image
+   command: docker pull mongo:3
+
+ - name: create elasticsearch container
+   command: docker run --name elasticsearch -d elasticsearch
+
+ - name: create mongo container
+   command: docker run --name mongo -d mongo
+

@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+digital_ocean_memory = 1024
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.define "dob_vm", primary: true do |dob|
+    dob.vm.network "private_network", ip: "192.168.50.51"
+    dob.vm.network :forwarded_port, guest: 22, host: 2223, id: "ssh", auto_correct: false
+
+    dob.vm.provider "virtualbox" do |vbox|
+      vbox.customize ["modifyvm", :id, "--memory", digital_ocean_memory, "--cpus", 1] 
+    end
+
+    dob.vm.provision "ansible" do |ansible|
+      ansible.playbook = "dob_vm_playbook.yml"
+      ansible.inventory_path = "dob_vm.inventory"
+      # ansible.extra_vars = {CONFIG_FILE_PATH: "objective8_config"}
+      ansible.sudo = true
+    end
+  end
+
+end
+
