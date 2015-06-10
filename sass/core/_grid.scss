@@ -6,23 +6,25 @@ $grid_gutter: 10px;
 // padding on `.column`s with negative margin for alignment.
 
 @mixin columns {
+  @include clearfix;
   margin-right: -$grid_gutter;
   margin-left: -$grid_gutter;
-  @include clearfix;
 }
-@mixin column {
-  @include width-to($medium_device) {
+@mixin column($breakpoint: $medium_device) {
+  padding-right: $grid_gutter;
+  padding-left: $grid_gutter;
+  @include width-to($breakpoint) {
     float: none;
     width: 100%;
   }
-  @include width-from($medium_device) {
-    padding-right: $grid_gutter;
-    padding-left: $grid_gutter;
+  @include width-from($breakpoint) {
     float: left;
   }
 }
 
 @mixin single-column {
+  width: 100%;
+  float: none;
   padding-right: $grid_gutter;
   padding-left: $grid_gutter;
 }
@@ -36,16 +38,17 @@ $grid_gutter: 10px;
   @include column;
 }
 
-@mixin column-one-half() {
-  @include column;
+@mixin column-one-half($breakpoint:$medium_device) {
+  $breakpoint: if($breakpoint, $breakpoint, 100px);
+  @include column($breakpoint);
   width: 50%;
 }
-@mixin column-one-third() {
-  @include column;
+@mixin column-one-third($breakpoint:$medium_device) {
+  @include column($breakpoint);
   width: 33.333333%;
 }
-@mixin column-two-thirds() {
-  @include column;
+@mixin column-two-thirds($breakpoint:$medium_device) {
+  @include column($breakpoint);
   width: 66.666667%;
 }
 

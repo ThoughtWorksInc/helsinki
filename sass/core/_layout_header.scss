@@ -1,24 +1,28 @@
+$sign_in_breakpoint: 480px;
+
 .layout-header {
   @include columns;
   position: relative;
   max-width: $large_device;
   padding: 0 1rem;
-  margin: 0 auto 0.5rem;
-  border-bottom: 3px solid $white;
+  margin: 0 auto 0.5rem auto;
+  border-bottom: 2px solid $white;
   @include font-size(30);
   @include width-from($medium_device) {
-    @include font-size(40);
-    margin-bottom: 1.5rem;
+    //margin-bottom: 1.5rem;
   }
   &__logo {
-    height: 40px;
-    text-decoration: none;
-    &:hover {
+    @include column-one-third($sign_in_breakpoint);
+    &__link {
+      height: 40px;
       text-decoration: none;
-    }
-    i {
-      padding: 5px;
-      vertical-align: bottom;
+      &:hover {
+        text-decoration: none;
+      }
+      i {
+        padding: 5px;
+        vertical-align: bottom;
+      }
     }
   }
 }
@@ -36,12 +40,12 @@
   }
 }
 .sign {
-  @include column-one-half;
-  text-align: right;
+  @include column-two-thirds($sign_in_breakpoint);
   height: 55px;
+  padding-top: 16px;
   @include font-size(18);
-  @include width-from($medium_device) {
-    padding-top: 22px;
+  @include width-from($sign_in_breakpoint) {
+    text-align: right;
   }
   &__out {
 
