@@ -411,9 +411,9 @@ input {
   border-radius: 0; }
 
 .columns {
+  zoom: 1;
   margin-right: -10px;
-  margin-left: -10px;
-  zoom: 1; }
+  margin-left: -10px; }
   .columns:before,
   .columns:after {
     display: table;
@@ -421,18 +421,20 @@ input {
   .columns:after {
     clear: both; }
 
-@media only screen and (max-width: 640px) {
-  .column {
-    float: none;
-    width: 100%; } }
-
-@media screen and (min-width: 640px) {
-  .column {
-    padding-right: 10px;
-    padding-left: 10px;
-    float: left; } }
+.column {
+  padding-right: 10px;
+  padding-left: 10px; }
+  @media only screen and (max-width: 640px) {
+    .column {
+      float: none;
+      width: 100%; } }
+  @media screen and (min-width: 640px) {
+    .column {
+      float: left; } }
 
 .one-third {
+  padding-right: 10px;
+  padding-left: 10px;
   width: 33.333333%; }
   @media only screen and (max-width: 640px) {
     .one-third {
@@ -440,11 +442,11 @@ input {
       width: 100%; } }
   @media screen and (min-width: 640px) {
     .one-third {
-      padding-right: 10px;
-      padding-left: 10px;
       float: left; } }
 
 .two-thirds {
+  padding-right: 10px;
+  padding-left: 10px;
   width: 66.666667%; }
   @media only screen and (max-width: 640px) {
     .two-thirds {
@@ -452,14 +454,14 @@ input {
       width: 100%; } }
   @media screen and (min-width: 640px) {
     .two-thirds {
-      padding-right: 10px;
-      padding-left: 10px;
       float: left; } }
 
 .one-fourth {
   width: 25%; }
 
 .one-half {
+  padding-right: 10px;
+  padding-left: 10px;
   width: 50%; }
   @media only screen and (max-width: 640px) {
     .one-half {
@@ -467,8 +469,6 @@ input {
       width: 100%; } }
   @media screen and (min-width: 640px) {
     .one-half {
-      padding-right: 10px;
-      padding-left: 10px;
       float: left; } }
 
 .three-fourths {
@@ -481,6 +481,8 @@ input {
   width: 80%; }
 
 .single-column {
+  width: 100%;
+  float: none;
   padding-right: 10px;
   padding-left: 10px; }
 
@@ -513,14 +515,14 @@ body {
   margin: 0 auto 3rem auto; }
 
 .layout-header {
+  zoom: 1;
   margin-right: -10px;
   margin-left: -10px;
-  zoom: 1;
   position: relative;
   max-width: 768px;
   padding: 0 1rem;
-  margin: 0 auto 0.5rem;
-  border-bottom: 3px solid #fff;
+  margin: 0 auto 0.5rem auto;
+  border-bottom: 2px solid #fff;
   font-size: 30px;
   font-size: 1.875rem; }
   .layout-header:before,
@@ -529,19 +531,25 @@ body {
     content: ""; }
   .layout-header:after {
     clear: both; }
-  @media screen and (min-width: 640px) {
-    .layout-header {
-      font-size: 40px;
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem; } }
   .layout-header__logo {
-    height: 40px;
-    text-decoration: none; }
-    .layout-header__logo:hover {
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 33.333333%; }
+    @media only screen and (max-width: 480px) {
+      .layout-header__logo {
+        float: none;
+        width: 100%; } }
+    @media screen and (min-width: 480px) {
+      .layout-header__logo {
+        float: left; } }
+    .layout-header__logo__link {
+      height: 40px;
       text-decoration: none; }
-    .layout-header__logo i {
-      padding: 5px;
-      vertical-align: bottom; }
+      .layout-header__logo__link:hover {
+        text-decoration: none; }
+      .layout-header__logo__link i {
+        padding: 5px;
+        vertical-align: bottom; }
 
 .button {
   text-decoration: none; }
@@ -553,23 +561,23 @@ body {
       margin-right: 0; }
 
 .sign {
-  width: 50%;
-  text-align: right;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 66.666667%;
   height: 55px;
+  padding-top: 16px;
   font-size: 18px;
   font-size: 1.125rem; }
-  @media only screen and (max-width: 640px) {
+  @media only screen and (max-width: 480px) {
     .sign {
       float: none;
       width: 100%; } }
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 480px) {
     .sign {
-      padding-right: 10px;
-      padding-left: 10px;
       float: left; } }
-  @media screen and (min-width: 640px) {
+  @media screen and (min-width: 480px) {
     .sign {
-      padding-top: 22px; } }
+      text-align: right; } }
 
 .profile__button {
   display: inline-block;
@@ -939,9 +947,9 @@ a {
                 animation: loading_spinner 350ms linear infinite; }
 
 .interest-items {
+  zoom: 1;
   margin-right: -10px;
   margin-left: -10px;
-  zoom: 1;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 0;
@@ -956,6 +964,8 @@ a {
     clear: both; }
 
 .interest-item {
+  padding-right: 10px;
+  padding-left: 10px;
   width: 50%; }
   @media only screen and (max-width: 640px) {
     .interest-item {
@@ -963,9 +973,12 @@ a {
       width: 100%; } }
   @media screen and (min-width: 640px) {
     .interest-item {
-      padding-right: 10px;
-      padding-left: 10px;
       float: left; } }
+  .interest-item--fullwidth {
+    width: 100%;
+    float: none;
+    padding-right: 10px;
+    padding-left: 10px; }
   .interest-item__link {
     position: relative;
     display: block;
