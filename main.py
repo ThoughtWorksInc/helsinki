@@ -78,10 +78,7 @@ if __name__ == "__main__":
     if args.reindex:
         print "Indexing API data..."
         configure()
-        decisions = import_decision_data()
-
-        for d in decisions.get("objects"):
-            index_decision(agenda_item_to_municipal_action(d))
+	import_decision_data()
 
     app.debug = bool(args.debug)
     app.run()

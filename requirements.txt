@@ -3,3 +3,6 @@ pyjade
 elasticsearch
 requirements
 pymongo
+requests
+nose
+pep8
