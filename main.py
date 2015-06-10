@@ -27,7 +27,8 @@ def signing_in():
 
 @app.route("/profile")
 def profile():
-    return render_template('profile.jade')
+    return render_template('profile.jade',
+                           signedIn=True)
 
 @app.route("/demo-mail-login", methods=["POST"])
 def demo_mail_login():
