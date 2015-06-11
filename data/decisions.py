@@ -38,7 +38,6 @@ def get_decisions():
     return r.json()
 
 
-def get_municipal_actions():
-    decisions = get_decisions()
+def get_municipal_actions(decisions):
     agenda_items = decisions_to_agenda_items(decisions)
     return list(map(agenda_item_to_municipal_action, agenda_items))

@@ -6,3 +6,4 @@ pymongo
 requests
 nose
 pep8
+mock
