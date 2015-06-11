@@ -7,7 +7,7 @@ es = Elasticsearch()
 
 def configure():
     try:
-        es.indices.delete('decisions', ignore=[400,404])
+        es.indices.delete('decisions', ignore=[400, 404])
         es.indices.create(
             index="decisions",
             body={
@@ -47,4 +47,3 @@ def find_decisions(criteria):
     )
     hits = results.get("hits")
     return [hit.get("_source") for hit in hits.get("hits")]
-

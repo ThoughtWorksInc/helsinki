@@ -7,10 +7,17 @@ class APIError(Exception):
 
 
 SEARCH_FIELDS = ['subject', 'issue_subject', 'content.text']
-DECISION_MAPPING = {'decision_data': {'properties': {'issue_subject': {'analyzer': 'finnish', 'type': 'string'},
-                                                     'last_modified_time': {'type': 'datetime'},
-                                                     'subject': {'analyzer': 'finnish', 'type': 'string'},
-                                                     'content': {'properties': {'text': {'type': 'string', 'analyzer': 'finnish'}}}}}}
+DECISION_MAPPING = {'decision_data':
+                    {'properties':
+                     {'issue_subject': {'analyzer': 'finnish',
+                                        'type': 'string'},
+                      'last_modified_time': {'type': 'datetime'},
+                      'subject': {'analyzer': 'finnish',
+                                  'type': 'string'},
+                      'content': {'properties':
+                                  {'text': {'type': 'string',
+                                            'analyzer': 'finnish'}}}}}}
+
 
 def agenda_item_to_municipal_action(agenda_item):
     issue = agenda_item.get("issue")
@@ -32,7 +39,9 @@ def decisions_to_agenda_items(decisions):
 
 
 def get_decisions():
-    r = requests.get('http://dev.hel.fi/paatokset/v1/agenda_item/?order_by=-last_modified_time&limit=50')
+    agenda_items_url = ("http://dev.hel.fi/paatokset/v1/agenda_item/"
+                        "?order_by=-last_modified_time&limit=50")
+    r = requests.get(agenda_items_url)
     if r.status_code not in [200, 201]:
         raise APIError()
     return r.json()

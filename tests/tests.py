@@ -4,12 +4,6 @@ import sys
 import mock
 
 
-#directory_name = os.path.dirname(__file__)
-#up_one_dir = os.path.join(directory_name, '..')
-#project_path = os.path.abspath(up_one_dir)
-#sys.path.append(project_path)
-
-
 from emailing import mailgun
 from data.decisions import (get_decisions, agenda_item_to_municipal_action,
                             decisions_to_agenda_items, get_municipal_actions)
@@ -27,8 +21,10 @@ agenda_item = {u'index': 1,
                             u'resource_uri': u'/paatokset/v1/meeting/7342/'},
                u'subject': u'SUBJECT',
                u'introducer': None,
-               u'content': [{u'text': u'<p>SOME HTML CONTENT</p>', u'type': u'resolution'},
-                            {u'text': u'<p>SOME MORE HTML CONTENT</p>', u'type': u'reasons for resolution'}],
+               u'content': [{u'text': u'<p>SOME HTML CONTENT</p>',
+                             u'type': u'resolution'},
+                            {u'text': u'<p>SOME MORE HTML CONTENT</p>',
+                             u'type': u'reasons for resolution'}],
                u'permalink': u'http://dev.hel.fi/paatokset/asia/hel-2015-006704/02100vh1-2015-25/',
                u'resolution': None,
                u'preparer': u'Nina Nyyt\xe4j\xe4',
@@ -54,8 +50,10 @@ agenda_item = {u'index': 1,
                u'classification_code': u'00 01 00-26'}
 
 
-municipal_action = {'content': [{u'text': u'<p>SOME HTML CONTENT</p>', u'type': u'resolution'},
-                                {u'text': u'<p>SOME MORE HTML CONTENT</p>', u'type': u'reasons for resolution'}],
+municipal_action = {'content': [{u'text': u'<p>SOME HTML CONTENT</p>',
+                                 u'type': u'resolution'},
+                                {u'text': u'<p>SOME MORE HTML CONTENT</p>',
+                                 u'type': u'reasons for resolution'}],
                     'issue_subject': u'THE ISSUE SUBJECT',
                     'permalink': u'http://dev.hel.fi/paatokset/asia/hel-2015-006704/02100vh1-2015-25/',
                     'last_modified_time': u'2015-06-11T11:05:52.586203',
@@ -69,7 +67,8 @@ class TestExample(unittest.TestCase):
 
     def test_agenda_item_to_municipal_actions_extracts_correct_fields(self):
         self.maxDiff = None
-        self.assertEqual(municipal_action, agenda_item_to_municipal_action(agenda_item))
+        self.assertEqual(municipal_action,
+                         agenda_item_to_municipal_action(agenda_item))
 
     def test_decisions_to_agenda_items(self):
         decisions = {"objects": "decisions"}

@@ -20,7 +20,8 @@ def home():
 
 @app.route("/example/email")
 def email_template():
-    return _build_html_email({'results': find_decisions('Helsinki'), 'topic': 'Helsinki'})
+    return _build_html_email({'results': find_decisions('Helsinki'),
+                              'topic': 'Helsinki'})
 
 
 @app.route("/search", methods=["GET"])
@@ -30,8 +31,8 @@ def search_decisions():
         criteria_stripped = criteria.strip()
         results = find_decisions(criteria_stripped)
         return render_template('results.jade',
-                                results=results,
-                                searchTerm=criteria_stripped)
+                               results=results,
+                               searchTerm=criteria_stripped)
     return ""
 
 
@@ -43,7 +44,8 @@ def decision():
 def valid_subscription(form):
     valid = False
     if 'email' in form and 'topic' in form:
-        address_ok = re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", form.get('email'))
+        email_regex = r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$"
+        address_ok = re.match(email_regex, form.get('email'))
         if address_ok and form.get('topic'):
             valid = True
     return valid
@@ -82,4 +84,3 @@ if __name__ == "__main__":
 
     app.debug = bool(args.debug)
     app.run()
-
