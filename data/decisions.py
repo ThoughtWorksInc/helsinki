@@ -1,7 +1,7 @@
 import json
 import requests
 
-from data import es
+from data import indexing
 
 
 class APIError(Exception):
@@ -32,7 +32,7 @@ def agenda_item_to_municipal_action(agenda_item):
 def import_decision_data(): 
     decisions = get_decisions()
     for d in decisions.get("objects"):
-        es.index_decision(agenda_item_to_municipal_action(d))
+        indexing.index_decision(agenda_item_to_municipal_action(d))
 
 
 def get_decisions():
