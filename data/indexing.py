@@ -1,5 +1,5 @@
 from es import index_decisions
-from decisions import get_municipal_actions
+from decisions import get_municipal_actions, get_decisions
 
 
 def import_decision_data():
