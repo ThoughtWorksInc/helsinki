@@ -5,3 +5,5 @@
 .idea
 node_modules/
 ops/.vagrant*
+*.egg-info
+dist/
