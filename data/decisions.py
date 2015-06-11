@@ -1,8 +1,6 @@
 import json
 import requests
 
-from data import indexing
-
 
 class APIError(Exception):
     pass
@@ -29,10 +27,8 @@ def agenda_item_to_municipal_action(agenda_item):
     }
 
 
-def import_decision_data(): 
-    decisions = get_decisions()
-    for d in decisions.get("objects"):
-        indexing.index_decision(agenda_item_to_municipal_action(d))
+def decisions_to_agenda_items(decisions):
+    return decisions.get("objects")
 
 
 def get_decisions():
@@ -41,3 +37,8 @@ def get_decisions():
         raise APIError()
     return r.json()
 
+
+def get_municipal_actions():
+    decisions = get_decisions()
+    agenda_items = decisions_to_agenda_items(decisions)
+    return list(map(agenda_item_to_municipal_action, agenda_items))

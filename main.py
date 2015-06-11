@@ -3,8 +3,8 @@ import sys
 from flask import Flask, render_template, request, jsonify
 import re
 
-from data.decisions import import_decision_data, agenda_item_to_municipal_action
-from data.es import index_decision, find_decisions, configure
+from data.indexing import import_decision_data
+from data.es import find_decisions
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, get_subscriptions
 
@@ -77,8 +77,7 @@ if __name__ == "__main__":
 
     if args.reindex:
         print "Indexing API data..."
-        configure()
-	import_decision_data()
+        import_decision_data()
 
     app.debug = bool(args.debug)
     app.run()

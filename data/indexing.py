@@ -1,17 +1,8 @@
-from elasticsearch import Elasticsearch
+from es import configure, index_decisions
+from decisions import get_municipal_actions
 
-es = Elasticsearch()
 
-
-def index_decision(decision):
-  try:
-    es.index(
-        index="decisions",
-        doc_type="decision_data",
-        body=decision,
-        id=decision.get("id")
-        )
-  except:
-    print "Error when indexing: %s" % decision
-    pass
-
+def import_decision_data():
+    configure()
+    municipal_actions = get_municipal_actions()
+    index_decisions(municipal_actions)
