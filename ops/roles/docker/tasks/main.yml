@@ -1,6 +1,6 @@
 ---
- - name: install docker.io
-   apt: name="docker.io" state=present
+ - name: install docker
+   shell: curl -sSL https://get.docker.com/ | sh
 
  - name: pull elasticsearch image
    command: docker pull elasticsearch:1.6
@@ -8,9 +8,11 @@
  - name: pull mongo image
    command: docker pull mongo:3
 
+ - name: pull python image
+   command: docker pull python:2.7
+
  - name: create elasticsearch container
    command: docker run --name elasticsearch -d elasticsearch
 
  - name: create mongo container
    command: docker run --name mongo -d mongo
-
