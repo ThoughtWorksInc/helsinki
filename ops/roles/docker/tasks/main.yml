@@ -1,18 +1,39 @@
 ---
- - name: install docker
-   shell: curl -sSL https://get.docker.com/ | sh
+# - script: get_docker.sh
 
- - name: pull elasticsearch image
-   command: docker pull elasticsearch:1.6
+ - name: install pip
+   apt: name=python-pip state=present
 
- - name: pull mongo image
-   command: docker pull mongo:3
+ # required to prevent bug:
+ # https://github.com/ansible/ansible/issues/10810
+ - name: ensure pip is upgraded
+   command: easy_install -U pip
 
- - name: pull python image
-   command: docker pull python:2.7
+ # latest version of docker-py breaks all the things:
+ # https://github.com/ansible/ansible-modules-core/issues/1227
+ - name: install docker-py
+   pip: name=docker-py version=1.1.0 state=present
 
- - name: create elasticsearch container
-   command: docker run --name elasticsearch -d elasticsearch
+ - name: add docker apt key
+   apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=36A1D7869245C8950F966E92D8576A8BA88D21E9
 
- - name: create mongo container
-   command: docker run --name mongo -d mongo
+ - name: add docker apt repo
+   apt_repository: repo='deb https://get.docker.com/ubuntu docker main' state=present
+
+ - name: install lxc-docker
+   apt: name=lxc-docker state=present
+
+ - name: docker elasticsearch
+   docker:
+     name: elasticsearch
+     image: elasticsearch:1.6
+
+ - name: docker mongo
+   docker:
+     name: mongo
+     image: mongo:3
+
+ - name: docker python
+   docker:
+     image: python:2.7
+     state: present
