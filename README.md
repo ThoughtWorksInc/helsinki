@@ -11,12 +11,16 @@ To be running on `localhost`
 
 ###Install Dependencies
 
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 
 ###Running the server
 
-`python main.py`
+```
+python main.py
+```
 
 Run with `--reindex` to load the data from OpenAhjo into elasticsearch
 
@@ -28,26 +32,36 @@ Run with `--debug` for live reloading and stack traces
 To send notifications you will need to have your mailgun credentials in `mailgun.json`
 (see the example file). Then run
 
-`python main.py --mailshot`
+```
+python main.py --mailshot
+```
 
 
-###Running Tests
+###Tests
 
 Before pushing:
 
-`./pre_push.sh`
+```
+./pre_push.sh
+```
 
 #####Unit tests:
 
-`nosetests`
+```
+nosetests
+```
 
 To include print output:
 
-`nosetests -s`
+```
+nosetests -s
+```
 
 #####Code style checks:
 
-`pep8 .`
+```
+pep8 .
+```
 
 
 ##Front End
