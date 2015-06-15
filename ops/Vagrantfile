@@ -22,6 +22,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # ansible.extra_vars = {CONFIG_FILE_PATH: "objective8_config"}
       ansible.sudo = true
     end
+
+    dob.vm.synced_folder "../", "/var/helsinki"
   end
 
 end
