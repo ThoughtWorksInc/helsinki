@@ -1,8 +1,17 @@
+import os
+import logging
 from elasticsearch import Elasticsearch
 
 from data import decisions
 
-es = Elasticsearch()
+
+try:
+    logging.info('Attempt to connect to elasticsearch')
+    es = Elasticsearch([{'host': os.getenv('ELASTICSEARCH_PORT_9200_TCP_ADDR', 
+                                          'localhost')}])
+except Exception as e:
+    logging.error('Could not connect to elasticsearch: ', e)
+    raise e
 
 
 def configure():
@@ -17,8 +26,8 @@ def configure():
             ignore=400
         )
     except Exception as e:
-        print "Could not set up indexes: ", e
-        pass
+        logging.error("Could not set up indexes: ", e)
+        raise e
 
 
 def index_decision(decision):
@@ -30,7 +39,7 @@ def index_decision(decision):
             id=decision.get("id")
         )
     except:
-        print "Error when indexing: %s" % decision
+        logging.warning("Error when indexing: %s" % decision)
         pass
 
 

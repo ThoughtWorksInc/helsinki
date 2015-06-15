@@ -2,6 +2,7 @@ import argparse
 import sys
 from flask import Flask, render_template, request, jsonify
 import re
+import logging
 
 from data.indexing import import_decision_data
 from data.es import find_decisions, configure
@@ -16,7 +17,6 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 @app.route("/")
 def home():
     return render_template('index.jade')
-
 
 @app.route("/example/email")
 def email_template():
@@ -60,6 +60,7 @@ def subscribe():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG)
     parser = argparse.ArgumentParser()
     parser.add_argument("--mailshot", action="store_true")
     parser.add_argument("--reindex", action="store_true")
@@ -83,4 +84,4 @@ if __name__ == "__main__":
         import_decision_data()
 
     app.debug = bool(args.debug)
-    app.run()
+    app.run(host='0.0.0.0')
