@@ -1,11 +1,6 @@
 import os
 from setuptools import setup, find_packages
 
-fileList = []
-for root, subFolders, files in os.walk('helsinki/templates'):
-    for file in files:
-        fileList.append(os.path.join(root, file))
-
 setup(
     name='helsinki',
     version='0.0.1',
@@ -15,7 +10,7 @@ setup(
         'Programming Language :: Python :: 2.7'
     ],
     packages=find_packages(),
-    package_data={'helsinki': fileList},
+    include_package_data=True,
     entry_points={
         'console_scripts': ['helsinki=helsinki.main:run_app']
     }
