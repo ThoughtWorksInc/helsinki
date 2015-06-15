@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 fileList = []
 for root, subFolders, files in os.walk('helsinki/templates'):
     for file in files:
-        fileList.append(os.path.join(root,file))
+        fileList.append(os.path.join(root, file))
 
 setup(
     name='helsinki',

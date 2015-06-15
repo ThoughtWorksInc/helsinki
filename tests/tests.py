@@ -4,9 +4,9 @@ import sys
 import mock
 
 
-from emailing import mailgun
-from data.decisions import (get_decisions, agenda_item_to_municipal_action,
-                            decisions_to_agenda_items, get_municipal_actions)
+from helsinki.emailing import mailgun
+from helsinki.data.decisions import (get_decisions, agenda_item_to_municipal_action,
+                                     decisions_to_agenda_items, get_municipal_actions)
 
 agenda_item = {u'index': 1,
                u'origin_last_modified_time': u'2015-06-11T11:03:00',
@@ -74,7 +74,7 @@ class TestExample(unittest.TestCase):
         decisions = {"objects": "decisions"}
         self.assertEqual("decisions", decisions_to_agenda_items(decisions))
 
-    @mock.patch("data.decisions.decisions_to_agenda_items")
+    @mock.patch("helsinki.data.decisions.decisions_to_agenda_items")
     def test_get_municipal_actions_converts_decisions_to_agenda_items(self, mock_decisions_to_agenda_items):
         agenda_items = [agenda_item, agenda_item]
         mock_decisions_to_agenda_items.return_value = agenda_items
