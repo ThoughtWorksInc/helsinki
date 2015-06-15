@@ -7,8 +7,8 @@ from data import decisions
 
 try:
     logging.info('Attempt to connect to elasticsearch')
-    es = Elasticsearch([{'host': os.getenv('ELASTICSEARCH_PORT_9200_TCP_ADDR', 
-                                          'localhost')}])
+    es = Elasticsearch([{'host': os.getenv('ELASTICSEARCH_PORT_9200_TCP_ADDR',
+                                           'localhost')}])
 except Exception as e:
     logging.error('Could not connect to elasticsearch: ', e)
     raise e

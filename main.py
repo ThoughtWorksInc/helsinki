@@ -18,6 +18,7 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 def home():
     return render_template('index.jade')
 
+
 @app.route("/example/email")
 def email_template():
     return _build_html_email({'results': find_decisions('Helsinki'),
