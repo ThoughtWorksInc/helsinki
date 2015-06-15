@@ -2,7 +2,7 @@ import os
 import logging
 from elasticsearch import Elasticsearch
 
-from data import decisions
+import decisions
 
 
 try:
