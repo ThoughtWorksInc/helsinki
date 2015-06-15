@@ -59,8 +59,8 @@ def subscribe():
     return 'ok', 201
 
 
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+def run_app():
+    logging.basicConfig(level=logging.DEBUG, filename="helsinki.log")
     parser = argparse.ArgumentParser()
     parser.add_argument("--mailshot", action="store_true")
     parser.add_argument("--reindex", action="store_true")
@@ -84,4 +84,9 @@ if __name__ == "__main__":
         import_decision_data()
 
     app.debug = bool(args.debug)
+    logging.info("Starting app server. Debug = %s" % app.debug)
     app.run(host='0.0.0.0')
+
+
+if __name__ == "__main__":
+    run_app()

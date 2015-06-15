@@ -9,4 +9,7 @@ setup(
         'Programming Language :: Python :: 2.7'
     ],
     packages=find_packages()
+    entry_points={
+        'console_scripts': ['helsinki = helsinki.main::run_app']
+    }
 )
