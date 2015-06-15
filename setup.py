@@ -10,6 +10,6 @@ setup(
     ],
     packages=find_packages(),
     entry_points={
-        'console_scripts': ['helsinki = helsinki.main::run_app']
+        'console_scripts': ['helsinki=main:run_app']
     }
 )
