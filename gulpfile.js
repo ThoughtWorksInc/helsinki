@@ -13,7 +13,7 @@ if(util.env.production === 'true') {
   isProd = true;
 }
 
-var output_path = 'static';
+var output_path = 'helsinki/static';
 var dev_path = {
   sass: ['sass/*.scss', '!sass/_*.scss']
 };

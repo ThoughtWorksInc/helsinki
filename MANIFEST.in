@@ -1,1 +1,2 @@
 recursive-include helsinki/templates *.jade
+recursive-include helsinki/static *.css *.js *.gif *.ico *.png
