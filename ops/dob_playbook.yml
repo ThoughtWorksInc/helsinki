@@ -5,6 +5,6 @@
    
    roles:
     - common
-    - docker
     - nginx
     - ferm
+    - docker

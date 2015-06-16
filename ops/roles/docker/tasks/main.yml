@@ -23,6 +23,9 @@
  - name: install lxc-docker
    apt: name=lxc-docker state=present
 
+ - name: restart docker service
+   service: name=docker state=restarted
+
  - name: docker elasticsearch
    docker:
      name: elasticsearch
