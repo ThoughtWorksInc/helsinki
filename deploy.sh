@@ -1,4 +1,3 @@
-tar -cvzf $TAR $DIR
 ssh $REMOTE_USER@$SERVER_IP "mkdir -p /var/helsinki/dist"
 scp dist/* $REMOTE_USER@$SERVER_IP:/var/helsinki/dist
 ssh $REMOTE_USER@$SERVER_IP << EOF
