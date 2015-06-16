@@ -1,9 +1,5 @@
 flask
 pyjade
 elasticsearch
-requirements
 pymongo
 requests
-nose
-pep8
-mock
