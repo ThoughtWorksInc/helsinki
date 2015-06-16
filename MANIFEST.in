@@ -1,1 +1,4 @@
-recursive-include helsinki/templates *
+recursive-exclude tests *
+exclude helsinki/templates
+exclude helsinki/templates/layout
+exclude helsinki/templates/mixins
