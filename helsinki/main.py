@@ -83,6 +83,7 @@ def run_app():
         print "Indexing API data..."
         configure()
         import_decision_data()
+        sys.exit(0)
 
     app.debug = bool(args.debug)
     logging.info("Starting app server. Debug = %s" % app.debug)
