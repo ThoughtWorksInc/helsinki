@@ -1,0 +1,8 @@
+server {
+#  location /static/ {
+#    alias /var/www/helsinki/public/;
+#  }
+  location / {
+    proxy_pass http://localhost:5000;
+  }
+}
