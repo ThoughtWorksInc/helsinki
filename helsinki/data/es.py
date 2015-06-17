@@ -1,9 +1,10 @@
 import os
 from elasticsearch import Elasticsearch
+import logging
 
 import decisions
-from conf.helsinki_logging import logger
 
+logger = logging.getLogger('helsinki_log')
 
 try:
     logger.info('Attempt to connect to elasticsearch')

@@ -1,9 +1,10 @@
 import requests
 import json
 import sys
+import logging
 from jinja2 import Environment, PackageLoader
 
-from conf.helsinki_logging import logger
+logger = logging.getLogger('helsinki_log')
 
 j_env = Environment(loader=PackageLoader(__name__, 'templates'),
                     extensions=['pyjade.ext.jinja.PyJadeExtension'])

@@ -2,12 +2,12 @@ import argparse
 import sys
 from flask import Flask, render_template, request, jsonify
 import re
+import logging
 
 from data.indexing import import_decision_data
 from data.es import find_decisions, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, get_subscriptions
-from conf.helsinki_logging import logger
 
 
 app = Flask(__name__)
@@ -70,6 +70,14 @@ def run_app():
     parser.add_argument("--reindex", action="store_true")
     parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
+
+    logger = logging.getLogger('helsinki_log')
+    logger.setLevel(logging.DEBUG)
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(asctime)s - %(name)s - '
+                                  '%(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
 
     if args.mailshot:
         logger.info("Sending mail...")
