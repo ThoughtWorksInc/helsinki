@@ -33,8 +33,12 @@ def search_decisions():
         results = find_decisions(criteria_stripped)
         return render_template('results.jade',
                                results=results,
-                               searchTerm=criteria_stripped)
-    return ""
+                               searchTerm=criteria_stripped,
+                               showSubscribeBox=True)
+    return render_template('results.jade',
+                           searchTerm='',
+                           autoFocusOnSearch=True,
+                           showSubscribeBox=False)
 
 
 @app.route("/decision")
