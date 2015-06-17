@@ -1,7 +1,7 @@
 {
-  "name": "helsinki_hack",
+  "name": "helsinki_decisions",
   "version": "1.0.0",
-  "description": "hackathon",
+  "description": "Connecting people with decisions",
   "main": "",
   "dependencies": {
     "gulp": "^3.8.10",
@@ -17,6 +17,6 @@
   "author": "TW",
   "license": "ISC",
   "scripts": {
-    "build": ""
+    "postinstall": "gulp build"
   }
 }
