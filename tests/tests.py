@@ -3,6 +3,8 @@ import os.path
 import sys
 import mock
 
+src_path = os.path.abspath(os.path.join('helsinki'))
+sys.path.append(src_path)
 
 from helsinki.emailing import mailgun
 from helsinki.data.decisions import (get_decisions, agenda_item_to_municipal_action,
