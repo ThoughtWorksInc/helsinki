@@ -46,6 +46,7 @@ $subscript_input_height: 45px;
     border-radius: 3px;
     padding: 0 0.5rem 0.2rem 3.5rem;
     &:-webkit-autofill {
+      -webkit-text-fill-color: $default_text_color_dark;
       -webkit-box-shadow: 0 0 0px 1000px $super_light_green inset;
     }
     &:valid {
