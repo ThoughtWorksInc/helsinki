@@ -1,5 +1,7 @@
 - var bodyClass = ""
 - var htmlClass = ""
+- var signedIn = signedIn
+
 block vars
 
 doctype
@@ -24,11 +26,27 @@ html.no-js(lang="en", class="#{htmlClass}")
 
   body(class="#{bodyClass}")
     .wrapper
-      header.layout-header
-        a.layout-header__logo(href="/")
-          i.fa.fa-building-o
-          i.fa.fa-tree
-          i.fa.fa-bicycle
+      block header
+        header.layout-header
+          .layout-header__logo
+            a.layout-header__logo__link(href="/")
+              i.fa.fa-building-o
+              i.fa.fa-tree
+              i.fa.fa-bicycle
+          //-.sign
+            if signedIn
+              .sign__out
+                a.button.button--space(href="#")
+                  i.fa.fa-user.button__icon
+                  | Profile
+                a.button(href="/")
+                  i.fa.fa-sign-out.button__icon
+                  | Sign out
+            else
+              .sign__in
+                a.button(href="/sign-in")
+                  i.fa.fa-sign-in.button__icon
+                  | Sign in
 
-    block content
+      block content
     block footerScripts

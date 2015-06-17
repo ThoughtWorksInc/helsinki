@@ -1,0 +1,59 @@
+$sign_in_breakpoint: 480px;
+
+.layout-header {
+  @include columns;
+  position: relative;
+  max-width: $large_device;
+  padding: 0 16px 16px 16px;
+  margin: 0 auto 30px auto;
+  border-bottom: 2px solid $white;
+  @include font-size(30);
+  @include width-from($medium_device) {
+    //margin-bottom: 1.5rem;
+  }
+  &__logo {
+    @include column-one-third($sign_in_breakpoint);
+    &__link {
+      height: 40px;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+      i {
+        padding: 5px;
+        vertical-align: bottom;
+      }
+    }
+  }
+}
+
+.button {
+  text-decoration: none;
+  &__icon {
+    margin-right: 5px;
+  }
+  &--space {
+    margin-right: 12px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.sign {
+  @include column-two-thirds($sign_in_breakpoint);
+  padding-top: 16px;
+  @include font-size(18);
+  @include width-from($sign_in_breakpoint) {
+    text-align: right;
+  }
+  &__out {
+
+  }
+  &__in {
+
+  }
+}
+.profile__button {
+  display: inline-block;
+  margin-right: 15px;
+}

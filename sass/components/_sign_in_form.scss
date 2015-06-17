@@ -1,14 +1,15 @@
-$subscript_input_height: 45px;
+$signin_input_height: 45px;
 
-.subscribe-to-topic {
-  padding: 2rem 2rem 3rem 2rem;
-  margin-bottom: 2rem;
+.sign-in-form {
+  max-width: $medium_device;
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem;
   background: $white;
   border-radius: 4px;
   color: $default_text_color_dark;
   &__input_wrapper {
     position: relative;
-    height: $subscript_input_height;
+    height: $signin_input_height;
     line-height: 1;
     margin-bottom: 1rem;
     @include width-from($medium_device) {
@@ -16,32 +17,34 @@ $subscript_input_height: 45px;
     }
   }
   &__intro-text {
+    display: block;
+    @include font-size(18);
     margin-top: 0;
     margin-bottom: 1rem;
   }
   &__label {
-    $label_width: $subscript_input_height+1;
+    $label_width: $signin_input_height+1;
     position: absolute;
-    top: 0;
+    top: 1px;
     left: 0;
     z-index: 0;
-    @include size($label_width, $subscript_input_height);
-    line-height: $subscript_input_height;
+    @include size($label_width, $signin_input_height - 2);
+    line-height: $signin_input_height;
     padding: 0.1rem 0.75rem;
     transition: color 250ms ease;
     color: rgba($black,0.5);
     text-align: center;
     border-right: 1px solid $border_colors;
     i {
-      height: $subscript_input_height;
-      line-height: $subscript_input_height - 8;
+      height: $signin_input_height;
+      line-height: $signin_input_height - 8;
       vertical-align: middle;
     }
   }
   &__input {
     position: relative;
     width: 100%;
-    height: $subscript_input_height;
+    height: $signin_input_height;
     border: 1px solid $border_colors;
     border-radius: 3px;
     padding: 0 0.5rem 0.2rem 3.5rem;
@@ -70,7 +73,7 @@ $subscript_input_height: 45px;
   &__button {
     display: block;
     width: 100%;
-    height: $subscript_input_height;
+    height: $signin_input_height;
     line-height: 1;
     padding: 0.65rem 1rem;
     background: $dark_green;
@@ -80,14 +83,14 @@ $subscript_input_height: 45px;
     text-decoration: none;
     border-radius: 3px;
     border: none;
+    transition: background 250ms ease;
+    &:focus {
+      outline: none;
+      background-color: $light_green;
+      box-shadow: 0 3px 0 0 $super_dark_green;
+    }
     &__icon {
       margin-right: 0.25rem;
     }
   }
 }
-
-.search-term {
-  //color: $dark_green;
-  text-decoration: underline;
-}
-
