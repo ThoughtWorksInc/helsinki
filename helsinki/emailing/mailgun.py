@@ -3,7 +3,7 @@ import json
 import sys
 from jinja2 import Environment, PackageLoader
 
-from helsinki_logging import logger
+from conf.helsinki_logging import logger
 
 j_env = Environment(loader=PackageLoader(__name__, 'templates'),
                     extensions=['pyjade.ext.jinja.PyJadeExtension'])

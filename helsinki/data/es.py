@@ -2,7 +2,7 @@ import os
 from elasticsearch import Elasticsearch
 
 import decisions
-from helsinki_logging import logger
+from conf.helsinki_logging import logger
 
 
 try:

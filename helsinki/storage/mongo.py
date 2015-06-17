@@ -1,7 +1,7 @@
 import os
 from pymongo import MongoClient
 
-from helsinki_logging import logger
+from conf.helsinki_logging import logger
 
 try:
     mongo = MongoClient(host=os.getenv('MONGO_PORT_27017_TCP_ADDR', 'localhost'))

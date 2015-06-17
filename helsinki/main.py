@@ -7,7 +7,7 @@ from data.indexing import import_decision_data
 from data.es import find_decisions, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, get_subscriptions
-from helsinki_logging import logger
+from conf.helsinki_logging import logger
 
 
 app = Flask(__name__)
