@@ -3,7 +3,7 @@ import json
 import sys
 from jinja2 import Environment, PackageLoader
 
-from helsinki.helsinki_logging import logger
+from helsinki_logging import logger
 
 j_env = Environment(loader=PackageLoader(__name__, 'templates'),
                     extensions=['pyjade.ext.jinja.PyJadeExtension'])
@@ -26,7 +26,6 @@ def _build_html_email(data):
 
 
 def send_mail(to, subject, data):
-    logger.info('asdfasdfasdf')
     api_details = load_api_details()
     sandbox = api_details.get("sandbox")
     from_details = "Mailgun Sandbox <postmaster@%s.mailgun.org>" % sandbox
