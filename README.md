@@ -75,5 +75,5 @@ gulp
 To output minified css:
 
 ```
-gulp --production true
+gulp build --production true
 ```
