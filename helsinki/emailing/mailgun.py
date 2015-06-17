@@ -1,8 +1,9 @@
 import requests
 import json
 import sys
-
 from jinja2 import Environment, PackageLoader
+
+from helsinki.helsinki_logging import logger
 
 j_env = Environment(loader=PackageLoader(__name__, 'templates'),
                     extensions=['pyjade.ext.jinja.PyJadeExtension'])
@@ -13,7 +14,7 @@ def load_api_details():
         with open('mailgun.json') as f:
             return json.loads(f.read())
     except Exception as e:
-        print "Unable to load mailgun api details from mailgun.json. %s" % e
+        logger.error("Unable to load mailgun api details from mailgun.json: %s" % e)
         sys.exit(-1)
 
 
@@ -25,6 +26,7 @@ def _build_html_email(data):
 
 
 def send_mail(to, subject, data):
+    logger.info('asdfasdfasdf')
     api_details = load_api_details()
     sandbox = api_details.get("sandbox")
     from_details = "Mailgun Sandbox <postmaster@%s.mailgun.org>" % sandbox
@@ -37,5 +39,5 @@ def send_mail(to, subject, data):
               "text": 'Sorry this is an HTML email',
               "html": _build_html_email(data)})
     if result.status_code not in [200, 201]:
-        print ("Failed to send email using mailgun."
-               "Response was: \n %s" % result.text)
+        logger.warning("Failed to send email using mailgun."
+                       "Response was: \n %s" % result.text)

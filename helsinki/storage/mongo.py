@@ -1,13 +1,14 @@
 import os
 from pymongo import MongoClient
 
+from helsinki_logging import logger
 
 try:
     mongo = MongoClient(host=os.getenv('MONGO_PORT_27017_TCP_ADDR', 'localhost'))
     db = mongo.helsinki
     subscriptions = db.subscriptions
 except Exception as e:
-    logging.error('Could not connect to mongoDB: ', e)
+    logger.error('Could not connect to mongoDB: %s' % e)
     raise e
 
 

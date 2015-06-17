@@ -2,12 +2,12 @@ import argparse
 import sys
 from flask import Flask, render_template, request, jsonify
 import re
-import logging
 
 from data.indexing import import_decision_data
 from data.es import find_decisions, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, get_subscriptions
+from helsinki_logging import logger
 
 
 app = Flask(__name__)
@@ -61,7 +61,6 @@ def subscribe():
 
 
 def run_app():
-    logging.basicConfig(level=logging.DEBUG, filename="helsinki.log")
     parser = argparse.ArgumentParser()
     parser.add_argument("--mailshot", action="store_true")
     parser.add_argument("--reindex", action="store_true")
@@ -69,7 +68,7 @@ def run_app():
     args = parser.parse_args()
 
     if args.mailshot:
-        print "Sending mail..."
+        logger.info("Sending mail...")
         for sub in get_subscriptions():
             topic = sub.get('topic').strip()
             data = {'results': find_decisions(topic),
@@ -80,13 +79,13 @@ def run_app():
         sys.exit(0)
 
     if args.reindex:
-        print "Indexing API data..."
+        logger.info("Indexing API data...")
         configure()
         import_decision_data()
         sys.exit(0)
 
     app.debug = bool(args.debug)
-    logging.info("Starting app server. Debug = %s" % app.debug)
+    logger.info("Starting app server. Debug = %s" % app.debug)
     app.run(host='0.0.0.0')
 
 

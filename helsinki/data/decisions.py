@@ -11,7 +11,7 @@ DECISION_MAPPING = {'decision_data':
                     {'properties':
                      {'issue_subject': {'analyzer': 'finnish',
                                         'type': 'string'},
-                      'last_modified_time': {'type': 'datetime'},
+                      'last_modified_time': {'type': 'date'},
                       'subject': {'analyzer': 'finnish',
                                   'type': 'string'},
                       'content': {'properties':
