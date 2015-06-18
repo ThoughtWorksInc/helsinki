@@ -8,3 +8,4 @@ ops/.vagrant*
 *.egg-info
 dist/
 helsinki/static/css/*.css
+helsinki/static/fonts/
