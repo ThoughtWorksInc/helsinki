@@ -1,0 +1,19 @@
+.subscribed {
+  h1 {
+    font-weight: 300;
+    color: $default_text_color;
+    @include font-size(30);
+  }
+}
+.subscribed__message {
+  padding: 20px;
+  background-color: $white;
+  color: $dark_green;
+  border-radius: 10px;
+  :last-of-type {
+    margin-bottom: 0;
+  }
+}
+.subscribed__icon {
+  //font-size: 100px;
+}

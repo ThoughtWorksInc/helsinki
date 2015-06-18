@@ -18,6 +18,10 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 def home():
     return render_template('index.jade')
 
+@app.route("/subscribed")
+def subscribed():
+    return render_template('subscribed.jade')
+
 
 @app.route("/example/email")
 def email_template():
