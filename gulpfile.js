@@ -15,11 +15,19 @@ if(util.env.production === 'true') {
 
 var output_path = 'helsinki/static';
 var dev_path = {
-  sass: ['sass/*.scss', '!sass/_*.scss']
+  sass: ['sass/*.scss', '!sass/_*.scss'],
+  fonts: ['node_modules/font-awesome/fonts/fontawesome-webfont.*']
 };
 var build_path = {
-  css: output_path + '/css/'
+  css: output_path + '/css/',
+  fonts: output_path + '/fonts/'
 };
+
+gulp.task('fonts', function () {
+  return gulp.src(dev_path.fonts)
+      .pipe(gulp.dest(build_path.fonts));
+});
+
 
 gulp.task('sass', function () {
   return gulp.src(dev_path.sass)
@@ -42,6 +50,6 @@ gulp.task('watch', function () {
   gulp.watch('sass/**/*.scss', ['sass']);
 });
 
-gulp.task('build', ['sass']);
+gulp.task('build', ['sass', 'fonts']);
 
-gulp.task('default', ['sass','watch']);
+gulp.task('default', ['sass','fonts','watch']);
