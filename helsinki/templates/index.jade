@@ -11,11 +11,12 @@ block content
   .middle-container
     - var focusOnLoad = true
 
-    form.interested-in.interested-in-search--middle(action="/search", method="get", autocomplete="off")
+    form.interested-in.interested-in--middle(action="/search", method="get", autocomplete="off")
       p.interested-in__lede Search municipal decisions for the city of Helsinki
       p.interested-in-search
         label.interested-in-search__label(for="interested-in")
           | I’m interested in
-        input.interested-in-search__input(type="text", id="interested-in", name="q", autofocus=true, value=searchTerm)
+        span.interested-in-search__input-container
+          input.interested-in-search__input(type="text", id="interested-in", name="q", autofocus=true, value=searchTerm)
       .interested-in-search__actions
         button(type="submit", value="find")
