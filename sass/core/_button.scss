@@ -1,0 +1,33 @@
+.button {
+  display: inline-block;
+  height: $input_height;
+  line-height: 1;
+  padding: 0.65rem 1rem 0.8em 1rem;
+  @include font-size(18);
+  font-weight: 700;
+  border-radius: 3px;
+  border: none;
+  &:hover {
+    text-decoration: none;
+  }
+  &--full-width {
+    width: 100%;
+  }
+  &--dark, & {
+    background-color: $dark_green;
+    color: $white;
+    text-decoration: none;
+  }
+  &--dark {
+    &:hover {
+      background-color: darken($dark_green,5%);
+    }
+  }
+  &--light {
+    background-color: $white;
+    color: $dark_green;
+    &:hover {
+      background-color: darken($white,5%);
+    }
+  }
+}

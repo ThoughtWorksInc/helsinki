@@ -14,8 +14,14 @@ block content
     .subscribed
       h1 You've successfully subscribed
       .subscribed__message
-        p
+        p.subscribed__lede
           i.fa.fa-envelope-o.subscribed__icon
           = " "
-          | Shortly you'll receive a confirmation of your subscription.
+          | A confirmation of your subscription has been sent to your mailbox.
 
+    .interest-items
+      .interest-item.interest-item--fullwidth: a.interest-item__link(href="/")
+        i.fa.fa-search.interest-item__link__icon
+        = " "
+        span.interest-item__text
+        | Find more decisions

@@ -19,9 +19,14 @@ def home():
     return render_template('index.jade')
 
 
-@app.route("/subscribed")
+@app.route("/wip/subscribed")
 def subscribed():
     return render_template('subscribed.jade')
+
+
+@app.route("/wip/profile")
+def profile():
+    return render_template('profile.jade')
 
 
 @app.route("/example/email")
