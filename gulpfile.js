@@ -16,7 +16,7 @@ if(util.env.production === 'true') {
 var output_path = 'helsinki/static';
 var dev_path = {
   sass: ['sass/*.scss', '!sass/_*.scss'],
-  fonts: ['./bower_components/font-awesome/fonts/fontawesome-webfont.*']
+  fonts: ['node_modules/font-awesome/fonts/fontawesome-webfont.*']
 };
 var build_path = {
   css: output_path + '/css/',
