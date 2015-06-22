@@ -18,6 +18,6 @@
   "author": "TW",
   "license": "ISC",
   "scripts": {
-    "start": "gulp build --production true"
+    "postinstall": "gulp build --production true"
   }
 }
