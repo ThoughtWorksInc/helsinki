@@ -1,0 +1,19 @@
+server {
+  listen 80;
+  return 301 {{ site_address }}$request_uri;
+}
+
+
+server {
+  listen 443 ssl;  
+
+  ssl_certificate /etc/nginx/ssl/decisions.crt;
+  ssl_certificate_key /etc/nginx/ssl/decisions.key;
+
+  ssl_session_cache shared:SSL:32m;
+  ssl_session_timeout 10m;
+
+  location / {
+    proxy_pass http://localhost:5000;
+  }
+}

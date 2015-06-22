@@ -5,8 +5,17 @@
  - name: install fail2ban
    apt: name=fail2ban state=present
 
+ - name: create SSL folder
+   file: path="/etc/nginx/ssl" state=directory
+
+ - name: copy SSL cert
+   copy: src={{ cert_location }} dest="/etc/nginx/ssl/decisions.crt"
+
+ - name: copy SSL key
+   copy: src={{ cert_key_location }} dest="/etc/nginx/ssl/decisions.key"
+
  - name: copy over helsinki nginx config
-   copy: src="helsinki" dest="/etc/nginx/sites-available/helsinki" mode=0644
+   template: src="helsinki.j2" dest="/etc/nginx/sites-available/helsinki" mode=0644
 
  - name: create symbolic link to nginx helsinki config
    file: src="/etc/nginx/sites-available/helsinki" dest="/etc/nginx/sites-enabled/helsinki" state=link
