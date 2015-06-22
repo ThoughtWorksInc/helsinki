@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     autoprefixer = require('gulp-autoprefixer'),
     minifyCSS = require('gulp-minify-css'),
-    clean = require('gulp-clean');
+    del = require('gulp-clean');
 
 var isDev  = true;
 var isProd = false;
@@ -43,7 +43,7 @@ gulp.task('sass', function () {
 
 gulp.task('clean-css', function () {
   return gulp.src([build_path.css], {read: false})
-      .pipe(clean());
+      .pipe(del());
 });
 
 gulp.task('watch', function () {
