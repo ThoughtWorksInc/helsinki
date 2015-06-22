@@ -4,6 +4,7 @@
   "description": "Connecting people with decisions",
   "main": "",
   "dependencies": {
+    "bower": "^1.4.1",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^1.0.1",
     "gulp-clean": "^0.3.1",
@@ -11,8 +12,7 @@
     "gulp-if": "^1.2.5",
     "gulp-minify-css": "^0.3.11",
     "gulp-sass": "*",
-    "gulp-util": "^3.0.5",
-    "font-awesome": "^4.3.0"
+    "gulp-util": "^3.0.5"
   },
   "devDependencies": {},
   "author": "TW",
