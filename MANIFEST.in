@@ -1,4 +1,4 @@
 recursive-include helsinki/templates *.jade
-recursive-include helsinki/static *.css *.js *.gif *.ico *.png
+recursive-include helsinki/static *.css *.js *.gif *.ico *.png *.eot *.svg *.ttf *.woff *.woff2
 include requirements.txt
 prune tests
