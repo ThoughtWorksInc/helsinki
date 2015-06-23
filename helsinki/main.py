@@ -53,7 +53,12 @@ def search_decisions():
 
 @app.route("/decision")
 def decision():
-    return render_template('decision.jade')
+    return render_template('decision.jade',
+                           decisionTitle='Roast so single shot redeye',
+                           decisionSummary='Cappuccino, shop crema macchiato, aftertaste shop grounds caffeine aged extra coffee extraction. Id acerbic, coffee aftertaste arabica caramelization doppio. Cup and latte spoon id body sweet steamed. Cultivar plunger pot, blue mountain, and iced et, est et mazagran crema whipped.',
+                           hackpadLink='http://www.hackpad.com/',
+                           twitterLink='http://www.twitter.com/',
+                           facebookLink='http://www.facebook.com/')
 
 
 def valid_subscription(form):

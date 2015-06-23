@@ -1,0 +1,39 @@
+.social-networks {
+  margin-bottom: $default_margin;
+  &__list {
+    @include columns;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  &__item {
+    @include column-one-third(0);
+    list-style: none;
+    text-align: center;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  &__link {
+    display: block;
+    color: $white;
+    text-decoration: none;
+    padding: 15px;
+    border: 2px solid rgba($white,0.3);
+    border-radius: $border_radius;
+    &:hover {
+      text-decoration: none;
+      background-color: $white;
+      color: $dark_green;
+    }
+  }
+  &__icon {
+    margin-bottom: 8px;
+  }
+  &__title {
+    @include font-size(18);
+    //font-weight: 500;
+  }
+}
