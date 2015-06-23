@@ -9,3 +9,4 @@ ops/.vagrant*
 dist/
 helsinki/static/css/*.css
 helsinki/static/fonts/
+ops/roles/nginx/files/secure
