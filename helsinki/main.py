@@ -53,10 +53,9 @@ def search_decisions():
 @app.route("/decision/<id>", methods=["GET"])
 def decision(id):
     result = find_decision(id)
-    summary_content = [content['text'] for content in result['content']]
     return render_template('decision.jade',
                            decisionTitle=result['subject'],
-                           decisionSummary=summary_content,
+                           decisions=result['content'],
                            hackpadLink='http://www.hackpad.com/',
                            twitterLink='http://www.twitter.com/',
                            facebookLink='http://www.facebook.com/')

@@ -28,6 +28,9 @@
   line-height: 1.2;
   margin-top: 0;
   margin-bottom: 1rem;
+  &:first-letter {
+    text-transform: capitalize;
+  }
   &--light {
     color: $white;
   }
