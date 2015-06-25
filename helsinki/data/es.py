@@ -48,6 +48,13 @@ def index_decisions(municipal_actions):
     map(index_decision, municipal_actions)
 
 
+def _source_with_id(raw_result):
+    source = raw_result.get('_source')
+    id = raw_result.get('_id')
+    source['id'] = id
+    return source
+
+
 def find_decisions(criteria):
     results = es.search(
         index="decisions",
@@ -56,4 +63,13 @@ def find_decisions(criteria):
                                         "fields": decisions.SEARCH_FIELDS}}}
     )
     hits = results.get("hits")
-    return [hit.get("_source") for hit in hits.get("hits")]
+    return [_source_with_id(hit) for hit in hits.get("hits")]
+
+
+def find_decision(id):
+    result = es.get(
+        index="decisions",
+        doc_type="decision_data",
+        id=id
+    )
+    return _source_with_id(result)

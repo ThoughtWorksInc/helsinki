@@ -1,11 +1,11 @@
 import unittest
-import os.path
-import sys
 import mock
+import json
 
-from helsinki.emailing import mailgun
-from helsinki.data.decisions import (get_decisions, agenda_item_to_municipal_action,
+from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
+from helsinki.data.es import (_source_with_id)
+
 
 agenda_item = {u'index': 1,
                u'origin_last_modified_time': u'2015-06-11T11:03:00',
@@ -78,3 +78,21 @@ class TestExample(unittest.TestCase):
         agenda_items = [agenda_item, agenda_item]
         mock_decisions_to_agenda_items.return_value = agenda_items
         self.assertEqual([municipal_action, municipal_action], get_municipal_actions(agenda_items))
+
+
+def load_fixture(name):
+    with open("tests/fixtures/%s" % name, 'r') as f:
+        result = json.loads(f.read())
+    return result
+
+
+class TestElasticSearchResults(unittest.TestCase):
+
+    def test_adding_id_to_result(self):
+        results = load_fixture('results.json')
+        single_result = results.get('hits').get('hits')[0]
+        expected_id = single_result.get('_id')
+
+        source_with_id = _source_with_id(single_result)
+
+        self.assertEqual(source_with_id.get('id'), expected_id)

@@ -10,8 +10,9 @@ block content
 
     .decision-summary
       h2.sub-heading.sub-heading--light Summary
-      p
-        != decisionSummary
+      .decision-summary__data
+        for decision in decisionSummary
+          #{decision}
 
     .social-networks
       h2.sub-heading.sub-heading--light Take action

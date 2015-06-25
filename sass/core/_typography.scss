@@ -43,6 +43,20 @@ h2 {
 
 p {
   margin-top: 0;
+  margin-bottom: 0.75rem;
   @include font-size(18);
   line-height: 1.5;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+li {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+  @include font-size(18);
+  line-height: 1.5;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }

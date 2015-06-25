@@ -42,7 +42,7 @@ block content
     ul.results-list
       for result in results
         li.results-list__item
-          a.results-list__item__link(href=result.permalink)
+          a.results-list__item__link(href="/decision/#{result.id}")
             h2.results-list__item__title #{result.subject}
             span.date-heading__title #{result.last_modified_time}
             p.results-list__item__description #{result.issue_subject}

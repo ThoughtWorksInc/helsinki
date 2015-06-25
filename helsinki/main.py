@@ -5,10 +5,9 @@ import re
 import logging
 
 from data.indexing import import_decision_data
-from data.es import find_decisions, configure
+from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, get_subscriptions
-
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -51,11 +50,13 @@ def search_decisions():
                            showSubscribeBox=False)
 
 
-@app.route("/decision")
-def decision():
+@app.route("/decision/<id>", methods=["GET"])
+def decision(id):
+    result = find_decision(id)
+    summary_content = [content['text'] for content in result['content']]
     return render_template('decision.jade',
-                           decisionTitle='Roast so single shot redeye',
-                           decisionSummary='Cappuccino, shop crema macchiato, aftertaste shop grounds caffeine aged extra coffee extraction. Id acerbic, coffee aftertaste arabica caramelization doppio. Cup and latte spoon id body sweet steamed. Cultivar plunger pot, blue mountain, and iced et, est et mazagran crema whipped.',
+                           decisionTitle=result['subject'],
+                           decisionSummary=summary_content,
                            hackpadLink='http://www.hackpad.com/',
                            twitterLink='http://www.twitter.com/',
                            facebookLink='http://www.facebook.com/')
