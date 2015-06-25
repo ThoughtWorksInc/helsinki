@@ -56,9 +56,10 @@ def decision(id):
     return render_template('decision.jade',
                            decisionTitle=result['subject'],
                            decisions=result['content'],
-                           hackpadLink='http://www.hackpad.com/',
-                           twitterLink='http://www.twitter.com/',
-                           facebookLink='http://www.facebook.com/')
+                           path=request.base_url,
+                           hackpadLink='https://www.hackpad.com',
+                           twitterLink='https://www.twitter.com',
+                           facebookLink='https://www.facebook.com')
 
 
 def valid_subscription(form):
