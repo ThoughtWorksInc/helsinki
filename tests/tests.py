@@ -1,6 +1,7 @@
 import unittest
 import mock
 import json
+import requests
 
 from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
@@ -78,7 +79,6 @@ class TestExample(unittest.TestCase):
         agenda_items = [agenda_item, agenda_item]
         mock_decisions_to_agenda_items.return_value = agenda_items
         self.assertEqual([municipal_action, municipal_action], get_municipal_actions(agenda_items))
-
 
 def load_fixture(name):
     with open("tests/fixtures/%s" % name, 'r') as f:

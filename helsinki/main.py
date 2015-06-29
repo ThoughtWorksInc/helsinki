@@ -3,6 +3,7 @@ import sys
 from flask import Flask, render_template, request, jsonify
 import re
 import logging
+from logger.logs import get_logger
 
 from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
@@ -87,13 +88,7 @@ def run_app():
     parser.add_argument("--debug", action="store_true")
     args = parser.parse_args()
 
-    logger = logging.getLogger('helsinki_log')
-    logger.setLevel(logging.DEBUG)
-    handler = logging.StreamHandler()
-    formatter = logging.Formatter('%(asctime)s - %(name)s - '
-                                  '%(levelname)s - %(message)s')
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+    logger = get_logger()
 
     if args.mailshot:
         logger.info("Sending mail...")
@@ -109,7 +104,7 @@ def run_app():
     if args.reindex:
         logger.info("Indexing API data...")
         configure()
-        import_decision_data()
+        import_decision_data(10) # 10 pages of 50 results
         sys.exit(0)
 
     app.debug = bool(args.debug)
