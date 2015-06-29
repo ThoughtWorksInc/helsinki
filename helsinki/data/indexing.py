@@ -27,11 +27,11 @@ def should_continue_to_index(number_of_pages, current_page, last_decisions_count
 
 def import_decision_data(save_last_modified_fn, get_last_modified_fn, number_of_pages=-1):
     page_no = 0
-    mongo_lmt = get_last_modified_time()
+    mongo_lmt = get_last_modified_fn()
     decisions = import_decision_data_page(page_no)
     lmt = last_modified_time(decisions)
     decision_count = number_of_decisions(decisions)
-    save_last_modified_time(lmt)
+    save_last_modified_fn(lmt)
     while should_continue_to_index(number_of_pages, page_no, decision_count, mongo_lmt, lmt):
         page_no += 1
         decisions = import_decision_data_page(page_no)

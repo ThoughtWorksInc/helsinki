@@ -4,7 +4,7 @@ from dateutil.parser import parse
 import logging
 
 
-logging.getLogger('helsinki_log')
+logger = logging.getLogger('helsinki_log')
 
 
 class APIError(Exception):
