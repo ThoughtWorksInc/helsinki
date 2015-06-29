@@ -4,11 +4,11 @@ from flask import Flask, render_template, request, jsonify
 import re
 import logging
 
-from helsinki.logger.logs import get_logger
-from helsinki.data.indexing import import_decision_data
-from helsinki.data.es import find_decisions, find_decision, configure
-from helsinki.emailing.mailgun import send_mail, _build_html_email
-from helsinki.storage.mongo import save_subscription, get_subscriptions
+from logger.logs import get_logger
+from data.indexing import import_decision_data
+from data.es import find_decisions, find_decision, configure
+from emailing.mailgun import send_mail, _build_html_email
+from storage.mongo import save_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -104,7 +104,7 @@ def run_app():
     if args.reindex:
         logger.info("Indexing API data...")
         configure()
-        import_decision_data(10)  # 10 pages of 50 results
+        import_decision_data(save_last_modified_time, get_last_modified_time)  # 10 pages of 50 results
         sys.exit(0)
 
     app.debug = bool(args.debug)

@@ -1,10 +1,10 @@
-from helsinki.data.es import index_decisions
-from helsinki.data.decisions import get_municipal_actions, get_decisions, number_of_decisions, last_modified_time
-from helsinki.storage.mongo import save_last_modified_time, get_last_modified_time
-from helsinki.logger.logs import get_logger
+from es import index_decisions
+from decisions import get_municipal_actions, get_decisions, number_of_decisions, last_modified_time
+import logging
 
 
 page_size = 50
+logger = logging.getLogger('helsinki_log')
 
 
 def import_decision_data_page(page_no):
@@ -16,7 +16,7 @@ def import_decision_data_page(page_no):
 
 def should_continue_to_index(number_of_pages, current_page, last_decisions_count, previous_lmt, lmt):
     if previous_lmt and lmt <= previous_lmt:
-        get_logger().debug("Stopping indexing as decisions have already been indexed, %s %s" % (previous_lmt, lmt))
+        logger.debug("Stopping indexing as decisions have already been indexed, %s %s" % (previous_lmt, lmt))
         return False
     elif last_decisions_count < page_size:
         return False
@@ -25,7 +25,7 @@ def should_continue_to_index(number_of_pages, current_page, last_decisions_count
     return True
 
 
-def import_decision_data(number_of_pages=-1):
+def import_decision_data(save_last_modified_fn, get_last_modified_fn, number_of_pages=-1):
     page_no = 0
     mongo_lmt = get_last_modified_time()
     decisions = import_decision_data_page(page_no)

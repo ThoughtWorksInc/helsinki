@@ -1,7 +1,10 @@
 import json
 import requests
 from dateutil.parser import parse
-from helsinki.logger.logs import get_logger
+import logging
+
+
+logging.getLogger('helsinki_log')
 
 
 class APIError(Exception):
@@ -47,7 +50,7 @@ def number_of_decisions(decisions):
 def get_decisions(limit=50, offset=0):
     agenda_items_url = ("http://dev.hel.fi/paatokset/v1/agenda_item/"
                         "?order_by=-last_modified_time&limit=%s&offset=%s" % (limit, offset))
-    get_logger().debug("Indexing results from %s" % agenda_items_url)
+    logger.debug("Indexing results from %s" % agenda_items_url)
     r = requests.get(agenda_items_url)
     if r.status_code not in [200, 201]:
         raise APIError()

@@ -1,8 +1,8 @@
 import os
 from pymongo import MongoClient
-from helsinki.logger.logs import get_logger
+import logging
 
-logger = get_logger()
+logger = logging.getLogger('helsinki_log')
 
 
 try:
