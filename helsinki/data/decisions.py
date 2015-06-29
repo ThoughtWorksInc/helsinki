@@ -1,5 +1,6 @@
 import json
 import requests
+from dateutil.parser import parse
 from helsinki.logger.logs import get_logger
 
 
@@ -56,3 +57,8 @@ def get_decisions(limit=50, offset=0):
 def get_municipal_actions(decisions):
     agenda_items = decisions_to_agenda_items(decisions)
     return list(map(agenda_item_to_municipal_action, agenda_items))
+
+
+def last_modified_time(decisions):
+    first_item = decisions_to_agenda_items(decisions)[0]
+    return parse(first_item.get("last_modified_time"))
