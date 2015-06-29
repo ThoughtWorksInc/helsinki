@@ -80,6 +80,7 @@ class TestExample(unittest.TestCase):
         mock_decisions_to_agenda_items.return_value = agenda_items
         self.assertEqual([municipal_action, municipal_action], get_municipal_actions(agenda_items))
 
+
 def load_fixture(name):
     with open("tests/fixtures/%s" % name, 'r') as f:
         result = json.loads(f.read())

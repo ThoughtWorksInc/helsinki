@@ -1,6 +1,7 @@
 import unittest
 from helsinki.data.indexing import should_continue_to_index
 
+
 class TestIndexing(unittest.TestCase):
 
     def test_should_continue_to_index(self):

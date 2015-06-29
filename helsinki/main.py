@@ -104,7 +104,7 @@ def run_app():
     if args.reindex:
         logger.info("Indexing API data...")
         configure()
-        import_decision_data(10) # 10 pages of 50 results
+        import_decision_data(10)  # 10 pages of 50 results
         sys.exit(0)
 
     app.debug = bool(args.debug)
