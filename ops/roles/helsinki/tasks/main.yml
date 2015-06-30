@@ -1,4 +1,9 @@
 ---
+
+ - command: rm -rf /usr/local/helsinki
+
+ - file: path=/usr/local/helsinki state=directory
+
  - name: copy reindex.sh
    copy: src=reindex.sh dest=/usr/local/helsinki/reindex.sh
          owner=root group=root mode=0700
