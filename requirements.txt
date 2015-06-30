@@ -3,4 +3,4 @@ pyjade
 elasticsearch
 pymongo
 requests
-dateutil
+python-dateutil
