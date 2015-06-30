@@ -3,4 +3,10 @@
    copy: src=reindex.sh dest=/usr/local/helsinki
          owner=root group=root mode=0700
 
+ - name: copy mailshot.sh
+   copy: src=mailshot.sh dest=/usr/local/helsinki
+         owner=root group=root mode=0700
+
  - cron: name="helsinki reindex" special_time=daily job="/usr/local/helsinki/reindex.sh"
+
+ - cron: name="helsinki mailshot" special_time=daily job="/usr/local/helsinki/mailshot.sh"
