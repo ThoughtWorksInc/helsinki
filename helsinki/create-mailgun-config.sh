@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [ -z "$MAILGUN_API_KEY" ]; then
-  echo "MAILGUN_API_KEY is not set"
+  >&2 echo "MAILGUN_API_KEY is not set"
   exit 1;
 fi
 
 if [ -z "$MAILGUN_SANDBOX_ID" ]; then
-  echo "MAILGUN_SANDBOX_ID is not set"
+  >&2 echo "MAILGUN_SANDBOX_ID is not set"
   exit 1;
 fi
 
