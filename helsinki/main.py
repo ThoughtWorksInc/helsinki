@@ -24,6 +24,12 @@ def subscribed():
     return render_template('subscribed.jade')
 
 
+@app.route("/wip/unsubscribed")
+def unsubscribed():
+    return render_template('unsubscribed.jade',
+                           topic='Helksinki')
+
+
 @app.route("/wip/profile")
 def profile():
     return render_template('profile.jade')

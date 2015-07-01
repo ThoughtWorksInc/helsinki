@@ -1,0 +1,31 @@
+.unsubscribed {
+  @include columns;
+  h1 {
+    font-weight: 300;
+    color: $default_text_color;
+    @include font-size(30);
+  }
+}
+.unsubscribed__message {
+  position: relative;
+  min-height: 185px;
+  margin-bottom: $default_margin;
+  color: $dark_green;
+  background-color: $white;
+  border: 1px solid rgba($white,0.3);
+  border-radius: 10px;
+  >:last-of-type {
+    margin-bottom: 0;
+  }
+}
+.unsubscribed__lede {
+  @include vertical-middle-me;
+  width: 100%;
+  padding: 0 20px 20px 20px;
+  text-align: center;
+}
+.unsubscribed__icon {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 50px;
+}
