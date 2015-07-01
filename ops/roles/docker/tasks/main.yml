@@ -26,19 +26,21 @@
  - name: restart docker service
    service: name=docker state=restarted
 
- # - name: make es directory
-#    file: path=/data/es state=directory
-
- - name: docker elasticsearch
-   docker:
-     name: elasticsearch
-     image: elasticsearch:1.6
+ - name: make es directory
+   file: path=/data/es state=directory
 
  - name: make db directory
    file: path=/data/db state=directory
 
  - name: make backup directory
    file: path=/data/backup state=directory
+
+ - name: docker elasticsearch
+   docker:
+     name: elasticsearch
+     image: elasticsearch:1.6
+     volumes:
+       - /data/es:/data
 
  - name: docker mongo
    docker:
