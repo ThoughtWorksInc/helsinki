@@ -122,3 +122,13 @@ class TestDateFormat(unittest.TestCase):
         formatted_friendly_day = friendly_day(date_now_ugly)
 
         self.assertEqual(formatted_friendly_day, expected_friendly_day)
+
+
+    def test_friendly_formatting_yesterday(self):
+        date_yesterday = datetime.now() - timedelta(days=-1)
+        date_yesterday_ugly = str(date_yesterday.strftime('%Y-%m-%dT%H:%M:%S.%f'))
+        expected_friendly_day = "Yesterday"
+
+        formatted_friendly_day = friendly_day(date_yesterday_ugly)
+
+        self.assertEqual(formatted_friendly_day, expected_friendly_day)
