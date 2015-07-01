@@ -132,3 +132,12 @@ class TestDateFormat(unittest.TestCase):
         formatted_friendly_day = friendly_day(date_yesterday_ugly)
 
         self.assertEqual(formatted_friendly_day, expected_friendly_day)
+
+
+    def test_friendly_formatting_normal_day_name(self):
+        date_moon_landing_ugly = '1969-07-20T12:00:00.662000'
+        expected_friendly_day = "Sunday"
+
+        formatted_friendly_day = friendly_day(date_moon_landing_ugly)
+
+        self.assertEqual(formatted_friendly_day, expected_friendly_day)
