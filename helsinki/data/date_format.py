@@ -2,13 +2,12 @@ from datetime import datetime
 
 
 def friendly_day(ugly_date):
-    print ugly_date
     date = _parse_date(ugly_date)
     diff = datetime.now().date() - date
 
-    if diff == 0:
+    if diff.days == 0:
         return "Today"
-    elif diff == -1:
+    elif diff.days == -1:
         return "Yesterday"
     else:
         return date.strftime("%A")
