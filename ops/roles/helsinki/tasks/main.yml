@@ -1,9 +1,5 @@
 ---
 
-
- - name: Blatting the existing helsinki stuff
-   file: path=/usr/local/helsinki state=absent
-
  - name: Creating helsinki directory
    file: path=/usr/local/helsinki state=directory
 
