@@ -1,7 +1,0 @@
-{
-  "README": "Replace the details below with your mailgun account credentials and rename this file to mailgun.json",
-  "key": "KEY GOES HERE (starts with key-)",
-  "post_url": "https://api.mailgun.net/v3/SANDBOX ID GOES HERE (starts with sandbox).mailgun.org/messages",
-  "sandbox": "SANDBOX ID GOES HERE (starts with sandbox)"
-}
-
