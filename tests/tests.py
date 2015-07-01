@@ -1,7 +1,7 @@
 import unittest
 import mock
 import json
-import requests
+from datetime import datetime, timedelta
 
 from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
@@ -110,3 +110,15 @@ class TestElasticSearchResults(unittest.TestCase):
 
         self.assertEqual(source_with_friendly_date_info.get('friendly_day'), expected_friendly_day)
         self.assertEqual(source_with_friendly_date_info.get('friendly_date'), expected_friendly_date)
+
+
+class TestDateFormat(unittest.TestCase):
+
+    def test_friendly_formatting_today(self):
+        date_now = datetime.now()
+        date_now_ugly = str(date_now.strftime('%Y-%m-%dT%H:%M:%S.%f'))
+        expected_friendly_day = "Today"
+
+        formatted_friendly_day = friendly_day(date_now_ugly)
+
+        self.assertEqual(formatted_friendly_day, expected_friendly_day)
