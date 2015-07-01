@@ -98,7 +98,6 @@ class TestElasticSearchResults(unittest.TestCase):
 
         self.assertEqual(source_with_id.get('id'), expected_id)
 
-
     def test_adding_friendly_dates_to_result(self):
         results = load_fixture('results.json')
         single_result = results.get('hits').get('hits')[0]
@@ -123,7 +122,6 @@ class TestDateFormat(unittest.TestCase):
 
         self.assertEqual(formatted_friendly_day, expected_friendly_day)
 
-
     def test_friendly_formatting_yesterday(self):
         date_yesterday = datetime.now() - timedelta(days=-1)
         date_yesterday_ugly = str(date_yesterday.strftime('%Y-%m-%dT%H:%M:%S.%f'))
@@ -132,7 +130,6 @@ class TestDateFormat(unittest.TestCase):
         formatted_friendly_day = friendly_day(date_yesterday_ugly)
 
         self.assertEqual(formatted_friendly_day, expected_friendly_day)
-
 
     def test_friendly_formatting_normal_day_name(self):
         date_moon_landing_ugly = '1969-07-20T12:00:00.662000'
