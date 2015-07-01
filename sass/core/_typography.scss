@@ -9,11 +9,14 @@
 .date-heading {
   display: block;
   margin-top: 0;
-  margin-bottom: 0;
-  padding-top: 0.35rem;
+  margin-bottom: 1rem;
+  padding-top: 0.25rem;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
   @include font-size(22);
+  &:first-of-type {
+    padding-top: 0;
+  }
   &__title {
     font-weight: $heavy_weight;
     padding-right: 0.5em;

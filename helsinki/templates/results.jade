@@ -1,5 +1,7 @@
 extends layout/layout
 
+//-{% last_friendly_date = "" %}
+
 block title
   | Results for #{searchTerm}
 
@@ -35,14 +37,20 @@ block content
             button.button.button--dark.button--full-width.subscribe-to-topic__button(type="submit")
               | Subscribe
 
-    //time.date-heading(datetime="03/06/2015 20:00")
-    //  span.date-heading__title Yesterday
-    //  span.date-heading__date Yesterday
 
-    ul.results-list
-      for result in results
-        li.results-list__item
-          a.results-list__item__link(href="/decision/#{result.id}")
-            h2.results-list__item__title #{result.subject}
-            span.date-heading__title #{result.last_modified_time}
-            p.results-list__item__description #{result.issue_subject}
+    .results-list
+      {% for result in results %}
+      {% if result.friendly_date != last_friendly_date %}
+      time.date-heading(datetime="{{ result.last_modified_time }}")
+        span.date-heading__title {{ result.friendly_day }}
+        span.date-heading__date {{ result.friendly_date }}
+      {% endif %}
+      .results-list__item
+        a.results-list__item__link(href="/decision/#{result.id}")
+          h2.results-list__item__title {{ result.subject }}
+          p.results-list__item__description {{ result.issue_subject }}
+      {% set last_friendly_date = result.friendly_date %}
+      {% endfor %}
+
+
+

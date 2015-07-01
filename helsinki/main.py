@@ -41,6 +41,7 @@ def search_decisions():
     if criteria:
         criteria_stripped = criteria.strip()
         results = find_decisions(criteria_stripped)
+
         return render_template('results.jade',
                                results=results,
                                searchTerm=criteria_stripped,

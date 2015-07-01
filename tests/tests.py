@@ -5,8 +5,8 @@ import requests
 
 from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
-from helsinki.data.es import (_source_with_id)
-
+from helsinki.data.es import (_source_with_id, _source_with_friendly_day)
+from helsinki.data.date_format import (friendly_day, friendly_date, _parse_date)
 
 agenda_item = {u'index': 1,
                u'origin_last_modified_time': u'2015-06-11T11:03:00',
@@ -97,3 +97,16 @@ class TestElasticSearchResults(unittest.TestCase):
         source_with_id = _source_with_id(single_result)
 
         self.assertEqual(source_with_id.get('id'), expected_id)
+
+
+    def test_adding_friendly_dates_to_result(self):
+        results = load_fixture('results.json')
+        single_result = results.get('hits').get('hits')[0]
+        single_result_last_modified_time = single_result.get('_source').get('last_modified_time')
+        expected_friendly_day = friendly_day(single_result_last_modified_time)
+        expected_friendly_date = friendly_date(single_result_last_modified_time)
+
+        source_with_friendly_date_info = _source_with_friendly_day(single_result.get('_source'))
+
+        self.assertEqual(source_with_friendly_date_info.get('friendly_day'), expected_friendly_day)
+        self.assertEqual(source_with_friendly_date_info.get('friendly_date'), expected_friendly_date)

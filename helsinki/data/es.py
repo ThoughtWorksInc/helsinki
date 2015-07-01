@@ -3,6 +3,7 @@ from elasticsearch import Elasticsearch
 import logging
 
 import decisions
+from date_format import friendly_day, friendly_date
 
 logger = logging.getLogger('helsinki_log')
 
@@ -55,6 +56,13 @@ def _source_with_id(raw_result):
     return source
 
 
+def _source_with_friendly_day(raw_result):
+    last_modified_time = raw_result.get('last_modified_time')
+    raw_result['friendly_day'] = friendly_day(last_modified_time)
+    raw_result['friendly_date'] = friendly_date(last_modified_time)
+    return raw_result
+
+
 def find_decisions(criteria):
     results = es.search(
         index="decisions",
@@ -63,7 +71,7 @@ def find_decisions(criteria):
                                         "fields": decisions.SEARCH_FIELDS}}}
     )
     hits = results.get("hits")
-    return [_source_with_id(hit) for hit in hits.get("hits")]
+    return [_source_with_friendly_day(_source_with_id(hit)) for hit in hits.get("hits")]
 
 
 def find_decision(id):
