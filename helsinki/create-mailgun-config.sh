@@ -14,4 +14,4 @@ echo "{
   \"key\": \"$MAILGUN_API_KEY\",
   \"post_url\": \"https://api.mailgun.net/v3/$MAILGUN_SANDBOX_ID\",
   \"sandbox\": \"$MAILGUN_SANDBOX_ID\"
-}" > mailgun.json
+}"
