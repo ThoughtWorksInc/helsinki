@@ -1,6 +1,6 @@
 import argparse
 import sys
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 import re
 import logging
 
@@ -8,7 +8,7 @@ from logger.logs import get_logger
 from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
-from storage.mongo import save_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
+from storage.mongo import save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -24,10 +24,19 @@ def subscribed():
     return render_template('subscribed.jade')
 
 
+@app.route("/unsubscribe/<id>", methods=["GET"])
+def unsubscribe(id):
+    deleted = delete_subscription(id)
+    print(deleted)
+    topic = deleted.get('topic')
+    return redirect("/wip/unsubscribed?topic=%s" % topic, code=302)
+
+
 @app.route("/wip/unsubscribed")
 def unsubscribed():
+    topic = request.args.get("topic")
     return render_template('unsubscribed.jade',
-                           topic='Helksinki')
+                           topic=topic)
 
 
 @app.route("/wip/profile")

@@ -17,12 +17,14 @@ except Exception as e:
 
 
 def save_subscription(email, topic):
-    sub = {'email': email, 'topic': topic, '_id': email.lower(), 'unsubscribe_id': uuid.uuid1()}
+    sub = {'email': email, 'topic': topic, '_id': email.lower(), 'unsubscribe_id': str(uuid.uuid1())}
     subscriptions.insert_one(sub)
 
 
 def delete_subscription(unsubscribe_id):
-    return subscriptions.delete_one({'unsubscribe_id': unsubscribe_id}).raw_result
+    doc = subscriptions.find_one({'unsubscribe_id': unsubscribe_id})
+    delete_result = subscriptions.delete_one({'unsubscribe_id': unsubscribe_id})
+    return doc
 
 
 def get_subscriptions():

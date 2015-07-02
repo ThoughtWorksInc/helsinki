@@ -16,7 +16,11 @@ class TestSubscriptions(unittest.TestCase):
 
     def test_delete_subscription(self):
         subscriptions.delete_one = mock.Mock()
-        subscriptions.delete_one.return_value = DeleteResult({'topic': 'a-topic'}, True)
+        subscriptions.find_one = mock.Mock()
+
+        record = {'topic': 'a-topic'}
+        subscriptions.find_one.return_value = record
+
         uuid = "test-uuid"
         unsubscribed_record = delete_subscription("test-uuid")
         subscriptions.delete_one.assert_called_once_with({'unsubscribe_id': 'test-uuid'})
