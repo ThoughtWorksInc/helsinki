@@ -1,6 +1,7 @@
 import os
 from pymongo import MongoClient
 import logging
+import uuid
 
 logger = logging.getLogger('helsinki_log')
 
@@ -16,7 +17,7 @@ except Exception as e:
 
 
 def save_subscription(email, topic):
-    sub = {'email': email, 'topic': topic, '_id': email.lower()}
+    sub = {'email': email, 'topic': topic, '_id': email.lower(), 'unsubscribe_id': uuid.uuid1()}
     subscriptions.insert_one(sub)
 
 
