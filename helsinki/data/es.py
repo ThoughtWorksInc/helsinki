@@ -1,6 +1,8 @@
 import os
 from elasticsearch import Elasticsearch
 import logging
+import time
+import dateutil.parser
 
 import decisions
 from date_format import friendly_day, friendly_date
@@ -63,6 +65,15 @@ def _source_with_friendly_day(raw_result):
     return raw_result
 
 
+def last_modified_time_as_float(result):
+    date = dateutil.parser.parse(result.get('last_modified_time'))
+    return time.mktime(date.timetuple())
+
+
+def sort_by_last_modified_time(results):
+    return sorted(results, key=last_modified_time_as_float, reverse=True)
+
+
 def find_decisions(criteria):
     results = es.search(
         index="decisions",
@@ -71,7 +82,8 @@ def find_decisions(criteria):
                                         "fields": decisions.SEARCH_FIELDS}}}
     )
     hits = results.get("hits")
-    return [_source_with_friendly_day(_source_with_id(hit)) for hit in hits.get("hits")]
+    results = [_source_with_friendly_day(_source_with_id(hit)) for hit in hits.get("hits")]
+    return sort_by_last_modified_time(results)
 
 
 def find_decision(id):
