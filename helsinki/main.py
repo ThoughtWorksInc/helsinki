@@ -113,7 +113,7 @@ def run_app():
             topic = sub.get('topic').strip()
             unsubscribe_id = sub.get('unsubscribe_id')
             data = {'results': find_decisions(topic),
-                    'topic': topic
+                    'topic': topic,
                     'unsubscribe_id': unsubscribe_id}
             send_mail(sub.get('email'),
                       'Municipal Decisions for %s' % topic,
