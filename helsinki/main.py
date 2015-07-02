@@ -29,10 +29,10 @@ def unsubscribe(id):
     deleted = delete_subscription(id)
     print(deleted)
     topic = deleted.get('topic')
-    return redirect("/wip/unsubscribed?topic=%s" % topic, code=302)
+    return redirect("/unsubscribed?topic=%s" % topic, code=302)
 
 
-@app.route("/wip/unsubscribed")
+@app.route("/unsubscribed")
 def unsubscribed():
     topic = request.args.get("topic")
     return render_template('unsubscribed.jade',
@@ -47,7 +47,8 @@ def profile():
 @app.route("/example/email")
 def email_template():
     return _build_html_email({'results': find_decisions('Helsinki'),
-                              'topic': 'Helsinki'})
+                              'topic': 'Helsinki',
+                              'unsubscribe_id': 'UNSUBCRIBE_ID'})
 
 
 @app.route("/search", methods=["GET"])
@@ -110,8 +111,10 @@ def run_app():
         logger.info("Sending mail...")
         for sub in get_subscriptions():
             topic = sub.get('topic').strip()
+            unsubscribe_id = sub.get('unsubscribe_id')
             data = {'results': find_decisions(topic),
-                    'topic': topic}
+                    'topic': topic
+                    'unsubscribe_id': unsubscribe_id}
             send_mail(sub.get('email'),
                       'Municipal Decisions for %s' % topic,
                       data)
