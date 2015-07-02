@@ -21,6 +21,10 @@ def save_subscription(email, topic):
     subscriptions.insert_one(sub)
 
 
+def delete_subscription(unsubscribe_id):
+    return subscriptions.delete_one({'unsubscribe_id': unsubscribe_id}).raw_result
+
+
 def get_subscriptions():
     return subscriptions.find()
 
