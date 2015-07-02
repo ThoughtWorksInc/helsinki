@@ -1,5 +1,6 @@
 recursive-include helsinki/templates *.jade
 recursive-include helsinki/static *.css *.js *.gif *.ico *.png *.eot *.svg *.ttf *.woff *.woff2
+recursive-include helsinki/emailing/templates *.jade *.css
 include requirements.txt
 include helsinki/mailgun.json
 prune tests

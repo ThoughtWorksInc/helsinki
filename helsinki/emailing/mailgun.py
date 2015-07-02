@@ -3,6 +3,7 @@ import json
 import sys
 import logging
 from jinja2 import Environment, PackageLoader
+from pkg_resources import resource_string
 
 logger = logging.getLogger('helsinki_log')
 
@@ -12,8 +13,9 @@ j_env = Environment(loader=PackageLoader(__name__, 'templates'),
 
 def load_api_details():
     try:
-        with open('mailgun.json') as f:
-            return json.loads(f.read())
+        return json.loads(resource_string(__name__, '../mailgun.json'))
+        # with open('mailgun.json') as f:
+        #     return json.loads(f.read())
     except Exception as e:
         logger.error("Unable to load mailgun api details from mailgun.json: %s" % e)
         sys.exit(-1)
