@@ -12,6 +12,6 @@ fi
 
 echo "{
   \"key\": \"$MAILGUN_API_KEY\",
-  \"post_url\": \"https://api.mailgun.net/v3/$MAILGUN_SANDBOX_ID\",
+  \"post_url\": \"https://api.mailgun.net/v3/$MAILGUN_SANDBOX_ID/messages\",
   \"sandbox\": \"$MAILGUN_SANDBOX_ID\"
 }"
