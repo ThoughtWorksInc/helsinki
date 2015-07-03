@@ -34,7 +34,7 @@ results:
 subscribed:
   check_email: Check your email
   success: You've successfully subscribed
-  confirmation: A confirmation of your subscription has been sent to your mailbox.
+  confirmation: You will now receive email updates on
   find_more: Find more decisions
 
 unsubscribed:
