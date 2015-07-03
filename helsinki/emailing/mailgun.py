@@ -24,7 +24,7 @@ def load_api_details():
 def _build_html_email(data, language):
     template = j_env.get_template('email/subscription.jade')
     return template.render(subscription_title=data.get('topic'),
-                           unsubscribe_link=('/unsubscribe/%s' % data.get('unsubscribe_id')),
+                           unsubscribe_link=('https://decisions.dcentproject.eu/unsubscribe/%s' % data.get('unsubscribe_id')),
                            email_url='#',
                            results=data.get('results'),
                            t=language)
