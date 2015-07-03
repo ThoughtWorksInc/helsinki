@@ -29,3 +29,9 @@ index:
 results:
   results_for: Results for
   receive_updates: Would you like to receive updates on
+
+subscribed:
+  check_email: Check your email
+  success: You've successfully subscribed
+  confirmation: A confirmation of your subscription has been sent to your mailbox.
+  find_more: Find more decisions

@@ -4,7 +4,7 @@ extends layout/layout
 //  - bodyClass = ""
 
 block title
-  | Check your email
+  | {{t('subscribed.check_email')}}
 
 block headerScripts
 
@@ -12,16 +12,16 @@ block content
 
   .middle-container
     .subscribed
-      h1 You've successfully subscribed
+      h1 {{t('subscribed.success')}}
       .subscribed__message
         p.subscribed__lede
           i.fa.fa-envelope-o.subscribed__icon
           = " "
-          | A confirmation of your subscription has been sent to your mailbox.
+          | {{t('subscribed.confirmation')}}
 
     .interest-items
       .interest-item.interest-item--fullwidth: a.interest-item__link(href="/")
         i.fa.fa-search.interest-item__link__icon
         = " "
         span.interest-item__text
-        | Find more decisions
+        | {{t('subscribed.find_more')}}
