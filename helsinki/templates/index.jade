@@ -4,7 +4,7 @@ extends layout/layout
 //  - bodyClass = ""
 
 block title
-  | Interested in...
+  | Interested in... {{t('index.interested_in')}}
 
 block content
 
@@ -12,11 +12,11 @@ block content
     - var focusOnLoad = true
 
     form.interested-in.interested-in--middle(action="/search", method="get", autocomplete="off")
-      p.interested-in__lede Search municipal decisions for the city of Helsinki
+      p.interested-in__lede {{t('index.search_decisions')}}
       p.interested-in-search
         label.interested-in-search__label(for="interested-in")
-          | I’m interested in
+          | {{t('index.im_interested_in')}}
         span.interested-in-search__input-container
           input.interested-in-search__input(type="text", id="interested-in", name="q", autofocus=true, value=searchTerm)
       .interested-in-search__actions
-        button(type="submit", value="find")
+        button(type="submit", value="{{t('common.find')}}")

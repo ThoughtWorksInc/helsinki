@@ -26,12 +26,12 @@ html(xmlns='http://www.w3.org/1999/xhtml', style="font-family: 'Helvetica Neue',
                           tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
                             td(style="font-family:#{font_family}; box-sizing: border-box; vertical-align: top; border: 0; margin: 0; padding: 0 0 10px 0;", valign='top')
                               h1.alignleft(style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 32px; color: #353535; line-height: 1.2em; font-weight: 500; text-align: left; margin: 10px 0 0;", align='left')
-                                | Subscriptions for
+                                | {{t('email.subscriptions_for')}}
                                 | {{subscription_title}}
                           tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
                             td(style="font-family:#{font_family}; box-sizing: border-box; vertical-align: top; border: 0; margin: 0; padding: 0 0 10px 0;", valign='top')
                               h2.alignleft(style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 16px; color: #3fb46d; line-height: 1.2em; font-weight: bold; text-align: left; margin: 40px 0 0 0;", align='left')
-                                | LATEST UPDATES
+                                | {{t('email.latest_updates')}}
                           tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
                             td(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;", valign='top')
                               table.main-items(cellpadding='0', cellspacing='0', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;")
@@ -50,12 +50,12 @@ html(xmlns='http://www.w3.org/1999/xhtml', style="font-family: 'Helvetica Neue',
                     tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
                       td.content-block.aligncenter(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
                         a(href='{{ email_url }}', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; color: #348eda; text-decoration: underline; margin: 0;")
-                          | View in browser
+                          | {{t('email.view_in_browser')}}
             .footer(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;")
               table(width='100%', style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
                 tr(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; margin: 0;")
                   td.aligncenter.content-block(style="font-family:#{font_family}; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #fff; text-align: center; margin: 0; padding: 0 0 20px;", align='center', valign='top')
-                    a(href='{{ unsubscribe_link }}', style="font-family:#{font_family}; box-sizing: border-box; font-size: 12px; color: #fff; text-decoration: underline; margin: 0;") Unsubscribe
+                    a(href='{{ unsubscribe_link }}', style="font-family:#{font_family}; box-sizing: border-box; font-size: 12px; color: #fff; text-decoration: underline; margin: 0;") {{t('email.unsubscribe')}}
                     = " "
-                    | from {{ subscription_title }} news.
+                    | {{t('common.from')}} {{ subscription_title }} {{t('common.news')}}.
         td(style="font-family:#{font_family}; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;", valign='top')

@@ -4,3 +4,4 @@ elasticsearch
 pymongo
 requests
 python-dateutil
+pyyaml

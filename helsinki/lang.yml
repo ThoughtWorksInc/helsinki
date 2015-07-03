@@ -1,0 +1,31 @@
+common:
+  from: from&&
+  news: news&&
+  details: details&&
+  twitter: Twitter&&
+  facebook: Facebook&&
+  hackpad: Hackpad&&
+  find: find&&
+  email_address: Email address&&
+
+email:
+  subscriptions_for: Subscriptions for&&
+  latest_updates: LATEST UPDATES&&
+  view_in_browser: View in browser&&
+  unsubscribe: Unsubcribe&&
+
+decision:
+  take_action: Take action&&
+  get_involved: Take action and get involved with the discussions and planning.&&
+  resolution: Resolution&&
+  draft_statement: Draft statement&&
+  presenter: Presenter&&
+
+index:
+  interested_in: Interested in...&&
+  im_interested_in: I’m interested in&&
+  search_decisions: Search municipal decisions for the city of Helsinki&&
+
+results:
+  results_for: Results for&&
+  receive_updates: Would you like to receive updates on&&

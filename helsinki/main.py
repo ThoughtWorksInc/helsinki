@@ -9,19 +9,23 @@ from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
+from lang import load_translation
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 
+language = load_translation
+
+
 @app.route("/")
 def home():
-    return render_template('index.jade')
+    return render_template('index.jade', t=language)
 
 
 @app.route("/wip/subscribed")
 def subscribed():
-    return render_template('subscribed.jade')
+    return render_template('subscribed.jade', t=language)
 
 
 @app.route("/unsubscribe/<id>", methods=["GET"])
@@ -36,19 +40,20 @@ def unsubscribe(id):
 def unsubscribed():
     topic = request.args.get("topic")
     return render_template('unsubscribed.jade',
-                           topic=topic)
+                           topic=topic,
+                           t=language)
 
 
 @app.route("/wip/profile")
 def profile():
-    return render_template('profile.jade')
+    return render_template('_profile.jade')
 
 
 @app.route("/example/email")
 def email_template():
     return _build_html_email({'results': find_decisions('Helsinki'),
                               'topic': 'Helsinki',
-                              'unsubscribe_id': 'UNSUBCRIBE_ID'})
+                              'unsubscribe_id': 'UNSUBCRIBE_ID'}, language)
 
 
 @app.route("/search", methods=["GET"])
@@ -61,11 +66,13 @@ def search_decisions():
         return render_template('results.jade',
                                results=results,
                                searchTerm=criteria_stripped,
-                               showSubscribeBox=True)
+                               showSubscribeBox=True,
+                               t=language)
     return render_template('results.jade',
                            searchTerm='',
                            autoFocusOnSearch=True,
-                           showSubscribeBox=False)
+                           showSubscribeBox=False,
+                           t=language)
 
 
 @app.route("/decision/<id>", methods=["GET"])
@@ -77,7 +84,8 @@ def decision(id):
                            path=request.base_url,
                            hackpadLink='https://www.hackpad.com',
                            twitterLink='https://www.twitter.com',
-                           facebookLink='https://www.facebook.com')
+                           facebookLink='https://www.facebook.com',
+                           t=language)
 
 
 def valid_subscription(form):
@@ -117,7 +125,8 @@ def run_app():
                     'unsubscribe_id': unsubscribe_id}
             send_mail(sub.get('email'),
                       'Municipal Decisions for %s' % topic,
-                      data)
+                      data,
+                      language)
         sys.exit(0)
 
     if args.reindex:

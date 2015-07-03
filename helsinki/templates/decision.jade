@@ -1,7 +1,7 @@
 extends layout/layout
 
 block title
-  | #{decisionTitle} details
+  | #{decisionTitle} {{t('common.details')}}
 
 block content
 
@@ -15,23 +15,22 @@ block content
           #{decision.text}
 
     .social-networks
-      h2.sub-heading.sub-heading--light Take action
-      p Take action and get involved with the discussions and planning.
+      h2.sub-heading.sub-heading--light {{t('decision.take_action')}}
+      p {{t('decision.get_involved')}}
       nav.social-networks__list
         li.social-networks__item
           a.social-networks__link(href="#{hackpadLink}")
             i.fa.fa-3x.fa-book.social-networks__icon
-            .social-networks__title Hackpad
+            .social-networks__title {{t('common.hackpad')}}
         li.social-networks__item
           a.social-networks__link(href="#{twitterLink}/intent/tweet?text=#{path}")
             i.fa.fa-3x.fa-twitter.social-networks__icon
-            .social-networks__title Twitter
+            .social-networks__title {{t('common.twitter')}}
         li.social-networks__item
           a.social-networks__link(href="#{facebookLink}")
             i.fa.fa-3x.fa-facebook.social-networks__icon
-            .social-networks__title Facebook
+            .social-networks__title {{t('common.facebook')}}
 
     //-.decision-action
       h2.sub-heading.sub-heading--dark Resolution
       p Roast so single shot redeye milk frappuccino, body sit con panna extra beans, single shot java est caramelization mazagran caramelization, sit dripper body con panna et, so, lungo arabica seasonal at medium doppio, medium coffee cup barista extra. Skinny wings half and half to go, aroma sugar aged instant doppio organic as, strong cultivar body caffeine filter doppio barista extraction.
-

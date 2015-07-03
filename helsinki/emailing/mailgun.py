@@ -21,15 +21,16 @@ def load_api_details():
         sys.exit(-1)
 
 
-def _build_html_email(data):
+def _build_html_email(data, language):
     template = j_env.get_template('email/subscription.jade')
     return template.render(subscription_title=data.get('topic'),
                            unsubscribe_link=('/unsubscribe/%s' % data.get('unsubscribe_id')),
                            email_url='#',
-                           results=data.get('results'))
+                           results=data.get('results'),
+                           t=language)
 
 
-def send_mail(to, subject, data):
+def send_mail(to, subject, data, language):
     api_details = load_api_details()
     sandbox = api_details.get("sandbox")
     from_details = "Mailgun Sandbox <postmaster@%s.mailgun.org>" % sandbox
@@ -40,7 +41,7 @@ def send_mail(to, subject, data):
               "to": to,
               "subject": subject,
               "text": 'Sorry this is an HTML email',
-              "html": _build_html_email(data)})
+              "html": _build_html_email(data, language)})
     if result.status_code not in [200, 201]:
         logger.warning("Failed to send email using mailgun."
                        "Response was: \n %s" % result.text)

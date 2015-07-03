@@ -3,26 +3,26 @@ extends layout/layout
 //-{% last_friendly_date = "" %}
 
 block title
-  | Results for #{searchTerm}
+  | {{t('results.results_for')}} #{searchTerm}
 
 block content
 
   .middle-container
     form.interested-in(action="/search", method="get", autocomplete="off")
-      p.interested-in__lede Search municipal decisions for the city of Helsinki
+      p.interested-in__lede {{(t('index.search_decisions'))}}
       p.interested-in-search
         label.interested-in-search__label(for="interested-in")
-          | I’m interested in
+          | {{t('index.im_interested_in')}}
         span.interested-in-search__input-container
           input.interested-in-search__input(type="text", id="interested-in", name="q", value=searchTerm, autofocus=autoFocusOnSearch)
       .interested-in-search__actions
-        button(type="submit", value="find")
+        button(type="submit", value="{{t('common.find')}}")
 
     if showSubscribeBox
       form.subscribe-to-topic(action="/subscribers", method="POST")
         input(type="hidden", value=searchTerm, name="topic")
         p.subscribe-to-topic__intro-text
-          | Would you like to receive updates on
+          | {{t('results.receive_updates')}}
           = " "
           span.search-term #{searchTerm}
           | ?
@@ -32,10 +32,10 @@ block content
               input.subscribe-to-topic__input(type="email", name="email", id="e-address", required)
               label.subscribe-to-topic__label(for="e-address")
                 i.fa.fa-envelope-o
-                span.visuallyhidden Email address
+                span.visuallyhidden {{t('common.email_address')}}
           .column.one-third
             button.button.button--dark.button--full-width.subscribe-to-topic__button(type="submit")
-              | Subscribe
+              | {{t('common.subscribe')}}
 
 
     .results-list
@@ -51,6 +51,3 @@ block content
           p.results-list__item__description {{ result.issue_subject }}
       {% set last_friendly_date = result.friendly_date %}
       {% endfor %}
-
-
-
