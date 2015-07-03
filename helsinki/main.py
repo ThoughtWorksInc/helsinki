@@ -9,7 +9,7 @@ from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
-from lang import load_translation
+from lang import load_translation, translate_results
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -64,7 +64,7 @@ def search_decisions():
     criteria = request.args.get("q")
     if criteria:
         criteria_stripped = criteria.strip()
-        results = find_decisions(criteria_stripped)
+        results = translate_results(find_decisions(criteria_stripped))
 
         return render_template('results.jade',
                                results=results,

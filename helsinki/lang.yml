@@ -41,3 +41,14 @@ unsubscribed:
   title: Unsubscribe
   success: You will no longer receive emails about
   from_term: Unsubscribed from the term
+
+dates:
+  monday: Monday
+  tuesday: Tuesday
+  wednesday: Wednesday
+  thursday: Thursday
+  friday: Friday
+  saturday: Saturday
+  sunday: Sunday
+  today: Today
+  yesterday: Yesterday
