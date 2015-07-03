@@ -7,6 +7,7 @@ common:
   hackpad: Hackpad
   find: find
   email_address: Email address
+  subscribe: Subscribe
 
 email:
   subscriptions_for: Subscriptions for
@@ -35,3 +36,8 @@ subscribed:
   success: You've successfully subscribed
   confirmation: A confirmation of your subscription has been sent to your mailbox.
   find_more: Find more decisions
+
+unsubscribed:
+  title: Unsubscribe
+  success: You will no longer receive emails about
+  from_term: Unsubscribed from the term

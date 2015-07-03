@@ -23,9 +23,12 @@ def home():
     return render_template('index.jade', t=language)
 
 
-@app.route("/wip/subscribed")
+@app.route("/subscribed")
 def subscribed():
-    return render_template('subscribed.jade', t=language)
+    topic = request.args.get("topic")
+    return render_template('subscribed.jade',
+                           topic=topic,
+                           t=language)
 
 
 @app.route("/unsubscribe/<id>", methods=["GET"])
@@ -102,8 +105,10 @@ def valid_subscription(form):
 def subscribe():
     if not valid_subscription(request.form):
         return 'bad request', 400
-    save_subscription(request.form.get('email'), request.form.get('topic'))
-    return 'ok', 201
+    email = request.form.get('email')
+    topic = request.form.get('topic')
+    save_subscription(email, topic)
+    return redirect("/subscribed?topic=%s" % topic, code=302)
 
 
 def run_app():

@@ -4,7 +4,7 @@ extends layout/layout
 //  - bodyClass = ""
 
 block title
-  | Unsubscribe
+  | {{t('unsubscribed.title')}}
 
 block headerScripts
 
@@ -12,9 +12,9 @@ block content
 
   .middle-container
     .unsubscribed
-      h1 Unsubscribed from the term "#{topic}"
+      h1 {{t('unsubscribed.from_term')}} "#{topic}"
       .unsubscribed__message
         p.unsubscribed__lede
           i.fa.fa-check.unsubscribed__icon
           = " "
-          | You will no longer receive emails about "#{topic}".
+          | {{t('unsubscribed.success')}} "#{topic}".

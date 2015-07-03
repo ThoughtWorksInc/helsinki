@@ -2,11 +2,7 @@ import yaml
 import string
 from pkg_resources import resource_string
 
-f = open('lang.yml')
-
 en = yaml.load(resource_string(__name__, 'lang.yml'))
-
-f.close()
 
 
 def load_translation(p):
