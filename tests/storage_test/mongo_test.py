@@ -8,11 +8,12 @@ from helsinki.storage.mongo import save_subscription, subscriptions, delete_subs
 class TestSubscriptions(unittest.TestCase):
 
     def test_save_new_subscription(self):
+        sid = "c3848299-23e2-11e5-a64b-a45e60d3c73b"
         uuid.uuid1 = mock.Mock()
         subscriptions.insert_one = mock.Mock()
         subscriptions.find_one = mock.Mock()
         subscriptions.find_one.return_value = None
-        uuid.uuid1.return_value = "a-uuid"
+        uuid.uuid1.return_value = uuid.UUID(sid)
 
         save_subscription("Email@example.com", "shooting")
 
@@ -20,7 +21,7 @@ class TestSubscriptions(unittest.TestCase):
         subscriptions.insert_one.assert_called_once_with({'email': 'Email@example.com',
                                                           'topic': 'shooting',
                                                           '_id': 'email@example.com',
-                                                          'unsubscribe_id': 'a-uuid'})
+                                                          'unsubscribe_id': sid})
 
     def test_save_updated_subscription(self):
         subscriptions.insert_one = mock.Mock()

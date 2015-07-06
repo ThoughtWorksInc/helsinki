@@ -29,7 +29,7 @@ def save_subscription(email, topic):
         subscriptions.insert_one({'email': email,
                                   'topic': topic,
                                   '_id': email.lower(),
-                                  'unsubscribe_id': uuid.uuid1()})
+                                  'unsubscribe_id': str(uuid.uuid1())})
 
 
 def delete_subscription(unsubscribe_id):
