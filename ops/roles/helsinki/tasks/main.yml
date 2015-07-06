@@ -11,6 +11,6 @@
    copy: src=mailshot.sh dest=/usr/local/helsinki/mailshot.sh
          owner=root group=root mode=0700
 
- - cron: name="helsinki reindex" special_time=daily job="/usr/local/helsinki/reindex.sh"
+ - cron: name="helsinki reindex" job="/usr/local/helsinki/reindex.sh" minute=0 hour=0
 
- - cron: name="helsinki mailshot" special_time=daily job="/usr/local/helsinki/mailshot.sh"
+ - cron: name="helsinki mailshot"  job="/usr/local/helsinki/mailshot.sh" minute=0 hour=11
