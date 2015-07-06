@@ -13,4 +13,4 @@
 
  - cron: name="helsinki reindex" job="/usr/local/helsinki/reindex.sh" minute=0 hour=0
 
- - cron: name="helsinki mailshot"  job="/usr/local/helsinki/mailshot.sh" minute=0 hour=11
+ - cron: name="helsinki mailshot"  job="/usr/local/helsinki/mailshot.sh" minute=0 hour=7
