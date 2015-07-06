@@ -18,7 +18,7 @@ except Exception as e:
 
 def save_subscription(email, topic):
     sub = {'email': email, 'topic': topic, '_id': email.lower(), 'unsubscribe_id': str(uuid.uuid1())}
-    subscriptions.insert_one(sub)
+    subscriptions.replace_one({'_id': email.lower()}, sub, True)
 
 
 def delete_subscription(unsubscribe_id):
