@@ -54,8 +54,14 @@ def unsubscribed():
 
 @app.route("/wip/error")
 def error_page():
-    return render_template('_error.jade',
+    return render_template('error.jade',
                            t=get_translator(request))
+
+
+@app.errorhandler(Exception)
+def error_handler(e):
+    get_logger().error(str(e))
+    return render_template('error.jade', t=get_translator(request))
 
 
 @app.route("/wip/profile")
