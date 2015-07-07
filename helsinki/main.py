@@ -57,7 +57,7 @@ def error_page():
     t = get_translator(request)
     return render_template('error.jade',
                            error_title=t("whoops.title"),
-                           error_description=t("whoops.description"))
+                           error_description=t("whoops.description")), 500
 
 
 @app.errorhandler(Exception)
@@ -66,15 +66,15 @@ def error_handler(e):
     t = get_translator(request)
     return render_template('error.jade',
                            error_title=t("whoops.title"),
-                           error_description=t("whoops.description"))
+                           error_description=t("whoops.description")), 500
 
 
 @app.errorhandler(404)
-def not_found_handler(e):
+def not_found(e=None):
     t = get_translator(request)
     return render_template('error.jade',
                            error_title=t("not_found.title"),
-                           error_description=t("not_found.description"))
+                           error_description=t("not_found.description")), 404
 
 
 @app.route("/wip/profile")
@@ -111,14 +111,16 @@ def search_decisions():
 @app.route("/decision/<id>", methods=["GET"])
 def decision(id):
     result = find_decision(id)
-    return render_template('decision.jade',
-                           decisionTitle=result['subject'],
-                           decisions=result['content'],
-                           path=request.base_url,
-                           hackpadLink='https://www.hackpad.com',
-                           twitterLink='https://www.twitter.com',
-                           facebookLink='https://www.facebook.com',
-                           t=get_translator(request))
+    if result:
+        return render_template('decision.jade',
+                               decisionTitle=result['subject'],
+                               decisions=result['content'],
+                               path=request.base_url,
+                               hackpadLink='https://www.hackpad.com',
+                               twitterLink='https://www.twitter.com',
+                               facebookLink='https://www.facebook.com',
+                               t=get_translator(request))
+    return not_found()
 
 
 def valid_subscription(form):

@@ -90,6 +90,8 @@ def find_decision(id):
     result = es.get(
         index="decisions",
         doc_type="decision_data",
-        id=id
+        id=id,
+        ignore=[404]
     )
-    return _source_with_id(result)
+    if result.get('found'):
+        return _source_with_id(result)
