@@ -15,31 +15,33 @@ class TestSubscriptions(unittest.TestCase):
         subscriptions.find_one.return_value = None
         uuid.uuid1.return_value = uuid.UUID(sid)
 
-        save_subscription("Email@example.com", "shooting")
+        save_subscription("Email@example.com", "Shooting and Hunting")
 
-        subscriptions.find_one.assert_called_once_with({'_id': 'email@example.com'})
+        subscriptions.find_one.assert_called_once_with({'_id': 'email@example.com/shootingandhunting'})
         subscriptions.insert_one.assert_called_once_with({'email': 'Email@example.com',
-                                                          'topic': 'shooting',
-                                                          '_id': 'email@example.com',
+                                                          'topic': 'Shooting and Hunting',
+                                                          '_id': 'email@example.com/shootingandhunting',
                                                           'unsubscribe_id': sid})
 
-    def test_save_updated_subscription(self):
+    def test_ignore_repeated_subscription(self):
         subscriptions.insert_one = mock.Mock()
         subscriptions.find_one = mock.Mock()
         subscriptions.find_one.return_value = {'email': 'Email@example.com',
-                                               'topic': 'shooting',
-                                               '_id': 'email@example.com',
+                                               'topic': 'cycling',
+                                               '_id': 'email@example.com/cycling',
                                                'unsubscribe_id': 'a-uuid'}
 
         save_subscription("Email@example.com", "cycling")
 
-        subscriptions.find_one.assert_called_once_with({'_id': 'email@example.com'})
-        subscriptions.insert_one.assert_called_one_with({'_id': 'email@example.com'},
-                                                        {'email': 'Email@example.com',
-                                                         'topic': 'cycling',
-                                                         '_id': 'email@example.com',
-                                                         'unsubcribe_id': 'a-uuid'},
-                                                        True)
+        subscriptions.find_one.assert_called_once_with({'_id': 'email@example.com/cycling'})
+        assert not subscriptions.insert_one.called
+
+        # subscriptions.insert_one.assert_called_one_with({'_id': 'email@example.com'},
+        #                                                 {'email': 'Email@example.com',
+        #                                                  'topic': 'cycling',
+        #                                                  '_id': 'email@example.com',
+        #                                                  'unsubcribe_id': 'a-uuid'},
+        #                                                 True)
 
     def test_delete_subscription(self):
         subscriptions.delete_one = mock.Mock()

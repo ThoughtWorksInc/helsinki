@@ -16,19 +16,17 @@ except Exception as e:
     raise e
 
 
+def create_id(email, topic):
+    return "%s/%s" % (email.lower(), topic.lower().replace(' ', ''))
+
+
 def save_subscription(email, topic):
-    sub = subscriptions.find_one({'_id': email.lower()})
-    if sub:
-        subscriptions.replace_one({'_id': email.lower()},
-                                  {'email': email,
-                                   'topic': topic,
-                                   '_id': email.lower(),
-                                   'unsubscribe_id': sub.get('unsubscribe_id')},
-                                  True)
-    else:
+    sub_id = create_id(email, topic)
+    sub = subscriptions.find_one({'_id': sub_id})
+    if sub is None:
         subscriptions.insert_one({'email': email,
                                   'topic': topic,
-                                  '_id': email.lower(),
+                                  '_id': sub_id,
                                   'unsubscribe_id': str(uuid.uuid1())})
 
 
