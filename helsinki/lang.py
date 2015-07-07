@@ -2,12 +2,20 @@ import yaml
 import string
 from pkg_resources import resource_string
 
-en = yaml.load(resource_string(__name__, 'lang.yml'))
+en = yaml.load(resource_string(__name__, 'language/en.yml'))
+fi = yaml.load(resource_string(__name__, 'language/fi.yml'))
 
 
-def load_translation(p):
+def load_translation_data_for_code(code):
+    if code.lower() == "fi":
+        return fi
+    else:
+        return en
+
+
+def load_translation(lang, p):
     path = string.split(p.lower(), '.')
-    data = en
+    data = load_translation_data_for_code(lang)
     for part in path:
         data = data.get(part)
         if data is None:
@@ -18,10 +26,14 @@ def load_translation(p):
         return "MISSING TRANSLATION"
 
 
-def _translate_result(result):
-    result["friendly_day"] = load_translation("dates.%s" % result["friendly_day"])
+def translator(lang):
+    return lambda p: load_translation(lang, p)
+
+
+def _translate_result(lang, result):
+    result["friendly_day"] = load_translation(lang, "dates.%s" % result["friendly_day"])
     return result
 
 
-def translate_results(results):
-    return [_translate_result(result) for result in results]
+def translate_results(lang, results):
+    return [_translate_result(lang, result) for result in results]

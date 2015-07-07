@@ -9,18 +9,23 @@ from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
-from lang import load_translation, translate_results
+from lang import translator, translate_results
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 
-language = load_translation
+def request_lang(request):
+    return request.accept_languages.best_match(['en', 'fi'], 'en')
+
+
+def get_translator(request):
+    return translator(request_lang(request))
 
 
 @app.route("/")
 def home():
-    return render_template('index.jade', t=language)
+    return render_template('index.jade', t=get_translator(request))
 
 
 @app.route("/subscribed")
@@ -28,7 +33,7 @@ def subscribed():
     topic = request.args.get("topic")
     return render_template('subscribed.jade',
                            topic=topic,
-                           t=language)
+                           t=get_translator(request))
 
 
 @app.route("/unsubscribe/<id>", methods=["GET"])
@@ -44,7 +49,7 @@ def unsubscribed():
     topic = request.args.get("topic")
     return render_template('unsubscribed.jade',
                            topic=topic,
-                           t=language)
+                           t=get_translator(request))
 
 
 @app.route("/wip/error")
@@ -70,18 +75,18 @@ def search_decisions():
     criteria = request.args.get("q")
     if criteria:
         criteria_stripped = criteria.strip()
-        results = translate_results(find_decisions(criteria_stripped))
+        results = translate_results(request_lang(request), find_decisions(criteria_stripped))
 
         return render_template('results.jade',
                                results=results,
                                searchTerm=criteria_stripped,
                                showSubscribeBox=True,
-                               t=language)
+                               t=get_translator(request))
     return render_template('results.jade',
                            searchTerm='',
                            autoFocusOnSearch=True,
                            showSubscribeBox=False,
-                           t=language)
+                           t=get_translator(request))
 
 
 @app.route("/decision/<id>", methods=["GET"])
@@ -94,7 +99,7 @@ def decision(id):
                            hackpadLink='https://www.hackpad.com',
                            twitterLink='https://www.twitter.com',
                            facebookLink='https://www.facebook.com',
-                           t=language)
+                           t=get_translator(request))
 
 
 def valid_subscription(form):
@@ -137,7 +142,7 @@ def run_app():
             send_mail(sub.get('email'),
                       'Municipal Decisions for %s' % topic,
                       data,
-                      language)
+                      get_translator(request))
         sys.exit(0)
 
     if args.reindex:

@@ -1,0 +1,54 @@
+common:
+  from: lähettäjä
+  news: uutiset
+  details: tarkenna
+  twitter: Twitter
+  facebook: Facebook
+  hackpad: Hackpad
+  find: etsi
+  email_address: Sähköpostiosoite
+  subscribe: Rekisteröidy
+
+email:
+  subscriptions_for: Rekisteröityminen
+  latest_updates: PÄIVITYKSET
+  view_in_browser: Katso selaimessa
+  unsubscribe: Peru rekisteröityminen
+
+decision:
+  take_action: Tartu toimeen
+  get_involved: Tartu toimeen ja osallistu keskusteluun ja suunnitteluun.
+  resolution: Lopputulos
+  draft_statement: Luonnos
+  presenter: Esittelijä
+
+index:
+  interested_in: Kiinnostunut...
+  im_interested_in: Olen kiinnostunut
+  search_decisions: Etsi kunnallisia päätöksiä Helsingin kaupungilta
+
+results:
+  results_for: Tulokset
+  receive_updates: Haluaisitko vastaanottaa päivityksiä
+
+subscribed:
+  check_email: Tarkista sähköpostisi
+  success: Olet rekisteröitynyt
+  confirmation: Saat vastedes sähköpostipäivityksiä
+  find_more: Etsi lisää päätöksiä
+
+unsubscribed:
+  title: Peruuta rekisteröityminen
+  success: Et saa enää sähköpostipäivityksiä
+  from_term: Rekisteröityminen peruttu termiltä
+
+dates:
+  monday: Maanantai
+  tuesday: Tiistai
+  wednesday: Keskiviikko
+  thursday: Torstai
+  friday: Perjantai
+  saturday: Lauantai
+  sunday: Sunnuntai
+  today: Tänään
+  yesterday: Eilen
