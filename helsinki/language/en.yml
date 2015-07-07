@@ -60,3 +60,7 @@ whoops:
 not_found:
   title: 404 Not Found
   description: Sorry, nothing can be found for this url.
+
+unsubscribed_error:
+  title: Subscription not found
+  description: Couldn't unsubscribe because subscription was not found - perhaps you have already clicked this 'unsubscribe' link?

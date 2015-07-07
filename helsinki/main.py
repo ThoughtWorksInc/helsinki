@@ -38,10 +38,15 @@ def subscribed():
 
 @app.route("/unsubscribe/<id>", methods=["GET"])
 def unsubscribe(id):
+    t = get_translator(request)
     deleted = delete_subscription(id)
-    print(deleted)
-    topic = deleted.get('topic')
-    return redirect("/unsubscribed?topic=%s" % topic, code=302)
+    if deleted:
+        topic = deleted.get('topic')
+        return redirect("/unsubscribed?topic=%s" % topic, code=302)
+    else:
+        return render_template('error.jade',
+                               error_title=t('unsubscribed_error.title'),
+                               error_description=t('unsubscribed_error.description')), 404
 
 
 @app.route("/unsubscribed")
