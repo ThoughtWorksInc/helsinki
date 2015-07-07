@@ -54,14 +54,27 @@ def unsubscribed():
 
 @app.route("/wip/error")
 def error_page():
+    t = get_translator(request)
     return render_template('error.jade',
-                           t=get_translator(request))
+                           error_title=t("whoops.title"),
+                           error_description=t("whoops.description"))
 
 
 @app.errorhandler(Exception)
 def error_handler(e):
     get_logger().error(str(e))
-    return render_template('error.jade', t=get_translator(request))
+    t = get_translator(request)
+    return render_template('error.jade',
+                           error_title=t("whoops.title"),
+                           error_description=t("whoops.description"))
+
+
+@app.errorhandler(404)
+def not_found_handler(e):
+    t = get_translator(request)
+    return render_template('error.jade',
+                           error_title=t("not_found.title"),
+                           error_description=t("not_found.description"))
 
 
 @app.route("/wip/profile")

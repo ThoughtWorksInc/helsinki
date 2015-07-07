@@ -56,3 +56,7 @@ dates:
 whoops:
   title: Something went wrong
   description: Sorry, something went wrong trying to complete your request.
+
+not_found:
+  title: 404 Not Found
+  description: Sorry, nothing can be found for this url.

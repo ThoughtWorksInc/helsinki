@@ -4,7 +4,7 @@ extends layout/layout
 //  - bodyClass = ""
 
 block title
-  | {{t('whoops.title')}}
+  | {{error_title}}
 
 block headerScripts
 
@@ -13,8 +13,8 @@ block content
   .middle-container
     .error-help
       h1.page-heading
-        | {{t('whoops.title')}}
+        | {{error_title}}
         = " "
         i.fa.fa-frown-o
       p.error-help__lede
-        | {{t('whoops.description')}}
+        | {{error_description}}
