@@ -52,3 +52,7 @@ dates:
   sunday: Sunday
   today: Today
   yesterday: Yesterday
+
+whoops:
+  title: Something went wrong
+  description: Sorry, something went wrong trying to complete your request.

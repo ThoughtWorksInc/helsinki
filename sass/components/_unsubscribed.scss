@@ -1,10 +1,5 @@
 .unsubscribed {
   @include columns;
-  h1 {
-    font-weight: 300;
-    color: $default_text_color;
-    @include font-size(30);
-  }
 }
 .unsubscribed__message {
   position: relative;

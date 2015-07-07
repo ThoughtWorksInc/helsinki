@@ -1,8 +1,7 @@
-.subscribed {
-  @include columns;
+.error-help {
 
 }
-.subscribed__message {
+.error-help__box {
   position: relative;
   min-height: 185px;
   margin-bottom: $default_margin;
@@ -14,13 +13,10 @@
     margin-bottom: 0;
   }
 }
-.subscribed__lede {
-  @include vertical-middle-me;
-  width: 100%;
-  padding: 0 20px 20px 20px;
-  text-align: center;
+.error-help__lede {
+  @include font-size(22);
 }
-.subscribed__icon {
+.error-help__icon {
   display: block;
   margin-bottom: 10px;
   font-size: 50px;

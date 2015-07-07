@@ -47,6 +47,12 @@ def unsubscribed():
                            t=language)
 
 
+@app.route("/wip/error")
+def error_page():
+    return render_template('_error.jade',
+                           t=language)
+
+
 @app.route("/wip/profile")
 def profile():
     return render_template('_profile.jade')

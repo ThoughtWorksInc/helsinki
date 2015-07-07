@@ -2,8 +2,13 @@
   line-height: 1.2;
   letter-spacing: -0.05rem;
   @include font-size(30);
+  font-weight: 300;
   @include width-from($medium_device) {
     @include font-size(40);
+  }
+
+  &--center {
+    text-align: center;
   }
 }
 .date-heading {

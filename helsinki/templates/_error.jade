@@ -1,0 +1,20 @@
+extends layout/layout
+
+//block vars
+//  - bodyClass = ""
+
+block title
+  | {{t('whoops.title')}}
+
+block headerScripts
+
+block content
+
+  .middle-container
+    .error-help
+      h1.page-heading
+        | {{t('whoops.title')}}
+        = " "
+        i.fa.fa-frown-o
+      p.error-help__lede
+        | {{t('whoops.description')}}
