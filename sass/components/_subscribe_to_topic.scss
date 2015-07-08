@@ -2,23 +2,29 @@
 .subscribe-to-topic {
   $label_width: $input_height+1;
   min-height: 185px;
-  padding: 2rem 2rem 3rem 2rem;
-  margin-bottom: 2rem;
+  padding: 1.5rem;
+  margin-bottom: 16px;
   background: $white;
   border-radius: 4px;
   color: $default_text_color_dark;
+  @include width-from($medium_device) {
+    padding: 2rem;
+    margin-bottom: 32px;
+  }
   &__input_wrapper {
     position: relative;
     height: $input_height;
     line-height: 1;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
     @include width-from($medium_device) {
       margin-bottom: 0;
     }
   }
   &__intro-text {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    @include font-size(16);
   }
   &__label {
     position: absolute;
@@ -39,12 +45,14 @@
     }
   }
   &__input {
+    -webkit-appearance: none;
     position: relative;
     width: 100%;
     height: $input_height;
     border: 1px solid $border_colors;
     border-radius: 3px;
-    padding: 0 0.5rem 0.1rem #{$label_width + 15};
+    padding: 0 0.5rem 0.1rem #{$label_width + 10};
+    box-shadow: none;
     &:-webkit-autofill {
       -webkit-text-fill-color: $default_text_color_dark;
       -webkit-box-shadow: 0 0 0px 1000px $super_light_green inset;

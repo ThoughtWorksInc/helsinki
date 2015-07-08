@@ -1,5 +1,4 @@
 body {
-  padding-top: 3rem;
   @include font-smoothing(on);
   color: $default_text_color;
   font-family: $para_font_family;

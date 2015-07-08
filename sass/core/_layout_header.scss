@@ -4,12 +4,12 @@ $sign_in_breakpoint: 480px;
   @include columns;
   position: relative;
   max-width: $large_device;
-  padding: 0 16px 16px 16px;
-  margin: 0 auto 30px auto;
+  padding: 16px;
+  margin: 0 auto 16px auto;
   border-bottom: 2px solid $white;
   @include font-size(30);
   @include width-from($medium_device) {
-    //margin-bottom: 1.5rem;
+    margin-bottom: 30px;
   }
   &__logo {
     @include column-one-third($sign_in_breakpoint);

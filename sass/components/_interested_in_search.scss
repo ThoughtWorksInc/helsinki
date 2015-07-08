@@ -1,4 +1,8 @@
 .interested-in {
+  margin-bottom: 16px;
+  @include width-from($medium_device) {
+    margin-bottom: 32px;
+  }
   &--middle {
     @include width-from($medium_device) {
       width: $medium_device;
@@ -8,13 +12,13 @@
   &__lede {
     color: rgba($white,0.7);
     line-height: 1.2;
-    margin-bottom: 0.25rem;
+    margin-bottom: 8px;
   }
 }
 .interested-in-search {
   position: relative;
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
   font-weight: 300;
   color: $default_text_color;
   @include font-size(30);
@@ -24,7 +28,10 @@
   }
 
   &__label {
+    display: block;
+    margin-bottom: 4px;
     padding-right: 0.8rem;
+    line-height: 1.2;
     color: $default_text_color;
     @include width-from($medium_device) {
       white-space: nowrap;
@@ -39,7 +46,7 @@
   &__input {
     width: 100%;
     height: 50px;
-    padding: 0 0 0.5rem 0;
+    padding: 0 0 1rem 0;
     background: transparent;
     border: none;
     border-bottom: 2px solid rgba($default_text_color,0.5);
