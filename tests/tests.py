@@ -7,6 +7,7 @@ from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
 from helsinki.data.es import (_source_with_id, _source_with_friendly_day)
 from helsinki.data.date_format import (friendly_day, friendly_date, _parse_date)
+from helsinki.data.social_media import (add_slug_to_hackpad_url)
 
 agenda_item = {u'index': 1,
                u'origin_last_modified_time': u'2015-06-11T11:03:00',
@@ -138,3 +139,13 @@ class TestDateFormat(unittest.TestCase):
         formatted_friendly_day = friendly_day(date_moon_landing_ugly)
 
         self.assertEqual(formatted_friendly_day, expected_friendly_day)
+
+
+class TestDecisionOutput(unittest.TestCase):
+
+    def test_hackpad_link_has_correct_url(self):
+        expected_hackpad_link = "https://hki.hackpad.com/ive-been-expecting-you"
+
+        generated_hackpad_link = add_slug_to_hackpad_url("ive-been-expecting-you")
+
+        self.assertEqual(generated_hackpad_link, expected_hackpad_link)

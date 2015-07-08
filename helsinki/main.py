@@ -5,6 +5,7 @@ import re
 import logging
 
 from logger.logs import get_logger
+from data.social_media import add_slug_to_hackpad_url
 from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
@@ -121,7 +122,7 @@ def decision(id):
                                decisionTitle=result['subject'],
                                decisions=result['content'],
                                path=request.base_url,
-                               hackpadLink='https://www.hackpad.com',
+                               hackpadLink=add_slug_to_hackpad_url(result['issue_slug']),
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
                                t=get_translator(request))
