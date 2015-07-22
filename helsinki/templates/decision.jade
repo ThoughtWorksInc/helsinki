@@ -12,7 +12,7 @@ block content
       .decision-summary
         h2.sub-heading.sub-heading--light #{decision.type}
         .decision-summary__data
-          #{decision.text}
+          != decision.text
 
     //-.related-documents
       h2.sub-heading.sub-heading--light {{t('decision.related_documents_title')}}
