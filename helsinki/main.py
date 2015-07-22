@@ -3,6 +3,7 @@ import sys
 from flask import Flask, render_template, request, jsonify, redirect
 import re
 import logging
+import os
 
 from logger.logs import get_logger
 from data.social_media import add_slug_to_hackpad_url
@@ -113,6 +114,8 @@ def search_decisions():
                            showSubscribeBox=False,
                            t=get_translator(request))
 
+def base_url(request):
+    return os.getenv('BASE_URL', request.url_root)
 
 @app.route("/decision/<id>", methods=["GET"])
 def decision(id):
@@ -121,7 +124,7 @@ def decision(id):
         return render_template('decision.jade',
                                decisionTitle=result['subject'],
                                decisions=result['content'],
-                               path=request.base_url,
+                               path=base_url(request) + request.path,
                                hackpadLink=add_slug_to_hackpad_url(result['issue_slug']),
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
