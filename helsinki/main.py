@@ -114,8 +114,10 @@ def search_decisions():
                            showSubscribeBox=False,
                            t=get_translator(request))
 
+
 def base_url(request):
     return os.getenv('BASE_URL', request.url_root)
+
 
 @app.route("/decision/<id>", methods=["GET"])
 def decision(id):
