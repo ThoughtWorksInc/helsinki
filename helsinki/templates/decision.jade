@@ -33,11 +33,11 @@ block content
             i.fa.fa-3x.fa-book.social-networks__icon
             .social-networks__title {{t('common.hackpad')}}
         li.social-networks__item
-          a.social-networks__link(href="#{twitterLink}/intent/tweet?text=#{path}")
+          a.social-networks__link(href="#{twitterLink}/intent/tweet?text=#{page_url}")
             i.fa.fa-3x.fa-twitter.social-networks__icon
             .social-networks__title {{t('common.twitter')}}
         li.social-networks__item
-          a.social-networks__link(href="https://www.facebook.com/dialog/feed?app_id=#{facebook_app_id}&display=popup&caption=#{page_title}&link=#{path_safe}&redirect_uri=#{path_safe}")
+          a.social-networks__link(href="https://www.facebook.com/dialog/feed?app_id=#{facebook_app_id}&display=popup&caption=#{page_title}&link=#{page_url_safe}&redirect_uri=#{page_url_safe}")
             i.fa.fa-3x.fa-facebook.social-networks__icon
             .social-networks__title {{t('common.facebook')}}
 
