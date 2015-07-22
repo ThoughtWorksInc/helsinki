@@ -1,11 +1,13 @@
 server {
   listen 80;
+  server_name decisions.dcentproject.eu;
   return 301 {{ site_address }}$request_uri;
 }
 
 
 server {
   listen 443 ssl;
+  server_name decisions.dcentproject.eu;
 
   ssl_certificate /etc/nginx/ssl/decisions.crt;
   ssl_certificate_key /etc/nginx/ssl/decisions.key;

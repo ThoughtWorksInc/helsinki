@@ -23,8 +23,8 @@
  - name: install lxc-docker
    apt: name=lxc-docker state=present
 
- - name: restart docker service
-   service: name=docker state=restarted
+# - name: restart docker service
+#   service: name=docker state=restarted
 
  - name: make es directory
    file: path=/data/es state=directory
