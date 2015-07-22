@@ -1,5 +1,6 @@
 import argparse
 import sys
+import urllib
 from flask import Flask, render_template, request, jsonify, redirect
 import re
 import logging
@@ -123,10 +124,16 @@ def base_url(request):
 def decision(id):
     result = find_decision(id)
     if result:
+        page_url = base_url(request) + request.path
+        page_url_safe = urllib.quote(page_url.encode("utf-8"))
+        page_title = result['subject']
+        page_title_encoded = urllib.quote(page_title.encode("utf-8"))
         return render_template('decision.jade',
-                               decisionTitle=result['subject'],
+                               page_title=page_title_encoded,
+                               decisionTitle=page_title,
                                decisions=result['content'],
-                               path=base_url(request) + request.path,
+                               path=page_url,
+                               path_safe=page_url_safe,
                                hackpadLink=add_slug_to_hackpad_url(result['issue_slug']),
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
