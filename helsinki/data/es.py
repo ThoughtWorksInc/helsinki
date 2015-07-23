@@ -19,19 +19,23 @@ except Exception as e:
 
 
 def configure():
-    try:
-        es.indices.delete('decisions', ignore=[400, 404])
-        es.indices.create(
-            index="decisions",
-            body={
-                "settings": {"number_of_shards": 1, "number_of_replicas": 0},
-                "mappings": decisions.DECISION_MAPPING
-            },
-            ignore=400
-        )
-    except Exception as e:
-        logger.error("Could not set up indexes: %s" % e)
-        raise e
+    if not es.indices.exists(index='decisions'):
+        try:
+            logger.debug("Creating indexes")
+            es.indices.delete('decisions', ignore=[400, 404])
+            es.indices.create(
+                index="decisions",
+                body={
+                    "settings": {"number_of_shards": 1, "number_of_replicas": 0},
+                    "mappings": decisions.DECISION_MAPPING
+                },
+                ignore=400
+            )
+        except Exception as e:
+            logger.error("Could not set up indexes: %s" % e)
+            raise e
+    else:
+        logger.debug("Decisions index already exists")
 
 
 def index_decision(decision):
