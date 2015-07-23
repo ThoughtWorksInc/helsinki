@@ -14,15 +14,16 @@ block content
         .decision-summary__data
           != decision.text
 
-    //-.related-documents
-      h2.sub-heading.sub-heading--light {{t('decision.related_documents_title')}}
-      ul.icon-list
-        //- for document in documents
-        li.icon-list-item: a.icon-list-item__link(href="#")
-          i.fa.fa-file-text.icon-list-item__icon
-          = " "
-          span.icon-list-item__text
-          | Doc name
+    if attachments
+      .related-documents
+        h2.sub-heading.sub-heading--light {{t('decision.related_documents_title')}}
+        ul.icon-list
+          for attachment in attachments
+            li.icon-list-item: a.icon-list-item__link(href="#{attachment.file_uri}")
+              i.fa.fa-file-text.icon-list-item__icon
+              = " "
+              span.icon-list-item__text
+              | #{attachment.name}
 
     .social-networks
       h2.sub-heading.sub-heading--light {{t('decision.take_action')}}

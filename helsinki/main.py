@@ -137,6 +137,7 @@ def decision(id):
                                hackpadLink=add_slug_to_hackpad_url(result['issue_slug']),
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
+                               attachments=result['attachments'],
                                t=get_translator(request))
     return not_found()
 
