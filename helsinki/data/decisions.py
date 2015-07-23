@@ -24,6 +24,22 @@ DECISION_MAPPING = {'decision_data':
                                             'analyzer': 'finnish'}}}}}}
 
 
+def create_attachment(attachment):
+    return {
+        "file_uri": attachment.get("file_uri"),
+        "name": attachment.get("name"),
+    }
+
+
+def is_valid_file_attachment(attachment):
+    return attachment.get("file_uri") is not None
+
+
+def get_valid_file_attachments(attachments):
+    valid_attachments = filter(is_valid_file_attachment, attachments)
+    return map(create_attachment, valid_attachments)
+
+
 def agenda_item_to_municipal_action(agenda_item):
     issue = agenda_item.get("issue")
     content = agenda_item.get("content")
@@ -36,7 +52,8 @@ def agenda_item_to_municipal_action(agenda_item):
         "permalink": agenda_item.get("permalink"),
         "ajho_uri": agenda_item.get("resource_uri"),
         "content": content,
-        "id": agenda_item.get("id")
+        "id": agenda_item.get("id"),
+        "attachments": get_valid_file_attachments(agenda_item.get("attachments"))
     }
 
 
