@@ -35,7 +35,8 @@ def agenda_item_to_municipal_action(agenda_item):
         "issue_slug": issue.get("slug"),
         "permalink": agenda_item.get("permalink"),
         "ajho_uri": agenda_item.get("resource_uri"),
-        "content": content
+        "content": content,
+        "id": agenda_item.get("id")
     }
 
 
