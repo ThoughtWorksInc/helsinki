@@ -22,8 +22,11 @@ def request_lang(request):
     return request.accept_languages.best_match(['en', 'fi'], 'en')
 
 
-def get_translator(request):
-    return translator(request_lang(request))
+def get_translator(request=None):
+    if request:
+        return translator(request_lang(request))
+    else:
+        return translator('fi')
 
 
 @app.route("/")
@@ -182,7 +185,7 @@ def run_app():
             send_mail(sub.get('email'),
                       'Municipal Decisions for %s' % topic,
                       data,
-                      get_translator(request))
+                      get_translator())
         sys.exit(0)
 
     if args.reindex:
