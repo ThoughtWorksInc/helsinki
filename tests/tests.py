@@ -61,7 +61,8 @@ municipal_action = {'content': [{u'text': u'<p>SOME HTML CONTENT</p>',
                     'issue_slug': u'hel-2015-006704',
                     'type': u'viranhaltijan p\xe4\xe4t\xf6s',
                     'ajho_uri': u'/paatokset/v1/agenda_item/48941/',
-                    'subject': u'SUBJECT'}
+                    'subject': u'SUBJECT',
+                    'id': 48941}
 
 
 class TestExample(unittest.TestCase):
