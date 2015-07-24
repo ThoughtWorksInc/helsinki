@@ -141,6 +141,7 @@ def decision(id):
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
                                attachments=result['attachments'],
+                               facebook_app_id=1473073149670623,
                                t=get_translator(request))
     return not_found()
 
