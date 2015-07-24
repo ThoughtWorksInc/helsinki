@@ -33,7 +33,7 @@ def _build_html_email(data, language):
 def send_mail(to, subject, data, language):
     api_details = load_api_details()
     sandbox = api_details.get("sandbox")
-    from_details = "Mailgun Sandbox <postmaster@%s.mailgun.org>" % sandbox
+    from_details = "Helsinki Decisions <postmaster@%s>" % sandbox
     result = requests.post(
         api_details.get("post_url"),
         auth=("api", api_details.get("key")),
