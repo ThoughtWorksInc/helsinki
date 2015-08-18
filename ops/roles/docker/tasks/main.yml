@@ -38,7 +38,7 @@
  - name: docker elasticsearch
    docker:
      name: elasticsearch
-     image: elasticsearch:1.6
+     image: komu/elasticsearch-voikko:latest
      volumes:
        - /data/es:/data
 
