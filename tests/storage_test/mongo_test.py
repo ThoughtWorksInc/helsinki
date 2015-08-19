@@ -2,7 +2,7 @@ import unittest
 import mock
 import uuid
 from pymongo.results import DeleteResult
-from helsinki.storage.mongo import save_subscription, subscriptions, delete_subscription
+from helsinki.storage.mongo import save_subscription, subscriptions, delete_subscription, hackpads, save_hackpad_id, get_hackpad_id
 
 
 class TestSubscriptions(unittest.TestCase):
@@ -54,3 +54,29 @@ class TestSubscriptions(unittest.TestCase):
         unsubscribed_record = delete_subscription("test-uuid")
         subscriptions.delete_one.assert_called_once_with({'unsubscribe_id': 'test-uuid'})
         self.assertEqual(unsubscribed_record, {'topic': 'a-topic'})
+
+    def test_save_hackpad_id(self):
+        hackpads.insert_one = mock.Mock()
+
+        save_hackpad_id("issue_slug", "hackpad_id")
+        hackpads.insert_one.assert_called_once_with({'_id':'issue_slug', 'hackpad':'hackpad_id'})
+
+    def test_get_hackpad_id(self):
+        issue_id = 'issue_id'
+        hackpad_id = 'hackpad_id'
+        hackpads.find_one = mock.Mock()
+        hackpads.find_one.return_value = {'_id':issue_id, 'hackpad':hackpad_id}
+
+        record = {'_id':issue_id, 'hackpad':hackpad_id}
+        retrieved_hackpad_id = get_hackpad_id(issue_id)
+
+        hackpads.find_one.assert_called_once_with({'_id':issue_id})
+        self.assertEqual(retrieved_hackpad_id, hackpad_id)
+
+    def test_get_hackpad_id_no_result(self):
+
+        hackpads.find_one = mock.Mock()
+        hackpads.find_one.return_value = None
+
+        retrieved_hackpad_id = get_hackpad_id('issue_id')
+        self.assertEqual(retrieved_hackpad_id, None)

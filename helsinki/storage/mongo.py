@@ -11,6 +11,7 @@ try:
     db = mongo.helsinki
     subscriptions = db.subscriptions
     meta = db.meta
+    hackpads = db.hackpads
 except Exception as e:
     logger.error('Could not connect to mongoDB: %s' % e)
     raise e
@@ -50,3 +51,13 @@ def get_last_modified_time():
     entry = meta.find_one({'name': 'last_modified_time'})
     if entry:
         return entry.get('value')
+
+
+def save_hackpad_id(issue_slug, hackpad_id):
+    hackpads.insert_one({'_id':issue_slug, 'hackpad':hackpad_id})
+
+def get_hackpad_id(issue_slug):
+    result = hackpads.find_one({'_id':issue_slug})
+    if result:
+        return result['hackpad']
+    return None
