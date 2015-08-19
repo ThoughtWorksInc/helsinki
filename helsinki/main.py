@@ -63,6 +63,11 @@ def unsubscribed():
                            t=get_translator(request))
 
 
+@app.route("/hackpad/<issue_slug>", methods=["POST"])
+def hackpad(issue_slug):
+    return redirect(add_slug_to_hackpad_url(issue_slug), code=302)
+
+
 @app.route("/wip/error")
 def error_page():
     t = get_translator(request)

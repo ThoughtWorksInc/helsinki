@@ -30,9 +30,10 @@ block content
       p {{t('decision.get_involved')}}
       nav.social-networks__list
         li.social-networks__item
-          a.social-networks__link(href="#{hackpadLink}")
-            i.fa.fa-3x.fa-book.social-networks__icon
-            .social-networks__title {{t('common.hackpad')}}
+          form(action="#{hackpadLink}")
+            button.social-networks__link(type='post', value="{{t('common.hackpad')}}")
+              i.fa.fa-3x.fa-book.social-networks__icon
+              .social-networks__title {{t('common.hackpad')}}
         li.social-networks__item
           a.social-networks__link(href="#{twitterLink}/intent/tweet?text=#{page_url}")
             i.fa.fa-3x.fa-twitter.social-networks__icon

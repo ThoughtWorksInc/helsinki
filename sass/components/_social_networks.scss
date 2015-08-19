@@ -18,9 +18,11 @@
   }
   &__link {
     display: block;
+    width: 100%;
     color: $white;
     text-decoration: none;
     padding: 15px;
+    background-color: transparent;
     border: 2px solid rgba($white,0.3);
     border-radius: $border_radius;
     &:hover {
