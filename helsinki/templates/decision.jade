@@ -30,7 +30,7 @@ block content
       p {{t('decision.get_involved')}}
       nav.social-networks__list
         li.social-networks__item
-          form(action="#{hackpadLink}")
+          form(action="#{hackpadLink}", method='post')
             button.social-networks__link(type='post', value="{{t('common.hackpad')}}")
               i.fa.fa-3x.fa-book.social-networks__icon
               .social-networks__title {{t('common.hackpad')}}

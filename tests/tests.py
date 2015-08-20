@@ -7,7 +7,9 @@ from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
 from helsinki.data.es import (_source_with_id, _source_with_friendly_day)
 from helsinki.data.date_format import (friendly_day, friendly_date, _parse_date)
-from helsinki.data.social_media import (add_slug_to_hackpad_url)
+from helsinki.storage.mongo import save_hackpad_id, get_hackpad_id
+import helsinki.main
+from helsinki.hackpad import HackpadApi
 
 agenda_item = {u'index': 1,
                u'origin_last_modified_time': u'2015-06-11T11:03:00',
@@ -146,8 +148,46 @@ class TestDateFormat(unittest.TestCase):
 class TestDecisionOutput(unittest.TestCase):
 
     def test_hackpad_link_has_correct_url(self):
+        hackpadApi = HackpadApi()
         expected_hackpad_link = "https://hki.hackpad.com/ive-been-expecting-you"
 
-        generated_hackpad_link = add_slug_to_hackpad_url("ive-been-expecting-you")
+        generated_hackpad_link = hackpadApi.hackpad_url("ive-been-expecting-you")
 
         self.assertEqual(generated_hackpad_link, expected_hackpad_link)
+
+
+class TestCreatingHackpads(unittest.TestCase):
+
+    def test_hackpad_creation(self):
+        # Given there is no hackpad ID for issue in database
+        # Then create a new hackpad, store the id and redirect the user to that id
+        # And redirect the user to that hackpad
+        hackpadApi = HackpadApi()
+
+        hackpadApi.get_hackpad_id = mock.Mock()
+        hackpadApi.get_hackpad_id.return_value = None
+
+        hackpadApi.create_pad = mock.Mock()
+        hackpad_id = 'abcd'
+        hackpadApi.create_pad.return_value = hackpad_id
+
+        response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi)
+
+        redirect_location = response.headers['Location']
+
+        hackpadApi.create_pad.assert_called_once_with('New issue pad')
+        self.assertEqual(redirect_location, 'https://hki.hackpad.com/abcd')
+
+    def test_hackpad_creation_hackpad_exists(self):
+        # Given there is a hackpad ID in the database
+        # And the API confirms it exists
+        # Then redirect the user to that hackpad
+        pass
+
+    def test_hackpad_creation_hackpad_has_been_removed(self):
+        # Given there is a hackpad ID in the database
+        # And the API says it doesn't exist
+        # Then create new hackpad
+        # And replace ID in database
+        # And redirect the user to that hackpad
+        pass

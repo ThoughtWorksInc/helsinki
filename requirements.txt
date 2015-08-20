@@ -2,6 +2,8 @@ flask
 pyjade
 elasticsearch
 pymongo
-requests
+requests[security]
+requests_oauthlib
 python-dateutil
 pyyaml
+oauth2

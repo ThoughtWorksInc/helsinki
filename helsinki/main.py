@@ -7,12 +7,12 @@ import logging
 import os
 
 from logger.logs import get_logger
-from data.social_media import add_slug_to_hackpad_url
 from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
-from storage.mongo import save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
+from storage.mongo import save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time, save_hackpad_id, get_hackpad_id
 from lang import translator, translate_results
+from hackpad import HackpadApi
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -64,8 +64,17 @@ def unsubscribed():
 
 
 @app.route("/hackpad/<issue_slug>", methods=["POST"])
-def hackpad(issue_slug):
-    return redirect(add_slug_to_hackpad_url(issue_slug), code=302)
+def forward_to_hackpad(issue_slug, api=HackpadApi()):
+    existing_hackpad_id = get_hackpad_id(issue_slug)
+
+    if existing_hackpad_id:
+        pad_id = existing_hackpad_id
+    else:
+        pad_id = api.create_pad('New issue pad')
+        get_logger().warn(pad_id)
+        save_hackpad_id(issue_slug, pad_id)
+
+    return redirect(api.hackpad_url(pad_id), code=302)
 
 
 @app.route("/wip/error")
@@ -142,7 +151,7 @@ def decision(id):
                                decisions=result['content'],
                                page_url=page_url,
                                page_url_safe=page_url_safe,
-                               hackpadLink=add_slug_to_hackpad_url(result['issue_slug']),
+                               hackpadLink="/hackpad/" + result['issue_slug'],
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
                                attachments=result['attachments'],
