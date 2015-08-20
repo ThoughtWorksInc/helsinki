@@ -7,7 +7,7 @@ from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
 from helsinki.data.es import (_source_with_id, _source_with_friendly_day)
 from helsinki.data.date_format import (friendly_day, friendly_date, _parse_date)
-from helsinki.storage.mongo import save_hackpad_id, get_hackpad_id
+from helsinki.storage.mongo import HackpadDB
 import helsinki.main
 from helsinki.hackpad import HackpadApi
 
@@ -163,26 +163,45 @@ class TestCreatingHackpads(unittest.TestCase):
         # Then create a new hackpad, store the id and redirect the user to that id
         # And redirect the user to that hackpad
         hackpadApi = HackpadApi()
-
-        hackpadApi.get_hackpad_id = mock.Mock()
-        hackpadApi.get_hackpad_id.return_value = None
-
-        hackpadApi.create_pad = mock.Mock()
+        hackpadDB = HackpadDB()
         hackpad_id = 'abcd'
+
+        hackpadDB.get_hackpad_id = mock.Mock()
+        hackpadApi.create_pad = mock.Mock()
+
+        hackpadDB.get_hackpad_id.return_value = None
         hackpadApi.create_pad.return_value = hackpad_id
 
-        response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi)
+        response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
 
         redirect_location = response.headers['Location']
 
+        hackpadDB.get_hackpad_id.assert_called_once_with('issue_id')
         hackpadApi.create_pad.assert_called_once_with('New issue pad')
         self.assertEqual(redirect_location, 'https://hki.hackpad.com/abcd')
 
-    def test_hackpad_creation_hackpad_exists(self):
-        # Given there is a hackpad ID in the database
-        # And the API confirms it exists
-        # Then redirect the user to that hackpad
-        pass
+    # def test_hackpad_creation_hackpad_exists(self):
+    #     # Given there is a hackpad ID in the database
+    #     # And the API confirms it exists
+    #     # Then redirect the user to that hackpad
+    #     hackpad_id = "hackpad_id"
+    #     hackpadApi = HackpadApi()
+    #
+    #     hackpadApi.get_hackpad_id = mock.Mock()
+    #     hackpadApi.create_pad = mock.Mock()
+    #     hackpadApi.pad_exists = mock.Mock()
+    #
+    #     hackpadApi.get_hackpad_id.return_value = hackpad_id
+    #     hackpadApi.pad_exists.return_value = True
+    #
+    #     response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi)
+    #
+    #     redirect_location = response.headers['Location']
+    #
+    #     hackpadApi.get_hackpad_id.assert_called_once_with('issue_id')
+    #     hackpadApi.pad_exists.assert_called_once_with(hackpad_id)
+    #     assert not hackpadApi.create_pad.called
+    #     self.assertEqual(redirect_location, "https://hki.hackpad.com/hackpad_id")
 
     def test_hackpad_creation_hackpad_has_been_removed(self):
         # Given there is a hackpad ID in the database

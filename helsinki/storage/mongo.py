@@ -53,12 +53,16 @@ def get_last_modified_time():
         return entry.get('value')
 
 
-def save_hackpad_id(issue_slug, hackpad_id):
-    hackpads.insert_one({'_id': issue_slug, 'hackpad': hackpad_id})
+class HackpadDB:
 
+    def __init__(self):
+        pass
 
-def get_hackpad_id(issue_slug):
-    result = hackpads.find_one({'_id': issue_slug})
-    if result:
-        return result['hackpad']
-    return None
+    def save_hackpad_id(self, issue_slug, hackpad_id):
+        hackpads.insert_one({'_id': issue_slug, 'hackpad': hackpad_id})
+
+    def get_hackpad_id(self, issue_slug):
+        result = hackpads.find_one({'_id': issue_slug})
+        if result:
+            return result['hackpad']
+        return None

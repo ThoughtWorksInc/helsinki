@@ -10,7 +10,7 @@ from logger.logs import get_logger
 from data.indexing import import_decision_data
 from data.es import find_decisions, find_decision, configure
 from emailing.mailgun import send_mail, _build_html_email
-from storage.mongo import save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time, save_hackpad_id, get_hackpad_id
+from storage.mongo import HackpadDB, save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
 from lang import translator, translate_results
 from hackpad import HackpadApi
 
@@ -64,15 +64,17 @@ def unsubscribed():
 
 
 @app.route("/hackpad/<issue_slug>", methods=["POST"])
-def forward_to_hackpad(issue_slug, api=HackpadApi()):
-    existing_hackpad_id = get_hackpad_id(issue_slug)
+def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
+    existing_hackpad_id = db.get_hackpad_id(issue_slug)
 
     if existing_hackpad_id:
         pad_id = existing_hackpad_id
     else:
         pad_id = api.create_pad('New issue pad')
         get_logger().warn(pad_id)
-        save_hackpad_id(issue_slug, pad_id)
+        db.save_hackpad_id(issue_slug, pad_id)
+
+    print "PAD ID: " + str(pad_id)
 
     return redirect(api.hackpad_url(pad_id), code=302)
 
