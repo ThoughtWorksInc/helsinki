@@ -23,15 +23,13 @@ params = {
 
 class HackpadApi():
 
-    config = Config()
-    api_key = config.get_hackpad_api_key()
-    api_secret = config.get_hackpad_api_secret()
-
     def __init__(self):
-        pass
+        config = Config()
+        self.api_key = config.get_hackpad_api_key()
+        self.api_secret = config.get_hackpad_api_secret()
 
     def create_pad(self, text):
-        consumer = oauth2.Consumer(key=api_key, secret=api_secret)
+        consumer = oauth2.Consumer(key=self.api_key, secret=self.api_secret)
         params['oauth_consumer_key'] = consumer.key
         req = oauth2.Request(method='POST', url=api_method, parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
@@ -40,7 +38,7 @@ class HackpadApi():
         return json.loads(response.text)['padId']
 
     def get_pad(self, pad_id):
-        consumer = oauth2.Consumer(key=api_key, secret=api_secret)
+        consumer = oauth2.Consumer(key=self.api_key, secret=self.api_secret)
         params['oauth_consumer_key'] = consumer.key
         req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/options" % str(pad_id)), parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
