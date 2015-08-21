@@ -56,10 +56,10 @@ class TestSubscriptions(unittest.TestCase):
         self.assertEqual(unsubscribed_record, {'topic': 'a-topic'})
 
     def test_save_hackpad_id(self):
-        hackpads.insert_one = mock.Mock()
+        hackpads.replace_one = mock.Mock()
 
         HackpadDB().save_hackpad_id("issue_slug", "hackpad_id")
-        hackpads.insert_one.assert_called_once_with({'_id': 'issue_slug', 'hackpad': 'hackpad_id'})
+        hackpads.replace_one.assert_called_once_with({'_id': 'issue_slug'}, {'_id': 'issue_slug', 'hackpad': 'hackpad_id'}, True)
 
     def test_get_hackpad_id(self):
         issue_id = 'issue_id'

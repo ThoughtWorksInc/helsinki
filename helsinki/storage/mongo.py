@@ -59,7 +59,7 @@ class HackpadDB:
         pass
 
     def save_hackpad_id(self, issue_slug, hackpad_id):
-        hackpads.insert_one({'_id': issue_slug, 'hackpad': hackpad_id})
+        hackpads.replace_one({'_id': issue_slug}, {'_id': issue_slug, 'hackpad': hackpad_id}, True)
 
     def get_hackpad_id(self, issue_slug):
         result = hackpads.find_one({'_id': issue_slug})

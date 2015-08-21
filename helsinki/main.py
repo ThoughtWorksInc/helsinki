@@ -67,11 +67,10 @@ def unsubscribed():
 def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
     existing_hackpad_id = db.get_hackpad_id(issue_slug)
 
-    if existing_hackpad_id:
+    if (existing_hackpad_id is not None) and api.pad_exists(existing_hackpad_id):
         pad_id = existing_hackpad_id
     else:
         pad_id = api.create_pad('New issue pad')
-        get_logger().warn(pad_id)
         db.save_hackpad_id(issue_slug, pad_id)
 
     print "PAD ID: " + str(pad_id)
