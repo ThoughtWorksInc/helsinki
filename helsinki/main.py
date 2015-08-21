@@ -70,7 +70,7 @@ def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
     if (existing_hackpad_id is not None) and api.pad_exists(existing_hackpad_id):
         pad_id = existing_hackpad_id
     else:
-        pad_id = api.create_pad('New issue pad')
+        pad_id = api.create_pad(issue_slug)
         db.save_hackpad_id(issue_slug, pad_id)
 
     print "PAD ID: " + str(pad_id)
