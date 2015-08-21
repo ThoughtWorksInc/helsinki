@@ -35,12 +35,16 @@ class HackpadApi():
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
         req.sign_request(signature_method, consumer, None)
         response = requests.post(req.to_url(), headers={'Content-Type': 'text/plain'}, data=text, verify=True)
-        return json.loads(response.text)['padId']
+        if response.status_code == 200:
+            return json.loads(response.text)['padId']
+        else:
+            print str(response)
+            raise Exception("Error creating pad")
 
     def get_pad(self, pad_id):
         consumer = oauth2.Consumer(key=self.api_key, secret=self.api_secret)
         params['oauth_consumer_key'] = consumer.key
-        req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/options" % str(pad_id)), parameters=params)
+        req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/content.txt" % str(pad_id)), parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
         req.sign_request(signature_method, consumer, None)
         response = requests.get(req.to_url(), verify=True)
@@ -50,7 +54,7 @@ class HackpadApi():
             return None
 
     def pad_exists(self, pad_id):
-        return get_pad(pad_id) is not None
+        return self.get_pad(pad_id) is not None
 
     def hackpad_url(self, id):
         return urljoin('https://hki.hackpad.com/', id)

@@ -179,7 +179,7 @@ class TestCreatingHackpads(unittest.TestCase):
 
         hackpadDB.get_hackpad_id.assert_called_once_with('issue_id')
         hackpadDB.save_hackpad_id.assert_called_once_with('issue_id', hackpad_id)
-        hackpadApi.create_pad.assert_called_once_with('New issue pad')
+        hackpadApi.create_pad.assert_called_once_with('issue_id')
         self.assertEqual(redirect_location, 'https://hki.hackpad.com/abcd')
 
     def test_hackpad_creation_hackpad_exists(self):
@@ -233,5 +233,5 @@ class TestCreatingHackpads(unittest.TestCase):
 
         hackpadDB.get_hackpad_id.assert_called_once_with('issue_id')
         hackpadApi.pad_exists.assert_called_once_with('hackpad_id')
-        hackpadApi.create_pad.called_once_with('New issue pad')
+        hackpadApi.create_pad.called_once_with('issue_id')
         hackpadDB.save_hackpad_id.assert_called_once_with('issue_id', 'new_hackpad_id')
