@@ -3,8 +3,11 @@ import time
 import requests
 import ssl
 import json
+import logging
 from config import Config
 from urlparse import urljoin
+
+logging.getLogger('helsinki_log')
 
 base_url = "https://hki.hackpad.com/api/1.0"
 
@@ -38,7 +41,7 @@ class HackpadApi():
         if response.status_code == 200:
             return json.loads(response.text)['padId']
         else:
-            print str(response)
+            logger.debug("Response: " + response.text)
             raise Exception("Error creating pad")
 
     def get_pad(self, pad_id):
