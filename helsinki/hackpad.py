@@ -7,7 +7,7 @@ import logging
 from config import Config
 from urlparse import urljoin
 
-logging.getLogger('helsinki_log')
+logger = logging.getLogger('helsinki_log')
 
 base_url = "https://hki.hackpad.com/api/1.0"
 
