@@ -19,4 +19,4 @@ def _parse_date(ugly_date):
 
 def friendly_date(ugly_date):
     date = _parse_date(ugly_date)
-    return date.strftime('%d/%m/%y')
+    return date.strftime('%d.%m.%y')
