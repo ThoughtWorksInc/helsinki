@@ -13,6 +13,7 @@ from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import HackpadDB, save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
 from lang import translator, translate_results
 from hackpad import HackpadApi
+import config
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
@@ -140,6 +141,7 @@ def base_url(request):
 
 @app.route("/decision/<id>", methods=["GET"])
 def decision(id):
+    config = config.Config()
     result = find_decision(id)
     if result:
         page_url = base_url(request) + request.path
@@ -156,7 +158,7 @@ def decision(id):
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
                                attachments=result['attachments'],
-                               facebook_app_id=1473073149670623,
+                               facebook_app_id=config.get_facebook_id(),
                                t=get_translator(request))
     return not_found()
 

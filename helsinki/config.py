@@ -2,6 +2,7 @@ import os
 
 hackpad_api_key = os.getenv('HACKPAD_API_KEY')
 hackpad_api_secret = os.getenv('HACKPAD_API_SECRET')
+facebook_id = os.getenv('FACEBOOK_ID')
 
 
 class Config:
@@ -15,8 +16,11 @@ class Config:
     def get_hackpad_api_secret(self):
         return hackpad_api_secret
 
+    def get_facebook_id(self):
+        return facebook_id
 
-envs = ['HACKPAD_API_KEY', 'HACKPAD_API_SECRET']
+
+envs = ['HACKPAD_API_KEY', 'HACKPAD_API_SECRET', 'FACEBOOK_ID']
 
 
 def create_env_file():
