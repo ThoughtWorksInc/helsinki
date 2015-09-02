@@ -39,9 +39,15 @@ def language_active_classes():
                 'fi': 'language--active'}
 
 
+@app.context_processor
+def inject_lang_classes():
+    return dict(lang_indicator=language_active_classes(),
+                t=get_translator())
+
+
 @app.route("/")
 def home():
-    return render_template('index.jade', t=get_translator(), lang_indicator=language_active_classes())
+    return render_template('index.jade')
 
 
 @app.route("/lang", methods=["POST"])
@@ -55,9 +61,7 @@ def change_language():
 @app.route("/subscribed")
 def subscribed():
     topic = request.args.get("topic")
-    return render_template('subscribed.jade',
-                           topic=topic,
-                           t=get_translator())
+    return render_template('subscribed.jade', topic=topic)
 
 
 @app.route("/unsubscribe/<id>", methods=["GET"])
@@ -77,8 +81,7 @@ def unsubscribe(id):
 def unsubscribed():
     topic = request.args.get("topic")
     return render_template('unsubscribed.jade',
-                           topic=topic,
-                           t=get_translator())
+                           topic=topic)
 
 
 @app.route("/hackpad/<issue_slug>", methods=["POST"])
@@ -143,13 +146,11 @@ def search_decisions():
         return render_template('results.jade',
                                results=results,
                                searchTerm=criteria_stripped,
-                               showSubscribeBox=True,
-                               t=get_translator())
+                               showSubscribeBox=True)
     return render_template('results.jade',
                            searchTerm='',
                            autoFocusOnSearch=True,
-                           showSubscribeBox=False,
-                           t=get_translator())
+                           showSubscribeBox=False)
 
 
 def base_url(request):
@@ -175,8 +176,7 @@ def decision(id):
                                twitterLink='https://www.twitter.com',
                                facebookLink='https://www.facebook.com',
                                attachments=result['attachments'],
-                               facebook_app_id=config.get_facebook_id(),
-                               t=get_translator())
+                               facebook_app_id=config.get_facebook_id())
     return not_found()
 
 
