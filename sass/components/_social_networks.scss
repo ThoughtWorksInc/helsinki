@@ -19,12 +19,16 @@
   &__link {
     display: block;
     width: 100%;
-    color: $white;
-    text-decoration: none;
-    padding: 15px;
+    padding: 8px;
     background-color: transparent;
+    color: $white;
+    text-align: center;
+    text-decoration: none;
     border: 2px solid rgba($white,0.3);
     border-radius: $border_radius;
+    @include width-from($medium_device) {
+      padding: 15px;
+    }
     &:hover {
       text-decoration: none;
       background-color: $white;
@@ -35,7 +39,10 @@
     margin-bottom: 8px;
   }
   &__title {
-    @include font-size(18);
+    @include font-size(14);
+    @include width-from($medium_device) {
+      @include font-size(18);
+    }
     //font-weight: 500;
   }
 }
