@@ -1,10 +1,11 @@
 import argparse
 import sys
 import urllib
-from flask import Flask, render_template, request, jsonify, redirect
+from flask import Flask, render_template, request, jsonify, redirect, session
 import re
 import logging
 import os
+import uuid
 
 from logger.logs import get_logger
 from data.indexing import import_decision_data
@@ -17,15 +18,15 @@ from config import Config
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
+app.secret_key = str(uuid.uuid1())
 
-
-def request_lang(request):
-    return request.accept_languages.best_match(['en', 'fi'], 'en')
+def request_lang():
+    return session.get('lang', 'fi')
 
 
 def get_translator(request=None):
     if request:
-        return translator(request_lang(request))
+        return translator(request_lang())
     else:
         return translator('fi')
 
@@ -33,6 +34,14 @@ def get_translator(request=None):
 @app.route("/")
 def home():
     return render_template('index.jade', t=get_translator(request))
+
+
+@app.route("/lang", methods=["POST"])
+def change_language():
+    lang = request.form.get('lang')
+    referer = request.headers.get('Referer')
+    session['lang'] = lang
+    return redirect(referer)
 
 
 @app.route("/subscribed")
