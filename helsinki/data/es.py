@@ -26,9 +26,24 @@ def configure():
             es.indices.create(
                 index="decisions",
                 body={
-                    "settings": {"number_of_shards": 1, "number_of_replicas": 0},
-                    "mappings": decisions.DECISION_MAPPING
-                },
+                    "settings": {
+                        "number_of_shards": 1,
+                        "number_of_replicas": 0,
+                        "analysis": {
+                            "analyzer": {
+                                "default": {
+                                    "tokenizer": "finnish",
+                                    "filter": ["lowercase", "voikkoFilter"]
+                                }
+                            },
+                            "filter": {
+                                "voikkoFilter": {
+                                    "type": "voikko"
+                                }
+                            }
+                        }
+                    },
+                    "mappings": decisions.DECISION_MAPPING},
                 ignore=400
             )
         except Exception as e:
