@@ -8,6 +8,7 @@ common:
   find: find
   email_address: Email address
   subscribe: Subscribe
+  change-language: Change language to
 
 email:
   subscriptions_for: Subscriptions for

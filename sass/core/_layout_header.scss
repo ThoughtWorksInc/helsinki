@@ -12,7 +12,8 @@ $sign_in_breakpoint: 480px;
     margin-bottom: 30px;
   }
   &__logo {
-    @include column-one-third($sign_in_breakpoint);
+    @include column-one-third();
+    padding-left: 0;
     &__link {
       height: 40px;
       text-decoration: none;
@@ -24,6 +25,9 @@ $sign_in_breakpoint: 480px;
         vertical-align: bottom;
       }
     }
+  }
+  &__language-bar {
+    @include column-two-thirds();
   }
 }
 

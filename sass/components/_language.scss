@@ -1,0 +1,26 @@
+.language {
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  &__option {
+    float: left;
+    display: inline-block;
+    @include circle(36px);
+    @include font-size(14);
+    margin-right: 8px;
+    text-align: center;
+    background-color: transparent;
+    border: 2px solid transparent;
+    outline: 0;
+    &:hover, &:focus {
+      border-color: rgba($white,0.25);
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    &--active, &--active:hover {
+      pointer-events: none;
+      border-color: $white;
+    }
+  }
+}

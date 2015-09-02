@@ -32,11 +32,11 @@ def get_translator():
 def language_active_classes():
     lang = request_lang()
     if lang == 'en':
-        return {'en': 'language--active',
+        return {'en': 'language__option--active',
                 'fi': ''}
     else:
         return {'en': '',
-                'fi': 'language--active'}
+                'fi': 'language__option--active'}
 
 
 @app.context_processor
