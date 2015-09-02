@@ -1,12 +1,15 @@
 .social-networks {
   margin-bottom: $default_margin;
+  border-bottom: 2px solid $white;
+  padding-bottom: 8px;
   &__list {
-    @include columns;
+    @include clearfix;
     margin-left: 0;
     margin-right: 0;
   }
   &__item {
-    @include column-one-third(0);
+    display: block;
+    margin-right: 8px;
     list-style: none;
     text-align: center;
     &:first-child {
@@ -15,19 +18,38 @@
     &:last-child {
       padding-right: 0;
     }
+    @include width-from($medium_device) {
+      float: left;
+    }
   }
   &__link {
     display: block;
     width: 100%;
-    padding: 8px;
+    height: 60px;
+    padding: 15px;
     background-color: transparent;
     color: $white;
     text-align: center;
     text-decoration: none;
-    border: 2px solid rgba($white,0.3);
-    border-radius: $border_radius;
+    transition: color 250ms ease, background 250ms ease;
     @include width-from($medium_device) {
-      padding: 15px;
+      display: inline-block;
+      width: 60px;
+    }
+    &--hackpad {
+      line-height: 1;
+      margin-bottom: 0;
+      padding: 0 15px;
+      background-color: transparent;
+      color: $white;
+      text-transform: uppercase;
+      font-weight: bold;
+      border: 5px solid transparent;
+      transition: color 250ms ease, border-color 250ms ease;
+      outline: 0;
+      @include width-from($medium_device) {
+        width: auto;
+      }
     }
     &:hover {
       text-decoration: none;
@@ -36,6 +58,8 @@
     }
   }
   &__icon {
+    font-size: 30px;
+    line-height: 1;
     margin-bottom: 8px;
   }
   &__title {
@@ -43,6 +67,5 @@
     @include width-from($medium_device) {
       @include font-size(18);
     }
-    //font-weight: 500;
   }
 }

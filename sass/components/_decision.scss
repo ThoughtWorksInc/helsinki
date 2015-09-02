@@ -1,19 +1,10 @@
-.decision-summary {
+.decision {
+  margin-bottom: $default_margin;
   &__data {
     position: relative;
     background-color: $white;
     padding: 32px 32px 50px 32px;
     color: $text_grey;
-    @include trapezium(15px, 20px, $black);
+    //@include trapezium(15px, 20px, $black);
   }
-  margin-bottom: $default_margin;
-}
-
-.decision-action {
-  position: relative;
-  margin-bottom: $default_margin;
-  padding: 2rem;
-  background: $white;
-  color: $default_text_color_dark;
-  @include trapezium(15px, 20px, $black);
 }
