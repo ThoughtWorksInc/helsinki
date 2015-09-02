@@ -44,6 +44,9 @@ html.no-js(lang="en", class="#{htmlClass}")
               i.fa.fa-building-o
               i.fa.fa-tree
               i.fa.fa-bicycle
+          form(action="/lang", method="post")
+            button(type="submit", name="lang", value="en") EN
+            button(type="submit", name="lang", value="fi") FI
           //-.sign
             if signedIn
               .sign__out

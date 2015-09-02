@@ -20,20 +20,28 @@ app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 app.secret_key = str(uuid.uuid1())
 
+
 def request_lang():
     return session.get('lang', 'fi')
 
 
-def get_translator(request=None):
-    if request:
-        return translator(request_lang())
+def get_translator():
+    return translator(request_lang())
+
+
+def language_active_classes():
+    lang = request_lang()
+    if lang == 'en':
+        return {'en': 'language--active',
+                'fi': ''}
     else:
-        return translator('fi')
+        return {'en': '',
+                'fi': 'language--active'}
 
 
 @app.route("/")
 def home():
-    return render_template('index.jade', t=get_translator(request))
+    return render_template('index.jade', t=get_translator(), lang_indicator=language_active_classes())
 
 
 @app.route("/lang", methods=["POST"])
@@ -49,12 +57,12 @@ def subscribed():
     topic = request.args.get("topic")
     return render_template('subscribed.jade',
                            topic=topic,
-                           t=get_translator(request))
+                           t=get_translator())
 
 
 @app.route("/unsubscribe/<id>", methods=["GET"])
 def unsubscribe(id):
-    t = get_translator(request)
+    t = get_translator()
     deleted = delete_subscription(id)
     if deleted:
         topic = deleted.get('topic')
@@ -70,7 +78,7 @@ def unsubscribed():
     topic = request.args.get("topic")
     return render_template('unsubscribed.jade',
                            topic=topic,
-                           t=get_translator(request))
+                           t=get_translator())
 
 
 @app.route("/hackpad/<issue_slug>", methods=["POST"])
@@ -90,7 +98,7 @@ def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
 
 @app.route("/wip/error")
 def error_page():
-    t = get_translator(request)
+    t = get_translator()
     return render_template('error.jade',
                            error_title=t("whoops.title"),
                            error_description=t("whoops.description")), 500
@@ -99,7 +107,7 @@ def error_page():
 @app.errorhandler(Exception)
 def error_handler(e):
     get_logger().error(str(e))
-    t = get_translator(request)
+    t = get_translator()
     return render_template('error.jade',
                            error_title=t("whoops.title"),
                            error_description=t("whoops.description")), 500
@@ -107,7 +115,7 @@ def error_handler(e):
 
 @app.errorhandler(404)
 def not_found(e=None):
-    t = get_translator(request)
+    t = get_translator()
     return render_template('error.jade',
                            error_title=t("not_found.title"),
                            error_description=t("not_found.description")), 404
@@ -130,18 +138,18 @@ def search_decisions():
     criteria = request.args.get("q")
     if criteria:
         criteria_stripped = criteria.strip()
-        results = translate_results(request_lang(request), find_decisions(criteria_stripped))
+        results = translate_results(request_lang(), find_decisions(criteria_stripped))
 
         return render_template('results.jade',
                                results=results,
                                searchTerm=criteria_stripped,
                                showSubscribeBox=True,
-                               t=get_translator(request))
+                               t=get_translator())
     return render_template('results.jade',
                            searchTerm='',
                            autoFocusOnSearch=True,
                            showSubscribeBox=False,
-                           t=get_translator(request))
+                           t=get_translator())
 
 
 def base_url(request):
@@ -168,7 +176,7 @@ def decision(id):
                                facebookLink='https://www.facebook.com',
                                attachments=result['attachments'],
                                facebook_app_id=config.get_facebook_id(),
-                               t=get_translator(request))
+                               t=get_translator())
     return not_found()
 
 
