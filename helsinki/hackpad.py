@@ -48,7 +48,7 @@ class HackpadApi():
 
     def get_pad(self, pad_id):
         consumer = oauth2.Consumer(key=self.api_key, secret=self.api_secret)
-        prams = gen_params()
+        params = gen_params()
         params['oauth_consumer_key'] = consumer.key
         req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/content.txt" % str(pad_id)), parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
