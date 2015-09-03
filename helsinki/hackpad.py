@@ -34,8 +34,9 @@ class HackpadApi():
 
     def create_pad(self, text):
         consumer = oauth2.Consumer(key=self.api_key, secret=self.api_secret)
+        params = gen_params()
         params['oauth_consumer_key'] = consumer.key
-        req = oauth2.Request(method='POST', url=api_method, parameters=gen_params())
+        req = oauth2.Request(method='POST', url=api_method, parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
         req.sign_request(signature_method, consumer, None)
         response = requests.post(req.to_url(), headers={'Content-Type': 'text/plain'}, data=text, verify=True)
@@ -47,8 +48,9 @@ class HackpadApi():
 
     def get_pad(self, pad_id):
         consumer = oauth2.Consumer(key=self.api_key, secret=self.api_secret)
+        prams = gen_params()
         params['oauth_consumer_key'] = consumer.key
-        req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/content.txt" % str(pad_id)), parameters=gen_params())
+        req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/content.txt" % str(pad_id)), parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
         req.sign_request(signature_method, consumer, None)
         response = requests.get(req.to_url(), verify=True)
