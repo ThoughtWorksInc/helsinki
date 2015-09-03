@@ -23,8 +23,8 @@
  - name: install lxc-docker
    apt: name=lxc-docker state=present
 
-# - name: restart docker service
-#   service: name=docker state=restarted
+ - name: restart docker service
+   service: name=docker state=restarted
 
  - name: make es directory
    file: path=/data/es state=directory
@@ -39,6 +39,7 @@
    docker:
      name: elasticsearch
      image: komu/elasticsearch-voikko:latest
+     pull: always
      volumes:
        - /data/es:/data
 
@@ -46,6 +47,7 @@
    docker:
      name: mongo
      image: mongo:3
+     pull: always
      volumes:
        - /data/db:/data/db
        - /data/backup:/data/backup
