@@ -50,14 +50,21 @@ class HackpadApi():
         consumer = oauth2.Consumer(key=self.api_key, secret=self.api_secret)
         params = gen_params()
         params['oauth_consumer_key'] = consumer.key
-        req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/content.txt" % str(pad_id)), parameters=params)
+        req = oauth2.Request(method='GET', url=(base_url + "/pad/%s/revisions" % str(pad_id)), parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
         req.sign_request(signature_method, consumer, None)
         response = requests.get(req.to_url(), verify=True)
         if response.status_code == 200:
+            logger.debug("Pad exists: " + response.text)
             return response.text
-        else:
+        elif response.status_code == 404:
+            logger.debug("Non-existant pad: " + str(response.status_code))
+            # logger.debug(response.text)
             return None
+        else:
+            logger.debug("Unexpected status code: " + str(response.status_code))
+            logger.debug(response.text)
+            raise Exception("Error checking existance of pad")
 
     def pad_exists(self, pad_id):
         return self.get_pad(pad_id) is not None
