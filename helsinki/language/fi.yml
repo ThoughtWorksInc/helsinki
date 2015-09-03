@@ -4,7 +4,7 @@ common:
   details: tarkenna
   twitter: Twitter
   facebook: Facebook
-  hackpad: Hackpad
+  hackpad: Avaa yhteiskirjoitusalusta
   find: etsi
   email_address: Sähköpostiosoite
   subscribe: Rekisteröidy
@@ -17,7 +17,7 @@ email:
 
 decision:
   take_action: Tartu toimeen
-  get_involved: Tartu toimeen ja osallistu keskusteluun ja suunnitteluun.
+  get_involved: "Pitäisikö asiasta keskustella lisää? PItäisikö kirjoittaa yhdessä viesti päättäjille tai medialle? Pitäisikö laatia varjoehdotus tai pyytää lisätietoja? Käytä tätä alustaa yhteistyöskentelyyn niin muut, jotka ovat kiinnostuneet samasta aiheesta voivat osallistua."
   resolution: Lopputulos
   draft_statement: Luonnos
   presenter: Esittelijä

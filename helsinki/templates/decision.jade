@@ -8,8 +8,6 @@ block content
   .middle-container
     h1.page-heading #{decisionTitle}
 
-    include _social_networks
-
     for decision in decisions
       .decision
         h2.sub-heading.sub-heading--light #{decision.type}
@@ -29,4 +27,9 @@ block content
 
     h2.sub-heading.sub-heading--light {{t('decision.take_action')}}
     p {{t('decision.get_involved')}}
+
+    form.hackpad(action="#{hackpadLink}", method='post')
+      button.social-networks__link.social-networks__link--hackpad(type='post', value="{{t('common.hackpad')}}")
+        span.social-networks__title {{t('common.hackpad')}}
+
     include _social_networks

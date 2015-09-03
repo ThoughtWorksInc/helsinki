@@ -4,7 +4,7 @@ common:
   details: details
   twitter: Twitter
   facebook: Facebook
-  hackpad: Hackpad
+  hackpad: Open a joint workspace
   find: find
   email_address: Email address
   subscribe: Subscribe
@@ -18,7 +18,7 @@ email:
 
 decision:
   take_action: Take action
-  get_involved: Discuss this decision with HACKPAD.
+  get_involved: Should this issue be discussed further? Should we co-edit a message to out representatives or the media? Should we prepare a shadow proposal or ask for more information? Use this workspace for collaboration so others, who are interested in the same issue can take part.
   resolution: Resolution
   related_documents_title: Related documents
   draft_statement: Draft statement

@@ -1,7 +1,7 @@
 .social-networks {
   margin-bottom: $default_margin;
-  border-bottom: 2px solid $white;
-  padding-bottom: 8px;
+  border-top: 2px solid $white;
+  padding-top: 8px;
   &__list {
     @include clearfix;
     margin-left: 0;
@@ -36,12 +36,17 @@
       display: inline-block;
       width: 60px;
     }
+    &:hover {
+      text-decoration: none;
+      background-color: $white;
+      color: $dark_green;
+    }
     &--hackpad {
       line-height: 1;
       margin-bottom: 0;
       padding: 0 15px;
-      background-color: transparent;
-      color: $white;
+      background-color: $white;
+      color: $dark_green;
       text-transform: uppercase;
       font-weight: bold;
       border: 5px solid transparent;
@@ -50,11 +55,11 @@
       @include width-from($medium_device) {
         width: auto;
       }
-    }
-    &:hover {
-      text-decoration: none;
-      background-color: $white;
-      color: $dark_green;
+      &:hover {
+        background-color: $white;
+        text-decoration: none;
+        color: $black;
+      }
     }
   }
   &__icon {
@@ -68,4 +73,8 @@
       @include font-size(18);
     }
   }
+}
+
+.hackpad {
+  margin-bottom: 2rem;
 }
