@@ -24,12 +24,12 @@ decision:
 
 index:
   interested_in: Kiinnostunut...
-  im_interested_in: Olen kiinnostunut
+  im_interested_in: Minua kiinnostaa
   search_decisions: Etsi kunnallisia päätöksiä Helsingin kaupungilta
 
 results:
   results_for: Tulokset
-  receive_updates: Haluaisitko vastaanottaa päivityksiä
+  receive_updates: Haluaisitko sähköpostilla uudet artikkelit aiheesta
 
 subscribed:
   check_email: Tarkista sähköpostisi
