@@ -41,7 +41,7 @@
      image: komu/elasticsearch-voikko:latest
      pull: always
      volumes:
-       - /data/es:/data
+       - /data/es:/usr/share/elasticsearch/data
 
  - name: docker mongo
    docker:
