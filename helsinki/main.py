@@ -235,7 +235,7 @@ def run_app():
 
     app.debug = bool(args.debug)
     logger.info("Starting app server. Debug = %s" % app.debug)
-    app.run(host='0.0.0.0', port=3000)
+    app.run(host='0.0.0.0')
 
 
 if __name__ == "__main__":
