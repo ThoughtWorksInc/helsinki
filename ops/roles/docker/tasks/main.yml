@@ -38,7 +38,7 @@
  - name: docker elasticsearch
    docker:
      name: elasticsearch
-     image: komu/elasticsearch-voikko:latest
+     image: elasticsearch:latest
      pull: always
      volumes:
        - /data/es:/usr/share/elasticsearch/data
