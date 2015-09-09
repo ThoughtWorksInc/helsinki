@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import argparse
 import sys
 import urllib
@@ -88,10 +90,12 @@ def unsubscribed():
 def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
     existing_hackpad_id = db.get_hackpad_id(issue_slug)
 
+    text = str(issue_slug) + "\n Tämä on yhteiskirjoitusalusta liittyen tähän päätökseen \n\n Käytä tätä alustaa linkittääksesi aihetta koskeviin uutisiin, facebook-sivuihin ja muihin paikkoihin. Täällä voi kuka tahana osallistua aiheesta käytävään keskusteluun, yhteiskirjoittaa esimerkiksi viestiä päättäjille tai medialle, tai sopia muita keinoja vaikuttaa asiaan. Voit kutsua osallistujia tähän alustaan sivun oikean laidasta."
+
     if (existing_hackpad_id is not None) and api.pad_exists(existing_hackpad_id):
         pad_id = existing_hackpad_id
     else:
-        pad_id = api.create_pad(issue_slug)
+        pad_id = api.create_pad(text)
         db.save_hackpad_id(issue_slug, pad_id)
 
     print "PAD ID: " + str(pad_id)
@@ -231,7 +235,7 @@ def run_app():
 
     app.debug = bool(args.debug)
     logger.info("Starting app server. Debug = %s" % app.debug)
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=3000)
 
 
 if __name__ == "__main__":

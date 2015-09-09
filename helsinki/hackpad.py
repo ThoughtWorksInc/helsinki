@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import oauth2
 import time
 import requests
