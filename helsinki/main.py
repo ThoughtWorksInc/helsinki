@@ -90,7 +90,7 @@ def unsubscribed():
 def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
     existing_hackpad_id = db.get_hackpad_id(issue_slug)
 
-    text = str(issue_slug) + "\n Tämä on yhteiskirjoitusalusta liittyen tähän päätökseen \n\n Käytä tätä alustaa linkittääksesi aihetta koskeviin uutisiin, facebook-sivuihin ja muihin paikkoihin. Täällä voi kuka tahana osallistua aiheesta käytävään keskusteluun, yhteiskirjoittaa esimerkiksi viestiä päättäjille tai medialle, tai sopia muita keinoja vaikuttaa asiaan. Voit kutsua osallistujia tähän alustaan sivun oikean laidasta."
+    text = str(issue_slug) + "\nTämä on yhteiskirjoitusalusta liittyen tähän päätökseen\n\nKäytä tätä alustaa linkittääksesi aihetta koskeviin uutisiin, facebook-sivuihin ja muihin paikkoihin. Täällä voi kuka tahana osallistua aiheesta käytävään keskusteluun, yhteiskirjoittaa esimerkiksi viestiä päättäjille tai medialle, tai sopia muita keinoja vaikuttaa asiaan. Voit kutsua osallistujia tähän alustaan sivun oikean laidasta."
 
     if (existing_hackpad_id is not None) and api.pad_exists(existing_hackpad_id):
         pad_id = existing_hackpad_id
