@@ -78,14 +78,14 @@ def _source_with_id(raw_result):
 
 
 def _source_with_friendly_day(raw_result):
-    last_modified_time = raw_result.get('last_modified_time')
+    last_modified_time = raw_result.get('origin_last_modified_time')
     raw_result['friendly_day'] = friendly_day(last_modified_time)
     raw_result['friendly_date'] = friendly_date(last_modified_time)
     return raw_result
 
 
 def last_modified_time_as_float(result):
-    date = dateutil.parser.parse(result.get('last_modified_time'))
+    date = dateutil.parser.parse(result.get('origin_last_modified_time'))
     return time.mktime(date.timetuple())
 
 

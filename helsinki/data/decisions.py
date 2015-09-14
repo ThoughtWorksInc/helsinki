@@ -47,6 +47,7 @@ def agenda_item_to_municipal_action(agenda_item):
         "subject": agenda_item.get("subject"),
         "issue_subject": issue.get("subject"),
         "last_modified_time": agenda_item.get("last_modified_time"),
+        "origin_last_modified_time": agenda_item.get("origin_last_modified_time"),
         "type": agenda_item.get("classification_description"),
         "issue_slug": issue.get("slug"),
         "permalink": agenda_item.get("permalink"),
