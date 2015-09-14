@@ -14,7 +14,7 @@ def friendly_day(ugly_date):
 
 
 def _parse_date(ugly_date):
-    return datetime.strptime(ugly_date, '%Y-%m-%dT%H:%M:%S.%f').date()
+    return datetime.strptime(ugly_date, '%Y-%m-%dT%H:%M:%S').date()
 
 
 def friendly_date(ugly_date):

@@ -107,7 +107,7 @@ class TestElasticSearchResults(unittest.TestCase):
     def test_adding_friendly_dates_to_result(self):
         results = load_fixture('results.json')
         single_result = results.get('hits').get('hits')[0]
-        single_result_last_modified_time = single_result.get('_source').get('last_modified_time')
+        single_result_last_modified_time = single_result.get('_source').get('origin_last_modified_time')
         expected_friendly_day = friendly_day(single_result_last_modified_time)
         expected_friendly_date = friendly_date(single_result_last_modified_time)
 
@@ -121,7 +121,7 @@ class TestDateFormat(unittest.TestCase):
 
     def test_friendly_formatting_today(self):
         date_now = datetime.now()
-        date_now_ugly = str(date_now.strftime('%Y-%m-%dT%H:%M:%S.%f'))
+        date_now_ugly = str(date_now.strftime('%Y-%m-%dT%H:%M:%S'))
         expected_friendly_day = "Today"
 
         formatted_friendly_day = friendly_day(date_now_ugly)
@@ -130,7 +130,7 @@ class TestDateFormat(unittest.TestCase):
 
     def test_friendly_formatting_yesterday(self):
         date_yesterday = datetime.now() - timedelta(days=-1)
-        date_yesterday_ugly = str(date_yesterday.strftime('%Y-%m-%dT%H:%M:%S.%f'))
+        date_yesterday_ugly = str(date_yesterday.strftime('%Y-%m-%dT%H:%M:%S'))
         expected_friendly_day = "Yesterday"
 
         formatted_friendly_day = friendly_day(date_yesterday_ugly)
@@ -138,7 +138,7 @@ class TestDateFormat(unittest.TestCase):
         self.assertEqual(formatted_friendly_day, expected_friendly_day)
 
     def test_friendly_formatting_normal_day_name(self):
-        date_moon_landing_ugly = '1969-07-20T12:00:00.662000'
+        date_moon_landing_ugly = '1969-07-20T12:00:00'
         expected_friendly_day = "Sunday"
 
         formatted_friendly_day = friendly_day(date_moon_landing_ugly)
