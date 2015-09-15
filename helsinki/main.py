@@ -99,7 +99,7 @@ def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB(), esApi=Elast
     decision_title = decision.get('subject')
 
     html = render_template('pad.jade',
-                           decision_link=("%sdecision/%s" % (base_url(request), decision_id)),
+                           decision_link=("%s/decision/%s" % (base_url(request), decision_id)),
                            decision_title=decision_title)
     # print html
 
