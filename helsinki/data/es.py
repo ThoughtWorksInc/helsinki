@@ -93,24 +93,25 @@ def sort_by_last_modified_time(results):
     return sorted(results, key=last_modified_time_as_float, reverse=True)
 
 
-def find_decisions(criteria):
-    results = es.search(
-        index="decisions",
-        body={"query": {"multi_match": {"query": criteria,
-                                        "type": "most_fields",
-                                        "fields": decisions.SEARCH_FIELDS}}}
-    )
-    hits = results.get("hits")
-    results = [_source_with_friendly_day(_source_with_id(hit)) for hit in hits.get("hits")]
-    return sort_by_last_modified_time(results)
+class ElasticSearchApi:
 
+    def find_decisions(self, criteria):
+        results = es.search(
+            index="decisions",
+            body={"query": {"multi_match": {"query": criteria,
+                                            "type": "most_fields",
+                                            "fields": decisions.SEARCH_FIELDS}}}
+        )
+        hits = results.get("hits")
+        results = [_source_with_friendly_day(_source_with_id(hit)) for hit in hits.get("hits")]
+        return sort_by_last_modified_time(results)
 
-def find_decision(id):
-    result = es.get(
-        index="decisions",
-        doc_type="decision_data",
-        id=id,
-        ignore=[404]
-    )
-    if result.get('found'):
-        return _source_with_id(result)
+    def find_decision(self, id):
+        result = es.get(
+            index="decisions",
+            doc_type="decision_data",
+            id=id,
+            ignore=[404]
+        )
+        if result.get('found'):
+            return _source_with_id(result)

@@ -11,7 +11,7 @@ import uuid
 
 from logger.logs import get_logger
 from data.indexing import import_decision_data
-from data.es import find_decisions, find_decision, configure
+from data.es import ElasticSearchApi, configure
 from emailing.mailgun import send_mail, _build_html_email
 from storage.mongo import HackpadDB, save_subscription, delete_subscription, get_subscriptions, save_last_modified_time, get_last_modified_time
 from lang import translator, translate_results
@@ -91,15 +91,12 @@ def unsubscribed():
 
 
 @app.route("/hackpad/<issue_slug>", methods=["POST"])
-def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
+def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB(), esApi=ElasticSearchApi()):
     existing_hackpad_id = db.get_hackpad_id(issue_slug)
 
     decision_id = request.form.get("referring_decision")
-    decision = find_decision(decision_id)
-    if decision:
-        decision_title = decision.get('subject')
-    else:
-        decision_title = ""
+    decision = esApi.find_decision(decision_id)
+    decision_title = decision.get('subject')
 
     html = render_template('pad.jade',
                            decision_link=("%sdecision/%s" % (base_url(request), decision_id)),
@@ -156,17 +153,19 @@ def profile():
 
 @app.route("/example/email")
 def email_template():
-    return _build_html_email({'results': find_decisions('Helsinki'),
+    esApi = ElasticSearchApi()
+    return _build_html_email({'results': esApi.find_decisions('Helsinki'),
                               'topic': 'Helsinki',
                               'unsubscribe_id': 'UNSUBCRIBE_ID'}, language)
 
 
 @app.route("/search", methods=["GET"])
 def search_decisions():
+    esApi = ElasticSearchApi()
     criteria = request.args.get("q")
     if criteria:
         criteria_stripped = criteria.strip()
-        results = translate_results(request_lang(), find_decisions(criteria_stripped))
+        results = translate_results(request_lang(), esApi.find_decisions(criteria_stripped))
 
         return render_template('results.jade',
                                results=results,
@@ -181,7 +180,8 @@ def search_decisions():
 @app.route("/decision/<id>", methods=["GET"])
 def decision(id):
     config = Config()
-    result = find_decision(id)
+    esApi = ElasticSearchApi()
+    result = esApi.find_decision(id)
     if result:
         page_url = base_url(request) + request.path
         page_url_safe = urllib.quote(page_url.encode("utf-8"))

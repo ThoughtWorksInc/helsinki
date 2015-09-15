@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 from helsinki.data.decisions import (agenda_item_to_municipal_action,
                                      decisions_to_agenda_items, get_municipal_actions)
-from helsinki.data.es import (_source_with_id, _source_with_friendly_day)
+from helsinki.data.es import (_source_with_id, _source_with_friendly_day, ElasticSearchApi)
 from helsinki.data.date_format import (friendly_day, friendly_date, _parse_date)
 from helsinki.storage.mongo import HackpadDB
 import helsinki.main
@@ -168,17 +168,20 @@ class TestCreatingHackpads(unittest.TestCase):
         # And redirect the user to that hackpad
         hackpadApi = HackpadApi()
         hackpadDB = HackpadDB()
+        esApi = ElasticSearchApi()
         hackpad_id = 'abcd'
 
         hackpadDB.get_hackpad_id = mock.Mock()
         hackpadDB.save_hackpad_id = mock.Mock()
         hackpadApi.create_pad = mock.Mock()
+        esApi.find_decision = mock.Mock()
 
         hackpadDB.get_hackpad_id.return_value = None
+        esApi.find_decision.return_value = {'subject': 'The Subject'}
         hackpadApi.create_pad.return_value = hackpad_id
 
         with app.test_request_context(method="POST", data={'referring_decision': 1}):
-            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
+            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB, esApi)
 
         redirect_location = response.headers['Location']
 
@@ -194,17 +197,20 @@ class TestCreatingHackpads(unittest.TestCase):
         hackpad_id = "hackpad_id"
         hackpadApi = HackpadApi()
         hackpadDB = HackpadDB()
+        esApi = ElasticSearchApi()
 
         hackpadDB.get_hackpad_id = mock.Mock()
         hackpadDB.save_hackpad_id = mock.Mock()
         hackpadApi.create_pad = mock.Mock()
         hackpadApi.pad_exists = mock.Mock()
+        esApi.find_decision = mock.Mock()
 
         hackpadDB.get_hackpad_id.return_value = hackpad_id
         hackpadApi.pad_exists.return_value = True
+        esApi.find_decision.return_value = {'subject': 'The Subject'}
 
         with app.test_request_context(method="POST", data={'referring_decision': 1}):
-            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
+            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB, esApi)
 
         redirect_location = response.headers['Location']
 
@@ -223,18 +229,21 @@ class TestCreatingHackpads(unittest.TestCase):
         hackpad_id = "hackpad_id"
         hackpadApi = HackpadApi()
         hackpadDB = HackpadDB()
+        esApi = ElasticSearchApi()
 
         hackpadDB.get_hackpad_id = mock.Mock()
         hackpadDB.save_hackpad_id = mock.Mock()
         hackpadApi.create_pad = mock.Mock()
         hackpadApi.pad_exists = mock.Mock()
+        esApi.find_decision = mock.Mock()
 
         hackpadDB.get_hackpad_id.return_value = "hackpad_id"
         hackpadApi.pad_exists.return_value = False
         hackpadApi.create_pad.return_value = "new_hackpad_id"
+        esApi.find_decision.return_value = {'subject': 'The Subject'}
 
         with app.test_request_context(method="POST", data={'referring_decision': 1}):
-            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
+            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB, esApi)
 
         redirect_location = response.headers['Location']
 
