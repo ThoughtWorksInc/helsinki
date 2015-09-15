@@ -41,7 +41,7 @@ class HackpadApi():
         req = oauth2.Request(method='POST', url=api_method, parameters=params)
         signature_method = oauth2.SignatureMethod_HMAC_SHA1()
         req.sign_request(signature_method, consumer, None)
-        response = requests.post(req.to_url(), headers={'Content-Type': 'text/plain'}, data=text, verify=True)
+        response = requests.post(req.to_url(), headers={'Content-Type': 'text/html'}, data=text, verify=True)
         if response.status_code == 200:
             return json.loads(response.text)['padId']
         else:

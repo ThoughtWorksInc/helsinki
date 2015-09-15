@@ -23,6 +23,10 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 app.secret_key = str(uuid.uuid1())
 
 
+def base_url(request):
+    return os.getenv('BASE_URL', request.url_root)
+
+
 def request_lang():
     return session.get('lang', 'fi')
 
@@ -90,17 +94,34 @@ def unsubscribed():
 def forward_to_hackpad(issue_slug, api=HackpadApi(), db=HackpadDB()):
     existing_hackpad_id = db.get_hackpad_id(issue_slug)
 
-    text = str(issue_slug) + "\nTämä on yhteiskirjoitusalusta liittyen tähän päätökseen\n\nKäytä tätä alustaa linkittääksesi aihetta koskeviin uutisiin, facebook-sivuihin ja muihin paikkoihin. Täällä voi kuka tahana osallistua aiheesta käytävään keskusteluun, yhteiskirjoittaa esimerkiksi viestiä päättäjille tai medialle, tai sopia muita keinoja vaikuttaa asiaan. Voit kutsua osallistujia tähän alustaan sivun oikean laidasta."
+    decision_id = request.form.get("referring_decision")
+    decision = find_decision(decision_id)
+    if decision:
+        decision_title = decision.get('subject')
+    else:
+        decision_title = ""
+
+    html = render_template('pad.jade',
+                           decision_link=("%sdecision/%s" % (base_url(request), decision_id)),
+                           decision_title=decision_title)
+    # print html
 
     if (existing_hackpad_id is not None) and api.pad_exists(existing_hackpad_id):
         pad_id = existing_hackpad_id
     else:
+        text = (issue_slug + "\n\n" + html).encode("utf-8")
         pad_id = api.create_pad(text)
         db.save_hackpad_id(issue_slug, pad_id)
 
     print "PAD ID: " + str(pad_id)
-
     return redirect(api.hackpad_url(pad_id), code=302)
+
+
+@app.route("/test/hackpad", methods=["GET"])
+def test_pad():
+    return render_template('pad.jade',
+                           decision_link="a link",
+                           decision_title="Decision Title")
 
 
 @app.route("/wip/error")
@@ -157,10 +178,6 @@ def search_decisions():
                            showSubscribeBox=False)
 
 
-def base_url(request):
-    return os.getenv('BASE_URL', request.url_root)
-
-
 @app.route("/decision/<id>", methods=["GET"])
 def decision(id):
     config = Config()
@@ -173,6 +190,7 @@ def decision(id):
         return render_template('decision.jade',
                                page_title=page_title_encoded,
                                decisionTitle=page_title,
+                               decisionId=id,
                                decisions=result['content'],
                                page_url=page_url,
                                page_url_safe=page_url_safe,

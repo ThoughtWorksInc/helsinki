@@ -1,6 +1,7 @@
 import unittest
 import mock
 import json
+import flask
 from datetime import datetime, timedelta
 
 from helsinki.data.decisions import (agenda_item_to_municipal_action,
@@ -10,6 +11,8 @@ from helsinki.data.date_format import (friendly_day, friendly_date, _parse_date)
 from helsinki.storage.mongo import HackpadDB
 import helsinki.main
 from helsinki.hackpad import HackpadApi
+
+app = flask.Flask(__name__, template_folder='../helsinki/templates')
 
 agenda_item = {u'index': 1,
                u'origin_last_modified_time': u'2015-06-11T11:03:00',
@@ -174,7 +177,8 @@ class TestCreatingHackpads(unittest.TestCase):
         hackpadDB.get_hackpad_id.return_value = None
         hackpadApi.create_pad.return_value = hackpad_id
 
-        response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
+        with app.test_request_context(method="POST", data={'referring_decision': 1}):
+            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
 
         redirect_location = response.headers['Location']
 
@@ -199,7 +203,8 @@ class TestCreatingHackpads(unittest.TestCase):
         hackpadDB.get_hackpad_id.return_value = hackpad_id
         hackpadApi.pad_exists.return_value = True
 
-        response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
+        with app.test_request_context(method="POST", data={'referring_decision': 1}):
+            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
 
         redirect_location = response.headers['Location']
 
@@ -228,7 +233,8 @@ class TestCreatingHackpads(unittest.TestCase):
         hackpadApi.pad_exists.return_value = False
         hackpadApi.create_pad.return_value = "new_hackpad_id"
 
-        response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
+        with app.test_request_context(method="POST", data={'referring_decision': 1}):
+            response = helsinki.main.forward_to_hackpad('issue_id', hackpadApi, hackpadDB)
 
         redirect_location = response.headers['Location']
 
